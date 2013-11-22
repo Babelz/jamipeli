@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using JamGame.Gamestate;
 using JamGame.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
@@ -45,6 +46,12 @@ namespace JamGame
 
                 return instance;
             }
+        }
+
+        public GameStateManager GameStateManager
+        {
+            get;
+            private set;
         }
 
         /// <summary>
@@ -121,7 +128,6 @@ namespace JamGame
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
             InputManager = new InputManager(this);
             Components.Add(InputManager);
             InputManager.AddStateProvider(typeof(KeyboardStateProvider), new KeyboardStateProvider());
@@ -146,7 +152,9 @@ namespace JamGame
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            GameStateManager = new GameStateManager(this, spriteBatch);
+            GameStateManager.PushState(new GameplayState());
+            Components.Add(GameStateManager);
             // TODO: use this.Content to load your game content here
         }
 

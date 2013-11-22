@@ -113,6 +113,9 @@
     <Compile Include="GameObjects\Components\IUpdatableObjectComponent.cs" />
     <Compile Include="GameObjects\DrawableGameObject.cs" />
     <Compile Include="GameObjects\GameObject.cs" />
+    <Compile Include="Gamestate\GameplayState.cs" />
+    <Compile Include="Gamestate\GameState.cs" />
+    <Compile Include="Gamestate\GameStateManager.cs" />
     <Compile Include="Input\Binding.cs" />
     <Compile Include="Input\ButtonTrigger.cs" />
     <Compile Include="Input\GamepadStateProvider.cs" />
