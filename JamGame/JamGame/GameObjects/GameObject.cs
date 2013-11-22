@@ -26,6 +26,12 @@ namespace JamGame.GameObjects
             get;
             set;
         }
+
+        public Vector2 Velocity
+        {
+            get;
+            set;
+        }
         public Size Size
         {
             get;
@@ -65,7 +71,7 @@ namespace JamGame.GameObjects
                 Game.Instance.RemoveGameObject(this);
             }
         }
-        public void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime)
         {
             if (destroying)
             {

@@ -32,6 +32,8 @@ namespace JamGame
 
         #region Properties
         private static object padLock = new object();
+        private Texture2D tempTexture;
+
         /// <summary>
         /// Palauttaa singleton instanssin pelistä.
         /// </summary>
@@ -52,6 +54,18 @@ namespace JamGame
         {
             get;
             private set;
+        }
+
+        public Texture2D Temp
+        {
+            get
+            {
+                return tempTexture;
+            }
+            private set
+            {
+                tempTexture = value;
+            }
         }
 
         /// <summary>
@@ -155,6 +169,14 @@ namespace JamGame
             GameStateManager = new GameStateManager(this, spriteBatch);
             GameStateManager.PushState(new GameplayState());
             Components.Add(GameStateManager);
+
+            #region Temp texture making
+            tempTexture = new Texture2D(GraphicsDevice, 1, 1);
+            Color[] data = new Color[tempTexture.Width * tempTexture.Height];
+            for (int i = 0; i < data.Length; data[i++] = Color.White) ;
+            tempTexture.SetData<Color>(data);
+            #endregion
+
             // TODO: use this.Content to load your game content here
         }
 
