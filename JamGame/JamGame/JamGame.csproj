@@ -108,11 +108,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataTypes\Size.cs" />
+    <Compile Include="Factories\IReflectionFactory.cs" />
+    <Compile Include="Factories\MonsterFactory.cs" />
+    <Compile Include="GameObjects\Components\FiniteStateMachine.cs" />
+    <Compile Include="GameObjects\Components\HealthComponent.cs" />
     <Compile Include="GameObjects\Components\IDrawableObjectComponent.cs" />
     <Compile Include="GameObjects\Components\IObjectComponent.cs" />
     <Compile Include="GameObjects\Components\IUpdatableObjectComponent.cs" />
+    <Compile Include="GameObjects\Components\TimerWrapper.cs" />
     <Compile Include="GameObjects\DrawableGameObject.cs" />
     <Compile Include="GameObjects\GameObject.cs" />
+    <Compile Include="GameObjects\Monsters\Chutulu.cs" />
+    <Compile Include="GameObjects\Monsters\Monster.cs" />
+    <Compile Include="Maps\Map.cs" />
+    <Compile Include="Maps\MapState.cs" />
+    <Compile Include="Maps\MapProcessor.cs" />
+    <Compile Include="Maps\MapStateManager.cs" />
+    <Compile Include="Maps\MonsterWave.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game.cs" />
@@ -120,8 +132,19 @@
   <ItemGroup>
     <Content Include="Game.ico" />
     <Content Include="GameThumbnail.png" />
+    <Content Include="Maps\MapFiles\testmap.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\box2dxna-62331\Box2D.XNA\Box2D.XNA - windows.csproj">
+      <Project>{22791486-E721-4511-AA4B-DA26CF5D0F2E}</Project>
+      <Name>Box2D.XNA - windows</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\xnaBrashSpriter\BrashMonkeySpriter\BrashMonkeySpriter.csproj">
+      <Project>{ED000F2E-4CFF-432F-9FAD-BA08ECB05D7D}</Project>
+      <Name>BrashMonkeySpriter</Name>
+    </ProjectReference>
     <ProjectReference Include="..\JamGameContent\JamGameContent.contentproj">
       <Name>JamGameContent</Name>
       <XnaReferenceType>Content</XnaReferenceType>

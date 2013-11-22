@@ -1,1 +1,2 @@
 c:\users\niko\documents\visual studio 2010\Projects\JamGame\JamGame\JamGameContent\obj\x86\Debug\JamGameContent.contentprojResolveAssemblyReference.cache
+C:\Users\Niko\jam\jamipeli\JamGame\JamGameContent\obj\x86\Debug\JamGameContent.contentprojResolveAssemblyReference.cache

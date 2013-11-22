@@ -65,7 +65,7 @@ namespace JamGame.GameObjects
                 Game.Instance.RemoveGameObject(this);
             }
         }
-        public void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime)
         {
             if (destroying)
             {

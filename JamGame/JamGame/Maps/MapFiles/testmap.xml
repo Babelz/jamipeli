@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Map>
+	<Style Background="bg1" Foreground="fg1"/>
+	<States>
+		<State>
+			<Waves>
+				<Wave ReleaseTime="0">
+					<Monsters>
+						<Monster Type="Chutulu" Count="5"/>
+					</Monsters>
+				</Wave>
+			</Waves>
+		</State>
+	</States>
+</Map>

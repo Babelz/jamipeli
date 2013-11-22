@@ -9,9 +9,11 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using JamGame.GameObjects;
+using JamGame.Maps;
 
 namespace JamGame
 {
+    // 1280 * 720
     /// <summary>
     /// This is the main type for your game
     /// </summary>
@@ -45,6 +47,33 @@ namespace JamGame
                 return instance;
             }
         }
+        public int ScreenWidth
+        {
+            get
+            {
+                return graphics.GraphicsDevice.Viewport.Width;
+            }
+        }
+        public int ScreenHeight
+        {
+            get
+            {
+                return graphics.GraphicsDevice.Viewport.Height;
+            }
+        }
+        public Vector2 ScreenPosition
+        {
+            get
+            {
+                return new Vector2(graphics.GraphicsDevice.Viewport.X,
+                                   graphics.GraphicsDevice.Viewport.Y);
+            }
+        }
+        public Map Current
+        {
+            get;
+            set;
+        }
         #endregion
 
         private Game()
@@ -54,6 +83,9 @@ namespace JamGame
 
             allObjects = new List<GameObject>();
             drawableObjects = new List<DrawableGameObject>();
+
+            graphics.PreferredBackBufferWidth = 1280;
+            graphics.PreferredBackBufferHeight = 720;
         }
 
         public void AddGameObject(GameObject gameObject)
@@ -108,6 +140,9 @@ namespace JamGame
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+
+            Current = new Map();
+            Current.Load(@"Maps\MapFiles\testmap.xml");
         }
 
         /// <summary>
@@ -130,6 +165,7 @@ namespace JamGame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
+            Current.Update(gameTime);
             allObjects.ForEach(
                 o => o.Update(gameTime));
             // TODO: Add your update logic here
@@ -145,8 +181,13 @@ namespace JamGame
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            spriteBatch.Begin();
+
+            Current.Draw(spriteBatch);
             drawableObjects.ForEach(
                 o => o.Draw(spriteBatch));
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
