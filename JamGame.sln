@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JamGame", "JamGame\JamGame\JamGame.csproj", "{61D4A517-A081-433E-B68B-3E7A36A56039}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "JamGameContent", "JamGame\JamGameContent\JamGameContent.contentproj", "{C7210242-2C42-4AB1-84B4-753AAFBB7392}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Box2D.XNA - windows", "box2dxna-62331\Box2D.XNA\Box2D.XNA - windows.csproj", "{22791486-E721-4511-AA4B-DA26CF5D0F2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrashMonkeySpriter", "xnaBrashSpriter\BrashMonkeySpriter\BrashMonkeySpriter.csproj", "{ED000F2E-4CFF-432F-9FAD-BA08ECB05D7D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{61D4A517-A081-433E-B68B-3E7A36A56039}.Debug|x86.ActiveCfg = Debug|x86
+		{61D4A517-A081-433E-B68B-3E7A36A56039}.Debug|x86.Build.0 = Debug|x86
+		{61D4A517-A081-433E-B68B-3E7A36A56039}.Release|x86.ActiveCfg = Release|x86
+		{61D4A517-A081-433E-B68B-3E7A36A56039}.Release|x86.Build.0 = Release|x86
+		{C7210242-2C42-4AB1-84B4-753AAFBB7392}.Debug|x86.ActiveCfg = Debug|x86
+		{C7210242-2C42-4AB1-84B4-753AAFBB7392}.Release|x86.ActiveCfg = Release|x86
+		{22791486-E721-4511-AA4B-DA26CF5D0F2E}.Debug|x86.ActiveCfg = Debug|x86
+		{22791486-E721-4511-AA4B-DA26CF5D0F2E}.Debug|x86.Build.0 = Debug|x86
+		{22791486-E721-4511-AA4B-DA26CF5D0F2E}.Release|x86.ActiveCfg = Release|x86
+		{22791486-E721-4511-AA4B-DA26CF5D0F2E}.Release|x86.Build.0 = Release|x86
+		{ED000F2E-4CFF-432F-9FAD-BA08ECB05D7D}.Debug|x86.ActiveCfg = Debug|x86
+		{ED000F2E-4CFF-432F-9FAD-BA08ECB05D7D}.Debug|x86.Build.0 = Debug|x86
+		{ED000F2E-4CFF-432F-9FAD-BA08ECB05D7D}.Release|x86.ActiveCfg = Release|x86
+		{ED000F2E-4CFF-432F-9FAD-BA08ECB05D7D}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
