@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using JamGame.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -45,6 +46,32 @@ namespace JamGame
                 return instance;
             }
         }
+
+        /// <summary>
+        /// InputManager joka tarjoaa bindit
+        /// </summary>
+        public InputManager InputManager
+        {
+            get;
+            private set;
+        }
+
+        public KeyInputBindProvider KeyInput
+        {
+            get
+            {
+                return InputManager.Mapper.GetInputBindProvider<KeyInputBindProvider>();
+            }
+        }
+
+        public PadInputBindProvider PadInput
+        {
+            get
+            {
+                return InputManager.Mapper.GetInputBindProvider<PadInputBindProvider>();
+            }
+        }
+
         #endregion
 
         private Game()
@@ -95,6 +122,19 @@ namespace JamGame
         {
             // TODO: Add your initialization logic here
 
+            InputManager = new InputManager(this);
+            Components.Add(InputManager);
+            InputManager.AddStateProvider(typeof(KeyboardStateProvider), new KeyboardStateProvider());
+            InputManager.AddStateProvider(typeof(GamepadStateProvider), new GamepadStateProvider());
+            InputManager.Mapper.AddInputBindProvider(typeof(KeyInputBindProvider), new KeyInputBindProvider());
+            InputManager.Mapper.AddInputBindProvider(typeof(PadInputBindProvider), new PadInputBindProvider());
+
+            KeyInput.Map(new KeyTrigger("Exit", Keys.Escape), (triggered, args) => Exit(), InputState.Released);
+            PadInput.Map(new ButtonTrigger("Exit", Buttons.A), (triggered, args) =>
+            {
+                if (args.State == InputState.Released)
+                    Exit();
+            });
             base.Initialize();
         }
 
@@ -126,10 +166,6 @@ namespace JamGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                this.Exit();
-
             allObjects.ForEach(
                 o => o.Update(gameTime));
             // TODO: Add your update logic here

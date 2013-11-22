@@ -1,5 +1,0 @@
-C:\Users\Niko\Documents\Visual Studio 2010\Projects\JamGame\box2dxna-62331\Box2D.XNA\bin\x86\Debug\Box2D.XNA.dll
-C:\Users\Niko\Documents\Visual Studio 2010\Projects\JamGame\box2dxna-62331\Box2D.XNA\bin\x86\Debug\Box2D.XNA.pdb
-C:\Users\Niko\Documents\Visual Studio 2010\Projects\JamGame\box2dxna-62331\Box2D.XNA\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
-C:\Users\Niko\Documents\Visual Studio 2010\Projects\JamGame\box2dxna-62331\Box2D.XNA\obj\x86\Debug\Box2D.XNA.dll
-C:\Users\Niko\Documents\Visual Studio 2010\Projects\JamGame\box2dxna-62331\Box2D.XNA\obj\x86\Debug\Box2D.XNA.pdb
