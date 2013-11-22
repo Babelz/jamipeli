@@ -1,6 +1,0 @@
-c:\users\niko\documents\visual studio 2010\Projects\JamGame\JamGame\JamGame\obj\x86\Debug\JamGame.csprojResolveAssemblyReference.cache
-c:\users\niko\documents\visual studio 2010\Projects\JamGame\JamGame\JamGame\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
-c:\users\niko\documents\visual studio 2010\Projects\JamGame\JamGame\JamGame\bin\x86\Debug\JamGame.exe
-c:\users\niko\documents\visual studio 2010\Projects\JamGame\JamGame\JamGame\bin\x86\Debug\JamGame.pdb
-c:\users\niko\documents\visual studio 2010\Projects\JamGame\JamGame\JamGame\obj\x86\Debug\JamGame.exe
-c:\users\niko\documents\visual studio 2010\Projects\JamGame\JamGame\JamGame\obj\x86\Debug\JamGame.pdb
