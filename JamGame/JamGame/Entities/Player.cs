@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using BrashMonkeySpriter;
 using FarseerPhysics;
 using FarseerPhysics.Dynamics;
 using FarseerPhysics.Dynamics.Joints;
@@ -17,20 +18,22 @@ using JamGame.GameObjects.Components;
 using JamGame.DataTypes;
 using JamGame.Weapons;
 using JamGame.GameObjects.Monsters;
+using JamGame.Extensions;
 
 namespace JamGame.Entities
 {
-    public class Player : DrawableGameObject
+    public abstract class Player : DrawableGameObject
     {
         #region Vars
-        private InputControlSetup defaultSetup;
-        private InputController controller;
+        protected InputControlSetup defaultSetup;
+        protected InputController controller;
 
         private DirectionalArrow directionalArrow;
-        private WeaponComponent weaponComponent;
+        private CharaterAnimator animator;
         private TargetingComponent<Monster> targetingComponent;
 
-        private const float speed = 15f;
+        protected  const float speed = 15f;
+        protected WeaponComponent weaponComponent;
         #endregion
 
         public Player(World world)
@@ -43,6 +46,11 @@ namespace JamGame.Entities
             controller = new InputController(Game.Instance.InputManager);
             controller.ChangeSetup(defaultSetup);
 
+            Game.Instance.MapManager.OnMapChanged += new MapManagerEventHandler(MapManager_OnMapChanged);
+            animator = Game.Instance.Content.Load<CharacterModel>("player").CreateAnimator("player");
+            animator.ChangeAnimation("move");
+            animator.Scale = 0.5f;
+
             // Colliderin alustus.
             body = BodyFactory.CreateRectangle(world, ConvertUnits.ToSimUnits(100), ConvertUnits.ToSimUnits(100), 1.0f);
             body.Friction = 0f;
@@ -51,6 +59,7 @@ namespace JamGame.Entities
             body.LinearDamping = 5f; 
             body.UserData = this;
             Position = Vector2.Zero;
+            Size = new Size(100, 100);
 
             // Komponentti alustus.
             components.Add(targetingComponent = new TargetingComponent<Monster>(this));
@@ -59,8 +68,6 @@ namespace JamGame.Entities
             components.Add(new HealthComponent(100));
 
             Game.Instance.MapManager.OnMapChanged += new MapManagerEventHandler(MapManager_OnMapChanged);
-
-            Initialize();
         }
 
         #region Event handlers
@@ -82,70 +89,14 @@ namespace JamGame.Entities
         }
         #endregion
 
-        private void InitKeyMaps()
-        {
-            KeyInputBindProvider keymapper = defaultSetup.Mapper.GetInputBindProvider<KeyInputBindProvider>();
-
-            keymapper.Map(new KeyTrigger("move left", Keys.A), (triggered, args) =>
-                {
-                    body.ApplyForce(Velocity = new Vector2(-speed, 0));
-                });
-
-            keymapper.Map(new KeyTrigger("move right", Keys.D), (triggered, args) =>
-                {
-                    body.ApplyForce(Velocity = new Vector2(speed, 0));
-                });
-
-            keymapper.Map(new KeyTrigger("move up", Keys.W), (triggered, args) =>
-                {
-                    body.ApplyForce(new Vector2(0, -speed));
-                });
-
-            keymapper.Map(new KeyTrigger("move down", Keys.S), (triggered, args) =>
-                {
-                    body.ApplyForce(new Vector2(0, speed));
-                });
-
-            keymapper.Map(new KeyTrigger("attck", Keys.Space), (triggered, args) =>
-                {
-                    if (args.State == InputState.Down)
-                    {
-                        weaponComponent.Attack();
-                    }
-                });
-        }
-        private void InitPadMaps()
-        {
-            var padmapper = defaultSetup.Mapper.GetInputBindProvider<PadInputBindProvider>();
-            padmapper.Map(new ButtonTrigger("move left", Buttons.LeftThumbstickLeft), (triggered, args) =>
-            {
-                body.ApplyForce(new Vector2(-speed, 0));
-            });
-            padmapper.Map(new ButtonTrigger("move right", Buttons.LeftThumbstickRight), (triggered, args) => body.ApplyForce(new Vector2(speed, 0)));
-            padmapper.Map(new ButtonTrigger("move up", Buttons.LeftThumbstickUp), (triggered, args) => body.ApplyForce(new Vector2(0, -speed)));
-            padmapper.Map(new ButtonTrigger("move down", Buttons.LeftThumbstickDown), (triggered, args) => body.ApplyForce(new Vector2(0, speed)));
-        }
-        private Monster FindNearestMonster()
-        {
-            GameObject nearest = Game.Instance.GameObjects
-                .Where(o => o as Monster != null)
-                    .FirstOrDefault(o => Vector2.Distance(o.Position, Position) == Game.Instance.GameObjects
-                        .Min(a => Vector2.Distance(a.Position, Position)));
-
-            return nearest as Monster;
-        }
-
-        public void Initialize()
-        {
-            InitKeyMaps();
-            InitPadMaps();
-        }
         public override void Update(GameTime gameTime)
         {
+            animator.Location = Position + new Vector2(0, 256 * animator.Scale / 2);
+            animator.Update(gameTime);
             base.Update(gameTime);
 
             // Haetaan lähin monsteri.
-            Monster nearest = FindNearestMonster();
+            Monster nearest = Game.Instance.GameObjects.FindNearest<Monster>(Position) as Monster;
 
             if (nearest != null)
             {
@@ -164,6 +115,8 @@ namespace JamGame.Entities
             base.Draw(spriteBatch);
 
             spriteBatch.Draw(Game.Instance.Temp, new Rectangle((int)Position.X, (int)Position.Y, 100, 100), null, Color.Black, 0f, new Vector2(0.5f, 0.5f),SpriteEffects.None,0f );
+
+            animator.Draw(spriteBatch);
         }
     }
 }

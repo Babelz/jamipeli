@@ -12,6 +12,7 @@ using JamGame.Gamestate;
 using JamGame.GameObjects.Components;
 using JamGame.Entities;
 using FarseerPhysics.Dynamics.Contacts;
+using JamGame.Extensions;
 
 namespace JamGame.GameObjects.Monsters
 {
@@ -97,7 +98,12 @@ namespace JamGame.GameObjects.Monsters
                 .FirstOrDefault(s => s is GameplayState)
                 as GameplayState;
 
-            targetComponent.ChangeTarget(gameplayState.Player);
+            Player nearest = gameplayState.Players.FindNearest<Player>(Position) as Player;
+
+            if (nearest != null)
+            {
+                targetComponent.ChangeTarget(nearest);
+            }
 
             brain.PopState();
 
@@ -108,6 +114,11 @@ namespace JamGame.GameObjects.Monsters
             if (targetComponent.HasTarget)
             {
                 body.ApplyForce(targetComponent.VelocityToTarget * 5);
+            }
+            else
+            {
+                brain.PopState();
+                brain.PushState(GetTarget);
             }
         }
         private void RunAway()

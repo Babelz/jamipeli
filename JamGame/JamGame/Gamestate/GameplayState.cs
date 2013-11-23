@@ -13,20 +13,31 @@ namespace JamGame.Gamestate
     class GameplayState : GameState
     {
         #region Vars
-        private readonly Player player;
         private readonly Wall topWall;
         private readonly Wall bottomWall;
         private readonly Wall leftWall;
         private readonly Wall rightWall;
+
+        private readonly Player[] players;
         #endregion
 
         #region Properties
-        public Player Player
+        public Player[] Players
         {
             get
             {
-                return player;
+                return players;
             }
+        }
+        public Player PlayerOne
+        {
+            get;
+            private set;
+        }
+        public Player PlayerTwo
+        {
+            get;
+            private set;
         }
         public Wall LeftWall
         {
@@ -48,8 +59,16 @@ namespace JamGame.Gamestate
         {
             World world = Game.Instance.World;
 
-            player = new Player(world);
-            player.Position = new Vector2(500,500);
+            PlayerOne = new KeyboardPlayer(world);
+            PlayerTwo = new GamepadPlayer(world, PlayerIndex.One);
+
+            PlayerTwo.Position = new Vector2(500, 700);
+            PlayerOne.Position = new Vector2(500, 500);
+
+            players = new Player[] 
+            {
+                PlayerOne, PlayerTwo
+            };
 
             topWall = new Wall(world, new Vector2(Game.Instance.ScreenWidth / 2f, Game.Instance.ScreenHeight / 2f - 50), Game.Instance.ScreenWidth * 2, 100);
             bottomWall = new Wall(world, new Vector2(Game.Instance.ScreenWidth / 2f, Game.Instance.ScreenHeight + 50), Game.Instance.ScreenWidth * 2, 100);
@@ -60,13 +79,16 @@ namespace JamGame.Gamestate
         public override void Update(GameTime gameTime)
         {
             Game.Instance.World.Step((float)(gameTime.ElapsedGameTime.TotalMilliseconds * .001));
-            player.Update(gameTime);   
+
+            Array.ForEach(players,
+                p => p.Update(gameTime));
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
 
-            player.Draw(spriteBatch);
+            Array.ForEach(players,
+                p => p.Draw(spriteBatch));
 
             spriteBatch.End();
         }

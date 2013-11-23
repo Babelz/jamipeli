@@ -198,7 +198,7 @@ namespace JamGame
             InputManager.Mapper.AddInputBindProvider(typeof(PadInputBindProvider), new PadInputBindProvider());
 
             KeyInput.Map(new KeyTrigger("Exit", Keys.Escape), (triggered, args) => Exit(), InputState.Released);
-            PadInput.Map(new ButtonTrigger("Exit", Buttons.A), (triggered, args) =>
+            PadInput.Map(new ButtonTrigger("Exit", Buttons.Back), (triggered, args) =>
             {
                 if (args.State == InputState.Released)
                     Exit();
