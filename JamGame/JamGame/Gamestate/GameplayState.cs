@@ -44,7 +44,7 @@ namespace JamGame.Gamestate
         public override void Update(GameTime gameTime)
         {
             world.Step((float) (gameTime.ElapsedGameTime.TotalMilliseconds * .001));
-           // player.Update(gameTime);   
+            player.Update(gameTime);   
         }
 
 

@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace JamGame.GameObjects.Components
 {
-    public interface IDrawableObjectComponent
+    public interface IDrawableObjectComponent : IUpdatableObjectComponent
     {
         void Draw(SpriteBatch spriteBatch);
     }
