@@ -111,8 +111,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataTypes\Size.cs" />
+    <Compile Include="Entities\Wall.cs" />
     <Compile Include="Factories\IReflectionFactory.cs" />
     <Compile Include="Factories\MonsterFactory.cs" />
+    <Compile Include="GameObjects\Components\DirectionalArrow.cs" />
     <Compile Include="GameObjects\Components\FiniteStateMachine.cs" />
     <Compile Include="GameObjects\Components\HealthComponent.cs" />
     <Compile Include="Entities\Player.cs" />
@@ -164,9 +166,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\box2dxna-62331\Box2D.XNA\Box2D.XNA - windows.csproj">
-      <Project>{22791486-E721-4511-AA4B-DA26CF5D0F2E}</Project>
-      <Name>Box2D.XNA - windows</Name>
+    <ProjectReference Include="..\..\Farseer Physics Engine 3.5\Farseer Physics XNA.csproj">
+      <Project>{0A850700-1ABB-4288-A391-6726B90EBEB9}</Project>
+      <Name>Farseer Physics XNA</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\xnaBrashSpriter\BrashMonkeySpriter\BrashMonkeySpriter.csproj">
       <Project>{ED000F2E-4CFF-432F-9FAD-BA08ECB05D7D}</Project>

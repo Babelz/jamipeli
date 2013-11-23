@@ -21,13 +21,13 @@ namespace JamGame.GameObjects
         #endregion
 
         #region Properties
-        public Vector2 Position
+        public virtual Vector2 Position
         {
             get;
             set;
         }
 
-        public Vector2 Velocity
+        public virtual Vector2 Velocity
         {
             get;
             set;

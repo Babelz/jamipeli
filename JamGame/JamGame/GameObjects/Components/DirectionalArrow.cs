@@ -7,5 +7,8 @@ namespace JamGame.GameObjects.Components
 {
     public class DirectionalArrow
     {
+        #region Vars
+
+        #endregion
     }
 }
