@@ -13,10 +13,11 @@ namespace JamGame.GameObjects.Components
     public class WeaponComponent : IDrawableObjectComponent
     {
         #region Vars
-        private Weapon currentWeapon;
         private readonly TargetingComponent<Monster> targetingComponent;
         private readonly List<EffectDrawer> effectDrawers;
-        private readonly SpriteFont font;
+        private readonly SpriteFont spriteFont;
+
+        private Weapon currentWeapon;
         #endregion
 
         #region Properties
@@ -41,17 +42,14 @@ namespace JamGame.GameObjects.Components
             this.targetingComponent = targetingComponent;
  
             currentWeapon = startWeapon;
-
             effectDrawers = new List<EffectDrawer>();
-
-            font = Game.Instance.Content.Load<SpriteFont>("default");
+            spriteFont = Game.Instance.Content.Load<SpriteFont>("default");
         }
 
         private void AddStringDrawer(Vector2 startPosition, string stringToDraw)
         {
             int elapsed = 0;
             Vector2 position = startPosition;
-
             EffectDrawer effectDrawer = new EffectDrawer();
 
             effectDrawer.Update = (gameTime) =>
@@ -68,7 +66,7 @@ namespace JamGame.GameObjects.Components
                 };
             effectDrawer.Draw = (spriteBatch) =>
                 {
-                    spriteBatch.DrawString(font, stringToDraw, position, Color.Red);
+                    spriteBatch.DrawString(spriteFont, stringToDraw, position, Color.Red);
                 };
             effectDrawer.Dispose = () =>
                 {
@@ -103,7 +101,7 @@ namespace JamGame.GameObjects.Components
         {
             if (HasWeapon && currentWeapon.IsDrawing)
             {
-                //currentWeapon.DrawEffects(SpriteBatch spriteBatch, Vector2 position, Vector2 area, int elapsedDrawTime);
+                // TODO: pitäs piirtää weapon effectit.
             }
 
             effectDrawers.ForEach(e => e.Draw(spriteBatch));

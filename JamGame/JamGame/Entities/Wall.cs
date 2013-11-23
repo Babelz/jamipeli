@@ -13,41 +13,21 @@ namespace JamGame.Entities
 {
     class Wall : GameObject
     {
+        #region Vars
         private readonly int width;
         private readonly int height;
+        #endregion
 
         public Wall(World world, Vector2 position, int width, int height)
         {
             this.width = width;
             this.height = height;
+            
             body = BodyFactory.CreateRectangle(world, ConvertUnits.ToSimUnits(width), ConvertUnits.ToSimUnits(height),1f);
             body.Restitution = 0f;
             body.BodyType = BodyType.Static;
             body.Position = new Vector2(ConvertUnits.ToSimUnits(position.X), ConvertUnits.ToSimUnits(position.Y));
             body.UserData = this;
         }
-
-
-       
-        /*
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(
-                Game.Instance.Temp,
-                new Rectangle(
-                    (int) ConvertUnits.ToDisplayUnits(body.Position.X),
-                    (int) ConvertUnits.ToDisplayUnits(body.Position.Y),
-                    width,
-                    height
-                    ), 
-                    null,
-                    Color.Brown,
-                    0f,
-                    new Vector2(0.5f, 0.5f),
-                    SpriteEffects.None,
-                    0f
-                );
-        }
-         * */
     }
 }

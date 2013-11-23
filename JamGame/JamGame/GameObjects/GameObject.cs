@@ -13,10 +13,10 @@ namespace JamGame.GameObjects
     public abstract class GameObject
     {
         #region Vars
-        private bool destroying;
-
-        protected Body body;
         protected readonly List<IObjectComponent> components;
+        protected Body body;
+
+        private bool destroying;
         #endregion
 
         #region Events

@@ -112,7 +112,6 @@ namespace JamGame.GameObjects.Components
         {
             timers.ForEach(k => k.Value = 0);
         }
-
         public void Update(GameTime gameTime)
         {
             timers.ForEach(k => k.Value += gameTime.ElapsedGameTime.Milliseconds);

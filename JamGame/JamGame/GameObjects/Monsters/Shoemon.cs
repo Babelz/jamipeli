@@ -143,6 +143,7 @@ namespace JamGame.GameObjects.Monsters
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+
             Animation.Location = new Vector2(Position.X, Position.Y + (256 * Animation.Scale / 2));
             Animation.Update(gameTime);
               

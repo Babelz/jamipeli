@@ -38,12 +38,10 @@ namespace JamGame.Gamestate
                 gameStates.RemoveAt(gameStates.Count - 1);
 
         }
-
         public void PushState(GameState gameState)
         {
             gameStates.Add(gameState);
         }
-
         public void ChangeState(GameState gameState)
         {
             if (gameStates.Count == 0)
@@ -65,15 +63,17 @@ namespace JamGame.Gamestate
             }
 
             gameStates[gameStates.Count - 1].Update(gameTime);
+
             base.Update(gameTime);
         }
-
         public override void Draw(GameTime gameTime)
         {
             if (gameStates.Count == 0)
                 return;
 
             gameStates[gameStates.Count - 1].Draw(spriteBatch);
+
+            base.Draw(gameTime);
         }
     }
 }

@@ -22,6 +22,7 @@ namespace JamGame.Maps
             mapFile = XDocument.Load(mapName);
         }
 
+        // Yrittää lukea int arvoa atribuutista, jos atribuuttia ei ole, palauttaa defaultin (0)
         private int ReadAttribute(XElement xElement, string name)
         {
             int value = 0;
@@ -44,7 +45,7 @@ namespace JamGame.Maps
             string background = stateElement.Attribute("Background").Value;
             return Game.Instance.Content.Load<Texture2D>(background);
         }
-
+        // Lukee kaikki statet tiedostosta.
         private IEnumerable<XElement> ReadStates()
         {
             return  from states in mapFile.Descendants("States")
@@ -52,11 +53,13 @@ namespace JamGame.Maps
                     where state.Name == "State"
                     select state;
         }
+        // Lukee kaikki wavet statesta.
         private IEnumerable<XElement> ReadWaveElements(XElement stateElement)
         {
             return from waveElements in stateElement.Descendants("Waves")
                    select waveElements;
         }
+        // Parsii ja luo jokaisen waven.
         private List<MonsterWave> ParseWaves(XElement waveElements)
         {
             List<MonsterWave> waves = new List<MonsterWave>();
@@ -64,9 +67,10 @@ namespace JamGame.Maps
 
             foreach (XElement waveElement in waveElements.Descendants("Wave"))
             {
+                // Lukee waven releasetimen.
                 int releaseTime = int.Parse(waveElement.Attribute("ReleaseTime").Value);
 
-
+                // Hakee kaikki monsterit wavesta ja projektaa ne anonyymeiksi olioiksi.
                 var monsterDatasets = from monsterElements in waveElement.Descendants("Monsters")
                                       from monsterElement in monsterElements.Descendants()
                                       select new
@@ -75,13 +79,16 @@ namespace JamGame.Maps
                                           Count = int.Parse(monsterElement.Attribute("Count").Value)
                                       };
 
+                // Luo projektattujen datojen perusteella monsterit.
                 List<Monster> waveMonsters = new List<Monster>();
                 foreach (var monsterDataset in monsterDatasets)
                 {
                     waveMonsters.AddRange(factory.MakeNew(monsterDataset.Type, monsterDataset.Count));
                 }
 
+                // Lukee position modifierin wavesta.
                 Vector2 positionModifier = new Vector2(ReadAttribute(waveElement, "XModifier"), ReadAttribute(waveElement, "YModifier"));
+                
                 waves.Add(new MonsterWave(waveMonsters, releaseTime, positionModifier));
             }
 

@@ -6,9 +6,13 @@ using JamGame.GameObjects.Monsters;
 
 namespace JamGame.Factories
 {
+    /// <summary>
+    /// Reflection tehdas joka tuottaa monstereita.
+    /// </summary>
     public class MonsterFactory : IReflectionFactory<Monster>
     {
         #region Vars
+        // Nimiavaruus josta etsitään olioja kun reflectataan.
         private readonly string rootNamespace;
         #endregion
 
@@ -21,6 +25,9 @@ namespace JamGame.Factories
         {
             return Activator.CreateInstance(Type.GetType(rootNamespace + "." + typename)) as Monster; 
         }
+        /// <summary>
+        /// Luo halutun määrän uusia hirviöitä.
+        /// </summary>
         public List<Monster> MakeNew(string typename, int count)
         {
             List<Monster> monsters = new List<Monster>();

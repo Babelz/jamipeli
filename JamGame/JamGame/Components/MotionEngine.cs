@@ -6,23 +6,15 @@ namespace JamGame.Components
     public class MotionEngine
     {
         #region Vars
-
-        public Vector2 GoalVelocity = Vector2.Zero;
-
         private readonly GameObject character;
-
+        public Vector2 GoalVelocity = Vector2.Zero;
         private Vector2 oldPosition = Vector2.Zero;
-
         private Vector2 oldVelocity = Vector2.Zero;
-
         private Vector2 floor = Vector2.Zero;
-
         private float factor = 50;
-
         #endregion
 
         #region Properties
-
         /// <summary>
         /// Palauttaa edellisen paikan ennen nopeuden laskua tällä framella.
         /// Hyödyllinen esim collisionissa
@@ -31,7 +23,6 @@ namespace JamGame.Components
         {
             get { return oldPosition; }
         }
-
         /// <summary>
         /// Palauttaa viime framen nopeuden.
         /// </summary>
@@ -39,25 +30,21 @@ namespace JamGame.Components
         {
             get { return oldVelocity; }
         }
-
         public Vector2 Direction
         {
             get;
             set;
         }
-
         public Vector2 OldDirection
         {
             get;
             protected set;
         }
-
         public float GoalVelocityX
         {
             get { return GoalVelocity.X; }
             set { GoalVelocity.X = value; }
         }
-
         public float GoalVelocityY
         {
             get { return GoalVelocity.Y; }
@@ -78,8 +65,6 @@ namespace JamGame.Components
             Enabled = true;
         }
 
-        #region Methods
-
         public void Update(GameTime gameTime)
         {
             if (Enabled)
@@ -96,7 +81,6 @@ namespace JamGame.Components
                 character.Position += character.Velocity;
             }
         }
-
         public float CalculateSpeed(float goal, float currentSpeed, float deltaTime)
         {
             float diff = goal - currentSpeed;
@@ -114,7 +98,5 @@ namespace JamGame.Components
 
             return goal;
         }
-
-        #endregion
     }
 }

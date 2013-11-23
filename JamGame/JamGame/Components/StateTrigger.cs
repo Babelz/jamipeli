@@ -9,6 +9,9 @@ using JamGame.Gamestate;
 
 namespace JamGame.Components
 {
+    /// <summary>
+    /// Trigger joka hoitaa kartta statejen transitionin aloittamisen.
+    /// </summary>
     public class StateTrigger : GameComponent
     {
         #region Vars
@@ -26,6 +29,8 @@ namespace JamGame.Components
         #region Event hanlders
         private void StateManager_OnStateFinished(object sender, MapStateManagerEventArgs e)
         {
+            // Aloitetaan collisionin kuuntelu ja alustetaan rectangle staten koon mukaan.
+
             Enabled = true;
 
             int width = JamGame.Game.Instance.ScreenWidth / 10;
@@ -35,6 +40,7 @@ namespace JamGame.Components
         }
         private void MapManager_OnMapChanged(object sender, MapManagerEventArgs e)
         {
+            // Kun kartta vaihtuu, aloitetaan kuuntelemaan milloin state päättyy.
             JamGame.Game.Instance.MapManager.Active.StateManager.OnStateFinished += new MapStateManagerEventHandle(StateManager_OnStateFinished);
         }
         #endregion
@@ -43,19 +49,22 @@ namespace JamGame.Components
         {
             if (Enabled)
             {
-                base.Update(gameTime);
+                // Haetaan pelaajat ja katsotaan törmääkö joku heistä triggeriin.
 
                 Player player = (JamGame.Game.Instance.GameStateManager.States
                     .First(c => c is GameplayState) as GameplayState).Player;
+                
+                Rectangle playerRectangle = new Rectangle((int)player.Position.X, (int)player.Position.Y, 
+                    player.Size.Width, player.Size.Height);
 
-                Rectangle playerRect = new Rectangle((int)player.Position.X, (int)player.Position.Y, player.Size.Width, player.Size.Height);
-
-                if (collisionRectangle.Intersects(playerRect))
+                // Jos joku pelaajista törmää triggeriin, aloitetaan state transition.
+                if (collisionRectangle.Intersects(playerRectangle))
                 {
-                    Console.WriteLine("gg");
                     JamGame.Game.Instance.MapManager.Active.StateManager.StartTransition();
                     Enabled = false;
                 }
+
+                base.Update(gameTime);
             }
         }
     }

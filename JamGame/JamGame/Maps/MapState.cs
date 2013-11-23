@@ -14,7 +14,6 @@ namespace JamGame.Maps
         #region Vars
         private readonly Texture2D foreground;
         private readonly Texture2D background;
-
         private readonly List<MonsterWave> waves;
         private readonly List<Monster> releasedMonsters;
 
@@ -26,6 +25,9 @@ namespace JamGame.Maps
         #endregion
 
         #region Properties
+        /// <summary>
+        /// Staten sijainti.
+        /// </summary>
         public Point Position
         {
             get
@@ -37,6 +39,9 @@ namespace JamGame.Maps
                 StateArea = new Rectangle(value.X, value.Y, StateArea.Width, StateArea.Height);
             }
         }
+        /// <summary>
+        /// Staten area.
+        /// </summary>
         public Rectangle StateArea
         {
             get;
@@ -92,6 +97,7 @@ namespace JamGame.Maps
                 Started = true;
             }
         }
+
         public void Update(GameTime gameTime)
         {
             if (Started)
@@ -99,6 +105,7 @@ namespace JamGame.Maps
                 elapsed += gameTime.ElapsedGameTime.Milliseconds;
                 MonsterWave nextWave = waves.FirstOrDefault(w => elapsed > w.ReleaseTime);
                 
+                // Vapautetaan seuraava aalto hirviöitä.
                 if (nextWave != null)
                 {
                     if (OnNextWave != null)
@@ -118,6 +125,8 @@ namespace JamGame.Maps
                         int max_X = Game.Instance.ScreenWidth + 200;
                         int max_Y = Game.Instance.ScreenHeight;
 
+                        // Vetää monsterin positionin randomilla jonkin verran ulos ruudusta ja kertoo sen pos modifierillä 
+                        // jotta se saadaan tulemaan oikeasta paikasta (vasen, oikea, ylä ja ala)
                         monster.Position = new Vector2(
                             random.Next(Game.Instance.ScreenWidth, max_X) * nextWave.PositionModifier.X,
                             random.Next(Game.Instance.ScreenHeight / 2 + height, max_Y) * nextWave.PositionModifier.Y);
@@ -125,6 +134,8 @@ namespace JamGame.Maps
                     }
                 }
 
+                // Jos kaikki wavet on lähetetty, katsotaan onko hirviöitä vielä elossa.
+                // Jos kaikki hirviöt on jo tapettu, state on suoritettu.
                 if (!HasWaves)
                 {
                     Finished = true;

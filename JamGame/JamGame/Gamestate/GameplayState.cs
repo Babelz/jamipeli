@@ -13,11 +13,11 @@ namespace JamGame.Gamestate
     class GameplayState : GameState
     {
         #region Vars
-        private Player player;
-        private Wall topWall;
-        private Wall bottomWall;
-        private Wall leftWall;
-        private Wall rightWall;
+        private readonly Player player;
+        private readonly Wall topWall;
+        private readonly Wall bottomWall;
+        private readonly Wall leftWall;
+        private readonly Wall rightWall;
         #endregion
 
         #region Properties
@@ -47,8 +47,10 @@ namespace JamGame.Gamestate
         public GameplayState()
         {
             World world = Game.Instance.World;
+
             player = new Player(world);
             player.Position = new Vector2(500,500);
+
             topWall = new Wall(world, new Vector2(Game.Instance.ScreenWidth / 2f, Game.Instance.ScreenHeight / 2f - 50), Game.Instance.ScreenWidth * 2, 100);
             bottomWall = new Wall(world, new Vector2(Game.Instance.ScreenWidth / 2f, Game.Instance.ScreenHeight + 50), Game.Instance.ScreenWidth * 2, 100);
             leftWall = new Wall(world, new Vector2(-50, Game.Instance.ScreenHeight / 2f), 100, Game.Instance.ScreenHeight);
@@ -60,17 +62,12 @@ namespace JamGame.Gamestate
             Game.Instance.World.Step((float)(gameTime.ElapsedGameTime.TotalMilliseconds * .001));
             player.Update(gameTime);   
         }
-
-
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
 
             player.Draw(spriteBatch);
-          //  leftWall.Draw(spriteBatch);
-         //   rightWall.Draw(spriteBatch);
-           // bottomWall.Draw(spriteBatch);
-          //  topWall.Draw(spriteBatch);
+
             spriteBatch.End();
         }
     }

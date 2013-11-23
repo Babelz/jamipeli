@@ -129,7 +129,6 @@
     <Compile Include="GameObjects\Components\WeaponComponent.cs" />
     <Compile Include="GameObjects\DrawableGameObject.cs" />
     <Compile Include="GameObjects\GameObject.cs" />
-    <Compile Include="GameObjects\Monsters\Chutulu.cs" />
     <Compile Include="GameObjects\Monsters\Monster.cs" />
     <Compile Include="GameObjects\Monsters\Shoemon.cs" />
     <Compile Include="Weapons\MeleeWeapons.cs" />

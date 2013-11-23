@@ -31,6 +31,11 @@ namespace JamGame.GameObjects.Components
             {
                 elapsed = 0;
                 enabled = value;
+
+                if (value)
+                {
+                    Position = new Vector2(Game.Instance.ScreenWidth - arrowTexture.Width - 25, 25);
+                }
             }
         }
         #endregion
@@ -46,22 +51,20 @@ namespace JamGame.GameObjects.Components
             {
                 elapsed += gameTime.ElapsedGameTime.Milliseconds;
 
-                Position = new Vector2(Game.Instance.ScreenWidth - arrowTexture.Width - 25, 25);
-
                 if (elapsed > 500)
                 {
                     elapsed = 0;
                 }
             }
         }
+        /// <summary>
+        /// Piirtää nuolen välkyttäen sitä.
+        /// </summary>
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (enabled)
+            if (enabled && elapsed < 250)
             {
-                if (elapsed < 250)
-                {
-                    spriteBatch.Draw(arrowTexture, Position, Color.White);
-                }
+                spriteBatch.Draw(arrowTexture, Position, Color.White);
             }
         }
     }

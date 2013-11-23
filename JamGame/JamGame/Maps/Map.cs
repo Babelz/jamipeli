@@ -8,9 +8,13 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace JamGame.Maps
 {
+    /// <summary>
+    /// Stateja käyttävä kartta.
+    /// </summary>
     public class Map
     {
         #region Vars
+        // Kartan kaikki statet.
         private MapStateManager mapStateManager;
         #endregion
 
@@ -34,14 +38,14 @@ namespace JamGame.Maps
             Name = name;
         }
 
+        /// <summary>
+        /// Alustaa kartan kaikki statet.
+        /// </summary>
         public void Load()
         {
             MapProcessor mapProcessor = new MapProcessor(@"Maps\MapFiles\" + Name + ".xml");
             mapStateManager = new MapStateManager(mapProcessor.LoadMapStates());
-
-            mapStateManager.Start();
         }
-
         public void Update(GameTime gameTime)
         {
             mapStateManager.Update(gameTime);

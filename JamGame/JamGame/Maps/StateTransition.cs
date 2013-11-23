@@ -14,10 +14,9 @@ namespace JamGame.Maps
         private readonly MapState current;
         private readonly Point endPoint;
 
-        private Action velofunc;
         private bool playing;
-
         private int velocity;
+
         private const int maxVelocity = 15;
         #endregion
 
@@ -70,16 +69,19 @@ namespace JamGame.Maps
         {
             if (playing && !Finished)
             {
+                Action velocityFunction;
+
+                // Katsotaan tuleeko jarruttaa vai kiihdyttää.
                 if (next.Position.X <= 120)
                 {
-                    velofunc = Brake;
+                    velocityFunction = Brake;
                 }
                 else
                 {
-                    velofunc = Accelrate;
+                    velocityFunction = Accelrate;
                 }
 
-                velofunc();
+                velocityFunction();
 
                 next.Position = new Point(next.Position.X - velocity, next.Position.Y);
                 current.Position = new Point(current.Position.X - velocity, current.Position.Y);
