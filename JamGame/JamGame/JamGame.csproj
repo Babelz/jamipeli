@@ -5,7 +5,7 @@
     <ProjectTypeGuids>{6D335F3A-9D43-41b4-9D22-F6F17C4BE596};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>JamGame</RootNamespace>
     <AssemblyName>JamGame</AssemblyName>
@@ -59,6 +59,9 @@
     <PlatformTarget>x86</PlatformTarget>
     <XnaCompressContent>true</XnaCompressContent>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
       <Private>False</Private>
@@ -108,13 +111,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataTypes\Size.cs" />
-    <Compile Include="Entities\Player.cs" />
     <Compile Include="Entities\Wall.cs" />
+    <Compile Include="Factories\IReflectionFactory.cs" />
+    <Compile Include="Factories\MonsterFactory.cs" />
+    <Compile Include="GameObjects\Components\DirectionalArrow.cs" />
+    <Compile Include="GameObjects\Components\FiniteStateMachine.cs" />
+    <Compile Include="GameObjects\Components\HealthComponent.cs" />
+    <Compile Include="Entities\Player.cs" />
     <Compile Include="GameObjects\Components\IDrawableObjectComponent.cs" />
     <Compile Include="GameObjects\Components\IObjectComponent.cs" />
     <Compile Include="GameObjects\Components\IUpdatableObjectComponent.cs" />
+    <Compile Include="GameObjects\Components\TimerWrapper.cs" />
     <Compile Include="GameObjects\DrawableGameObject.cs" />
     <Compile Include="GameObjects\GameObject.cs" />
+    <Compile Include="GameObjects\Monsters\Chutulu.cs" />
+    <Compile Include="GameObjects\Monsters\Monster.cs" />
+    <Compile Include="Maps\Map.cs" />
+    <Compile Include="Maps\MapManager.cs" />
+    <Compile Include="Maps\MapState.cs" />
+    <Compile Include="Maps\MapProcessor.cs" />
+    <Compile Include="Maps\MapStateManager.cs" />
+    <Compile Include="Maps\MonsterWave.cs" />
     <Compile Include="Gamestate\GameplayState.cs" />
     <Compile Include="Gamestate\GameState.cs" />
     <Compile Include="Gamestate\GameStateManager.cs" />
@@ -144,14 +161,17 @@
   <ItemGroup>
     <Content Include="Game.ico" />
     <Content Include="GameThumbnail.png" />
+    <Content Include="Maps\MapFiles\testmap.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Farseer Physics Engine 3.5\Farseer Physics XNA.csproj">
-      <Project>{0a850700-1abb-4288-a391-6726b90ebeb9}</Project>
+      <Project>{0A850700-1ABB-4288-A391-6726B90EBEB9}</Project>
       <Name>Farseer Physics XNA</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\xnaBrashSpriter\BrashMonkeySpriter\BrashMonkeySpriter.csproj">
-      <Project>{ed000f2e-4cff-432f-9fad-ba08ecb05d7d}</Project>
+      <Project>{ED000F2E-4CFF-432F-9FAD-BA08ECB05D7D}</Project>
       <Name>BrashMonkeySpriter</Name>
     </ProjectReference>
     <ProjectReference Include="..\JamGameContent\JamGameContent.contentproj">

@@ -12,17 +12,22 @@ using JamGame.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using JamGame.Maps;
+using JamGame.GameObjects.Components;
 
 namespace JamGame.Entities
 {
     public class Player : DrawableGameObject
     {
+        #region Vars
         private MotionEngine motionEngine;
         private InputControlSetup defaultSetup;
         private InputController controller;
-        private float speed = 15f;
+        private DirectionalArrow directionalArrow;
 
+        private float speed = 15f;
         private Body body;
+        #endregion
 
         public Player(World world)
         {
@@ -41,7 +46,22 @@ namespace JamGame.Entities
             
             
             Initialize();
+
+            Game.Instance.MapManager.OnMapChanged += new MapManagerEventHandler(MapManager_OnMapChanged);
         }
+
+        #region Event handlers
+        private void MapManager_OnMapChanged(object sender, MapManagerEventArgs e)
+        {
+            e.Next.StateManager.OnStateFinished += new MapStateManagerEventHandle(StateManager_OnStateFinished);
+            //Console.WriteLine("No ainaki kartta vaihtuu?");
+        }
+        public void StateManager_OnStateFinished(object sender, MapStateManagerEventArgs e)
+        {
+            //Console.WriteLine("HAISTA VITTU HAISTA VITTU");
+            
+        }
+        #endregion
 
         public override Vector2 Position
         {
@@ -79,7 +99,6 @@ namespace JamGame.Entities
                 (triggered, args) => body.ApplyForce(new Vector2(0, -speed)));
             keymapper.Map(new KeyTrigger("move down", Keys.S),
                 (triggered, args) => body.ApplyForce(new Vector2(0, speed)));
-            
         }
 
         public override void Update(GameTime gameTime)

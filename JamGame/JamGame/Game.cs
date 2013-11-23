@@ -11,9 +11,11 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using JamGame.GameObjects;
+using JamGame.Maps;
 
 namespace JamGame
 {
+    // 1280 * 720
     /// <summary>
     /// This is the main type for your game
     /// </summary>
@@ -49,13 +51,33 @@ namespace JamGame
                 return instance;
             }
         }
-
+        public int ScreenWidth
+        {
+            get
+            {
+                return graphics.GraphicsDevice.Viewport.Width;
+            }
+        }
+        public int ScreenHeight
+        {
+            get
+            {
+                return graphics.GraphicsDevice.Viewport.Height;
+            }
+        }
+        public Vector2 ScreenPosition
+        {
+            get
+            {
+                return new Vector2(graphics.GraphicsDevice.Viewport.X,
+                                   graphics.GraphicsDevice.Viewport.Y);
+            }
+        }
         public GameStateManager GameStateManager
         {
             get;
             private set;
         }
-
         public Texture2D Temp
         {
             get
@@ -67,16 +89,19 @@ namespace JamGame
                 tempTexture = value;
             }
         }
-
+        public MapManager MapManager
+        {
+            get;
+            private set;
+        }
         /// <summary>
-        /// InputManager joka tarjoaa bindit
+        /// InputManager joka tarjoaa bindit.
         /// </summary>
         public InputManager InputManager
         {
             get;
             private set;
         }
-
         public KeyInputBindProvider KeyInput
         {
             get
@@ -84,7 +109,6 @@ namespace JamGame
                 return InputManager.Mapper.GetInputBindProvider<KeyInputBindProvider>();
             }
         }
-
         public PadInputBindProvider PadInput
         {
             get
@@ -92,7 +116,6 @@ namespace JamGame
                 return InputManager.Mapper.GetInputBindProvider<PadInputBindProvider>();
             }
         }
-
         #endregion
 
         private Game()
@@ -102,6 +125,9 @@ namespace JamGame
 
             allObjects = new List<GameObject>();
             drawableObjects = new List<DrawableGameObject>();
+
+            graphics.PreferredBackBufferWidth = 1280;
+            graphics.PreferredBackBufferHeight = 720;
         }
 
         public void AddGameObject(GameObject gameObject)
@@ -132,6 +158,10 @@ namespace JamGame
         {
             return allObjects.Where(o => predicate(o));
         }
+        public bool ContainsGameObject(GameObject gameObject)
+        {
+            return allObjects.Contains(gameObject);
+        }
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -155,6 +185,7 @@ namespace JamGame
                 if (args.State == InputState.Released)
                     Exit();
             });
+
             base.Initialize();
         }
 
@@ -166,6 +197,10 @@ namespace JamGame
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            MapManager = new MapManager(this, spriteBatch);
+            Components.Add(MapManager);
+
             GameStateManager = new GameStateManager(this, spriteBatch);
             GameStateManager.PushState(new GameplayState());
             Components.Add(GameStateManager);
@@ -176,6 +211,8 @@ namespace JamGame
             for (int i = 0; i < data.Length; data[i++] = Color.White) ;
             tempTexture.SetData<Color>(data);
             #endregion
+
+            MapManager.ChangeMap("testmap");
 
             // TODO: use this.Content to load your game content here
         }
@@ -196,9 +233,22 @@ namespace JamGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            // Allows the game to exit
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+                this.Exit();
+
             allObjects.ForEach(
                 o => o.Update(gameTime));
             // TODO: Add your update logic here
+
+            if (gameTime.TotalGameTime.Milliseconds % 1000 == 0)
+            {
+                if (allObjects.Count > 0)
+                {
+                    allObjects.First().Destory();
+                    Console.WriteLine("Poistettiin otus...");
+                }
+            }
 
             base.Update(gameTime);
         }
@@ -211,10 +261,14 @@ namespace JamGame
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            base.Draw(gameTime);
+
+            spriteBatch.Begin();
+
             drawableObjects.ForEach(
                 o => o.Draw(spriteBatch));
 
-            base.Draw(gameTime);
+            spriteBatch.End();
         }
     }
 }

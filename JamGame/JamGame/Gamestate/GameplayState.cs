@@ -13,7 +13,6 @@ namespace JamGame.Gamestate
     class GameplayState : GameState
     {
         private Player player;
-
         private World world;
         private Wall topWall;
         private Wall bottomWall;
@@ -39,7 +38,7 @@ namespace JamGame.Gamestate
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            spriteBatch.GraphicsDevice.Clear(Color.Red);
+
             player.Draw(spriteBatch);
             leftWall.Draw(spriteBatch);
             spriteBatch.End();

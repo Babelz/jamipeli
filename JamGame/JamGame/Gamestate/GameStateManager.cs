@@ -17,6 +17,8 @@ namespace JamGame.Gamestate
         {
             this.spriteBatch = spriteBatch;
             gameStates = new List<GameState>();
+
+            DrawOrder = 1;
         }
 
         public void PopState()
