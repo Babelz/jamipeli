@@ -24,10 +24,11 @@ namespace JamGame.Factories
         public List<Monster> MakeNew(string typename, int count)
         {
             List<Monster> monsters = new List<Monster>();
-            
+
+            Type type = Type.GetType(rootNamespace + "." + typename);
             for (int i = 0; i < count; i++)
             {
-                monsters.Add(MakeNew(typename));
+                monsters.Add(Activator.CreateInstance(type) as Monster);
             }
 
             return monsters;

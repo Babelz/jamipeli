@@ -15,7 +15,7 @@ namespace JamGame.Entities
     {
         private readonly int width;
         private readonly int height;
-        private Body body;
+
         public Wall(World world, Vector2 position, int width, int height)
         {
             this.width = width;

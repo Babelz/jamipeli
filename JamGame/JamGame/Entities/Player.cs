@@ -26,27 +26,6 @@ namespace JamGame.Entities
         private DirectionalArrow directionalArrow;
 
         private float speed = 15f;
-        private Body body;
-        #endregion
-
-        #region Properties
-        public override Vector2 Position
-        {
-            get
-            {
-                return new Vector2(
-                    ConvertUnits.ToDisplayUnits(body.Position.X),
-                    ConvertUnits.ToDisplayUnits(body.Position.Y)
-                    );
-            }
-            set
-            {
-                body.Position = new Vector2(
-                    ConvertUnits.ToSimUnits(value.X),
-                    ConvertUnits.ToSimUnits(value.Y)
-                    );
-            }
-        }
         #endregion
 
         public Player(World world)
@@ -61,6 +40,7 @@ namespace JamGame.Entities
             body.BodyType = BodyType.Dynamic;
             body.Restitution = 0f;
             body.LinearDamping = 5f;
+            body.UserData = this;
             Position = Vector2.Zero;
             components.Add(directionalArrow = new DirectionalArrow());
 

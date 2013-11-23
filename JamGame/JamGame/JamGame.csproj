@@ -122,6 +122,7 @@
     <Compile Include="GameObjects\Components\IDrawableObjectComponent.cs" />
     <Compile Include="GameObjects\Components\IObjectComponent.cs" />
     <Compile Include="GameObjects\Components\IUpdatableObjectComponent.cs" />
+    <Compile Include="GameObjects\Components\TargetingComponent.cs" />
     <Compile Include="GameObjects\Components\TimerWrapper.cs" />
     <Compile Include="GameObjects\DrawableGameObject.cs" />
     <Compile Include="GameObjects\GameObject.cs" />
@@ -166,6 +167,7 @@
     <Content Include="GameThumbnail.png" />
     <Content Include="Maps\MapFiles\testmap.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>

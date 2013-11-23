@@ -5,6 +5,8 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using JamGame.DataTypes;
 using JamGame.GameObjects.Components;
+using FarseerPhysics.Dynamics;
+using FarseerPhysics;
 
 namespace JamGame.GameObjects
 {
@@ -12,6 +14,8 @@ namespace JamGame.GameObjects
     {
         #region Vars
         private bool destroying;
+
+        protected Body body;
         protected readonly List<IObjectComponent> components;
         #endregion
 
@@ -21,10 +25,29 @@ namespace JamGame.GameObjects
         #endregion
 
         #region Properties
+        public Body Body
+        {
+            get
+            {
+                return body;
+            }
+        }
         public virtual Vector2 Position
         {
-            get;
-            set;
+            get
+            {
+                return new Vector2(
+                    ConvertUnits.ToDisplayUnits(body.Position.X),
+                    ConvertUnits.ToDisplayUnits(body.Position.Y)
+                    );
+            }
+            set
+            {
+                body.Position = new Vector2(
+                    ConvertUnits.ToSimUnits(value.X),
+                    ConvertUnits.ToSimUnits(value.Y)
+                    );
+            }
         }
         public virtual Vector2 Velocity
         {

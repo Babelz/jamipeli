@@ -46,7 +46,7 @@ namespace JamGame.GameObjects.Components
                 return keypair.Value;
             }
         }
-        public bool AutoCreate
+        public bool AutoCreateTimers
         {
             get;
             set;
@@ -78,9 +78,10 @@ namespace JamGame.GameObjects.Components
             Keypair<string, int> keypair = timers.FirstOrDefault(
                 k => k.Key == key);
 
-            if (keypair == null && AutoCreate)
+            if (keypair == null && AutoCreateTimers)
             {
                 keypair = MakeNew(key);
+                timers.Add(keypair);
             }
 
             return keypair;
