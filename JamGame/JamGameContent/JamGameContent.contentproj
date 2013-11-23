@@ -78,7 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\xnaBrashSpriter\BrashMonkeyContentPipelineExtension\BrashMonkeyContentPipelineExtension.csproj">
-      <Project>{bc6a7f30-afd4-48e3-83ce-ab412e33d759}</Project>
+      <Project>{BC6A7F30-AFD4-48E3-83CE-AB412E33D759}</Project>
       <Name>BrashMonkeyContentPipelineExtension</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\xnaBrashSpriter\BrashMonkeySpriter\BrashMonkeySpriter.csproj">

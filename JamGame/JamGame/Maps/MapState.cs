@@ -108,10 +108,19 @@ namespace JamGame.Maps
 
                     waves.Remove(nextWave);
 
+                    Random random = new Random();
                     foreach (Monster monster in nextWave.ReleaseMonsters())
                     {
                         Game.Instance.AddGameObject(monster);
                         releasedMonsters.Add(monster);
+
+                        int max_X = Game.Instance.ScreenWidth + 200;
+                        int max_Y = Game.Instance.ScreenHeight - monster.Size.Height;
+
+                        monster.Position = new Vector2(
+                            random.Next(Game.Instance.ScreenWidth, max_X),
+                            random.Next(Game.Instance.ScreenHeight / 2 + monster.Size.Height, max_Y));
+
                     }
                 }
 

@@ -8,6 +8,7 @@ using JamGame.GameObjects.Components;
 
 namespace JamGame.GameObjects.Monsters
 {
+    // TODO: testi monsu, älä käytä - Chutulu.
     public class Chutulu : Monster
     {
         #region Vars

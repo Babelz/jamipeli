@@ -5,15 +5,14 @@
 			<Waves>
 				<Wave ReleaseTime="0">
 					<Monsters>
-						<Monster Type="Chutulu" Count="5"/>
-            <Monster Type="Shoemon" Count="1" />
+						<Monster Type="Shoemon" Count="10"/>
 					</Monsters>
 				</Wave>
 			</Waves>
 		</State>
 		<State Background="bg1" Foreground="fg1">
 			<Waves>
-				<Wave ReleaseTime="1000">
+				<Wave ReleaseTime="10">
 					<Monsters>
 						<Monster Type="Chutulu" Count="1"/>
 					</Monsters>
