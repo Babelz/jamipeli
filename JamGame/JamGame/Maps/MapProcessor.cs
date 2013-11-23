@@ -94,8 +94,8 @@ namespace JamGame.Maps
                 }
 
                 Rectangle stateArea = new Rectangle(
-                    mapStates.Count * Game.Instance.ScreenWidth, 
-                    mapStates.Count * Game.Instance.ScreenHeight,
+                    (mapStates.Count > 0 ? 1 : 0) * Game.Instance.ScreenWidth,
+                    (mapStates.Count > 0 ? 1 : 0) * Game.Instance.ScreenHeight,
                     Game.Instance.ScreenWidth, 
                     Game.Instance.ScreenHeight);
 

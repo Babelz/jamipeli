@@ -110,6 +110,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\StateTrigger.cs" />
     <Compile Include="DataTypes\Size.cs" />
     <Compile Include="Entities\Wall.cs" />
     <Compile Include="Factories\IReflectionFactory.cs" />
@@ -132,9 +133,9 @@
     <Compile Include="Maps\MapProcessor.cs" />
     <Compile Include="Maps\MapStateManager.cs" />
     <Compile Include="Maps\MonsterWave.cs" />
-    <Compile Include="Gamestate\GameplayState.cs" />
-    <Compile Include="Gamestate\GameState.cs" />
-    <Compile Include="Gamestate\GameStateManager.cs" />
+    <Compile Include="Input\Gamestate\GameplayState.cs" />
+    <Compile Include="Input\Gamestate\GameState.cs" />
+    <Compile Include="Input\Gamestate\GameStateManager.cs" />
     <Compile Include="Input\Binding.cs" />
     <Compile Include="Input\ButtonTrigger.cs" />
     <Compile Include="Input\GamepadStateProvider.cs" />

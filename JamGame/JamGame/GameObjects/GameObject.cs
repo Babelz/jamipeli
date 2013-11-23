@@ -26,7 +26,6 @@ namespace JamGame.GameObjects
             get;
             set;
         }
-
         public virtual Vector2 Velocity
         {
             get;
@@ -35,7 +34,7 @@ namespace JamGame.GameObjects
         public Size Size
         {
             get;
-            private set;
+            protected set;
         }
         #endregion
 

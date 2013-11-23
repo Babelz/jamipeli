@@ -12,6 +12,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using JamGame.GameObjects;
 using JamGame.Maps;
+using JamGame.Components;
 
 namespace JamGame
 {
@@ -204,6 +205,9 @@ namespace JamGame
             GameStateManager = new GameStateManager(this, spriteBatch);
             GameStateManager.PushState(new GameplayState());
             Components.Add(GameStateManager);
+
+            StateTrigger trigger = new StateTrigger(this);
+            Components.Add(trigger);
 
             #region Temp texture making
             tempTexture = new Texture2D(GraphicsDevice, 1, 1);

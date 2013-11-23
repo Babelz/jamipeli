@@ -12,12 +12,25 @@ namespace JamGame.Gamestate
 {
     class GameplayState : GameState
     {
+        #region Vars
         private Player player;
         private World world;
         private Wall topWall;
         private Wall bottomWall;
         private Wall leftWall;
         private Wall rightWall;
+        #endregion
+
+        #region Properties
+        public Player Player
+        {
+            get
+            {
+                return player;
+            }
+        }
+        #endregion
+
         public GameplayState()
         {
             world = new World(new Vector2(0f, 0f));

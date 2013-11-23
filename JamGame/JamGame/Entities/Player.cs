@@ -14,6 +14,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using JamGame.Maps;
 using JamGame.GameObjects.Components;
+using JamGame.DataTypes;
 
 namespace JamGame.Entities
 {
@@ -51,6 +52,7 @@ namespace JamGame.Entities
 
         public Player(World world)
         {
+            Size = new Size(100, 100);
             motionEngine = new MotionEngine(this);
             defaultSetup = new InputControlSetup();
             controller = new InputController(Game.Instance.InputManager);
@@ -62,12 +64,8 @@ namespace JamGame.Entities
             body.Restitution = 0f;
             body.LinearDamping = 5f;
             Position = Vector2.Zero;
-            
-            
-            
-            Initialize();
 
-            Game.Instance.MapManager.OnMapChanged += new MapManagerEventHandler(MapManager_OnMapChanged);
+            Initialize();
         }
 
         #region Event handlers
@@ -78,8 +76,7 @@ namespace JamGame.Entities
         }
         public void StateManager_OnStateFinished(object sender, MapStateManagerEventArgs e)
         {
-            //Console.WriteLine("HAISTA VITTU HAISTA VITTU");
-            
+            Game.Instance.MapManager.Active.StateManager.StartTransition();
         }
         #endregion
 
@@ -111,7 +108,7 @@ namespace JamGame.Entities
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Game.Instance.Temp, new Rectangle((int) Position.X,
-                (int) Position.Y, 100, 100), Color.Black);
+                (int) Position.Y, Size.Width, Size.Height), Color.Black);
         }
 
         private void InitPadMaps()
