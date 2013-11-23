@@ -96,8 +96,8 @@ namespace JamGame.Maps
         {
             if (Started)
             {
-                elapsed += gameTime.TotalGameTime.Milliseconds;
-                MonsterWave nextWave = waves.FirstOrDefault(w => w.ReleaseTime >= elapsed);
+                elapsed += gameTime.ElapsedGameTime.Milliseconds;
+                MonsterWave nextWave = waves.FirstOrDefault(w => elapsed > w.ReleaseTime);
                 
                 if (nextWave != null)
                 {
@@ -114,12 +114,13 @@ namespace JamGame.Maps
                         Game.Instance.AddGameObject(monster);
                         releasedMonsters.Add(monster);
 
+                        int height = (int)(monster.Animation.Scale * 256);
                         int max_X = Game.Instance.ScreenWidth + 200;
-                        int max_Y = Game.Instance.ScreenHeight - monster.Size.Height;
+                        int max_Y = Game.Instance.ScreenHeight;
 
                         monster.Position = new Vector2(
-                            random.Next(Game.Instance.ScreenWidth, max_X),
-                            random.Next(Game.Instance.ScreenHeight / 2 + monster.Size.Height, max_Y));
+                            random.Next(Game.Instance.ScreenWidth, max_X) * nextWave.PositionModifier.X,
+                            random.Next(Game.Instance.ScreenHeight / 2 + height, max_Y) * nextWave.PositionModifier.Y);
 
                     }
                 }

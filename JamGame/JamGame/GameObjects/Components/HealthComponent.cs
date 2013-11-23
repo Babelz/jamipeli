@@ -21,7 +21,7 @@ namespace JamGame.GameObjects.Components
         {
             get
             {
-                return Health != 0;
+                return Health > 0;
             }
         }
         #endregion

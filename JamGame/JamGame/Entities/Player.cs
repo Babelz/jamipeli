@@ -20,12 +20,6 @@ using JamGame.GameObjects.Monsters;
 
 namespace JamGame.Entities
 {
-    public enum Facing
-    {
-        Left,
-        Right
-    }
-
     public class Player : DrawableGameObject
     {
         #region Vars
@@ -34,9 +28,8 @@ namespace JamGame.Entities
         private DirectionalArrow directionalArrow;
         private WeaponComponent weaponComponent;
         private TargetingComponent<Monster> targetingComponent;
-        private Facing facing;
 
-        private float speed = 15f;
+        private const float speed = 15f;
         #endregion
 
         public Player(World world)
@@ -63,7 +56,7 @@ namespace JamGame.Entities
 
             Game.Instance.MapManager.OnMapChanged += new MapManagerEventHandler(MapManager_OnMapChanged);
 
-            facing = Facing.Right;
+            Velocity = new Vector2(speed, 0);
 
             Initialize();
         }
@@ -96,14 +89,12 @@ namespace JamGame.Entities
             keymapper.Map(new KeyTrigger("move left", Keys.A),
                 (triggered, args) => 
                 {
-                    body.ApplyForce(new Vector2(-speed, 0));
-                    facing = Facing.Left;
+                    body.ApplyForce(Velocity = new Vector2(-speed, 0));
                 });
             keymapper.Map(new KeyTrigger("move right", Keys.D),
                 (triggered, args) =>
                 {
-                    body.ApplyForce(new Vector2(speed, 0));
-                    facing = Facing.Right;
+                    body.ApplyForce(Velocity = new Vector2(speed, 0));
                 });
             keymapper.Map(new KeyTrigger("move up", Keys.W),
                 (triggered, args) => body.ApplyForce(new Vector2(0, -speed)));
@@ -112,18 +103,38 @@ namespace JamGame.Entities
             keymapper.Map(new KeyTrigger("attck", Keys.Space),
                 (triggered, args) =>
                 {
-                    weaponComponent.Attack();
+                    if (args.State == InputState.Down)
+                    {
+                        weaponComponent.Attack();
+                    }
                 });
         }
 
-        private GameObject NearestObject()
+        private Monster FindNearestMonster()
         {
-            Game.Instance.GameObjects
+            GameObject nearest = Game.Instance.GameObjects
+                .FirstOrDefault(o => Vector2.Distance(o.Position, Position) == Game.Instance.GameObjects
+                    .Min(a => Vector2.Distance(a.Position, Position)) && o as Monster != null);
+
+            return nearest as Monster;
         }
 
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+
+            Monster nearest = FindNearestMonster();
+
+            if (nearest != null)
+            {
+                targetingComponent.ChangeTarget(nearest);
+            }
+
+            if (!Game.Instance.ContainsGameObject(nearest))
+            {
+                nearest = null;
+                targetingComponent.ClearTarget();
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -131,6 +142,11 @@ namespace JamGame.Entities
             base.Draw(spriteBatch);
             spriteBatch.Draw(Game.Instance.Temp, new Rectangle((int) Position.X,
                 (int) Position.Y, 100, 100), null, Color.Black, 0f, new Vector2(0.5f, 0.5f),SpriteEffects.None,0f );
+
+            if (targetingComponent.HasTarget)
+            {
+                spriteBatch.Draw(Game.Instance.Temp, new Rectangle((int)targetingComponent.Target.Position.X, (int)targetingComponent.Target.Position.Y, 32, 32), Color.Red);
+            }
         }
 
         private void InitPadMaps()

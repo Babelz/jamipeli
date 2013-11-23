@@ -88,7 +88,10 @@ namespace JamGame.GameObjects
                     OnDestroying(this, new GameObjectEventArgs(false, true));
                 }
             }
-            else
+        }
+        public virtual void Update(GameTime gameTime)
+        {
+            if (destroying)
             {
                 OnDestroy();
 
@@ -98,13 +101,7 @@ namespace JamGame.GameObjects
                 }
 
                 Game.Instance.RemoveGameObject(this);
-            }
-        }
-        public virtual void Update(GameTime gameTime)
-        {
-            if (destroying)
-            {
-                Destory();
+
                 return;
             }
 

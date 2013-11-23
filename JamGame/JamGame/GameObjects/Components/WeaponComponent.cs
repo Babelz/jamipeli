@@ -16,7 +16,6 @@ namespace JamGame.GameObjects.Components
         private Weapon currentWeapon;
         private readonly TargetingComponent<Monster> targetingComponent;
         private readonly List<EffectDrawer> effectDrawers;
-        private readonly TimerWrapper effectTimers;
         private readonly SpriteFont font;
         #endregion
 
@@ -44,28 +43,27 @@ namespace JamGame.GameObjects.Components
             currentWeapon = startWeapon;
 
             effectDrawers = new List<EffectDrawer>();
-            effectTimers = new TimerWrapper();
 
             font = Game.Instance.Content.Load<SpriteFont>("default");
         }
 
         private void AddStringDrawer(Vector2 startPosition, string stringToDraw)
         {
-            string timerkey = "timer" + effectDrawers.Count;
-            effectTimers.AddTimer(timerkey, 0);
+            int elapsed = 0;
+            Vector2 position = startPosition;
 
             EffectDrawer effectDrawer = new EffectDrawer();
-            Vector2 position = startPosition;
 
             effectDrawer.Update = (gameTime) =>
                 {
-                    if (effectTimers[timerkey] > 1500)
+                    if (elapsed > 500)
                     {
                         effectDrawer.Dispose();
                     } 
                     else 
                     {
-                        position = new Vector2(position.X, position.Y - 0.25f);
+                        elapsed += gameTime.ElapsedGameTime.Milliseconds;
+                        position = new Vector2(position.X, position.Y - 1.25f);
                     }
                 };
             effectDrawer.Draw = (spriteBatch) =>
@@ -75,8 +73,9 @@ namespace JamGame.GameObjects.Components
             effectDrawer.Dispose = () =>
                 {
                     effectDrawers.Remove(effectDrawer);
-                    effectTimers.RemoveTimer(timerkey);
                 };
+
+            effectDrawers.Add(effectDrawer);
         }
 
         public void Attack()
@@ -87,7 +86,7 @@ namespace JamGame.GameObjects.Components
                 {
                     int damage = currentWeapon.CalculateDamage();
                     targetingComponent.TargetHealthComponent.TakeDamage(damage);
-                    AddStringDrawer(new Vector2(targetingComponent.Target.Position.X / 2, targetingComponent.Target.Position.Y), damage.ToString());
+                    AddStringDrawer(new Vector2(targetingComponent.Target.Position.X, targetingComponent.Target.Position.Y), damage.ToString());
                 }
             }
         }
@@ -97,13 +96,17 @@ namespace JamGame.GameObjects.Components
             {
                 currentWeapon.Update(gameTime);
             }
+
+            effectDrawers.ForEach(e => e.Update(gameTime));
         }
         public void Draw(SpriteBatch spriteBatch)
         {
             if (HasWeapon && currentWeapon.IsDrawing)
             {
-                currentWeapon.DrawEffects(spriteBatch, targetingComponent.Target.Position);
+                //currentWeapon.DrawEffects(SpriteBatch spriteBatch, Vector2 position, Vector2 area, int elapsedDrawTime);
             }
+
+            effectDrawers.ForEach(e => e.Draw(spriteBatch));
         }
     }
 }

@@ -50,17 +50,14 @@ namespace JamGame.Weapons
         {
             int result = 0;
 
-            if (CanMakeDamage())
-            {
-                int damageModifier = (random.Next(0, 100) <= critChance ? CritModifier : 1);
+            int damageModifier = (random.Next(0, 100) <= critChance ? CritModifier : 1);
 
-                result = random.Next(minDamage, maxDamage) * damageModifier;
-            }
+            result = random.Next(minDamage, maxDamage) * damageModifier;
 
             return result;
         }
 
         public abstract void Update(GameTime gameTime);
-        public abstract void DrawEffects(SpriteBatch spriteBatch, Vector2 position);
+        public abstract void DrawEffects(SpriteBatch spriteBatch, Vector2 position, Vector2 area, int elapsedDrawTime);
     }
 }

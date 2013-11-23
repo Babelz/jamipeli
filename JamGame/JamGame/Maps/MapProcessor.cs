@@ -22,6 +22,18 @@ namespace JamGame.Maps
             mapFile = XDocument.Load(mapName);
         }
 
+        private int ReadAttribute(XElement xElement, string name)
+        {
+            int value = 0;
+            XAttribute attribute = xElement.Attribute(name);
+
+            if (attribute != null)
+            {
+                value = int.Parse(attribute.Value);
+            }
+
+            return value;
+        }
         private Texture2D LoadForeground(XElement stateElement)
         {
             string foreground = stateElement.Attribute("Foreground").Value;
@@ -69,7 +81,8 @@ namespace JamGame.Maps
                     waveMonsters.AddRange(factory.MakeNew(monsterDataset.Type, monsterDataset.Count));
                 }
 
-                waves.Add(new MonsterWave(waveMonsters, releaseTime));
+                Vector2 positionModifier = new Vector2(ReadAttribute(waveElement, "XModifier"), ReadAttribute(waveElement, "YModifier"));
+                waves.Add(new MonsterWave(waveMonsters, releaseTime, positionModifier));
             }
 
             return waves;

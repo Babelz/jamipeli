@@ -10,7 +10,7 @@ namespace JamGame.Weapons
     public class BaseballBat : MeleeWeapon
     {
         public BaseballBat()
-            : base("Baseball Bat", 5, 12, 25, 2500, 1000)
+            : base("Baseball Bat", 99, 100, 25, 1, 1000)
         {
         }
 
@@ -30,7 +30,7 @@ namespace JamGame.Weapons
                 random.Next(min_X / 2, max_X / 2),
                 random.Next(min_Y / 2, max_Y / 2));
 
-                spriteBatch.Draw(Game.Instance.Temp, rectangle, Color.Red)
+                spriteBatch.Draw(Game.Instance.Temp, rectangle, Color.Red);
             }
         }
     }

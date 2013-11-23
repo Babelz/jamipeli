@@ -110,6 +110,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\EffectDrawer.cs" />
     <Compile Include="Components\StateTrigger.cs" />
     <Compile Include="DataTypes\Size.cs" />
     <Compile Include="Entities\Wall.cs" />
@@ -117,6 +118,7 @@
     <Compile Include="Factories\MonsterFactory.cs" />
     <Compile Include="GameObjects\Components\DirectionalArrow.cs" />
     <Compile Include="GameObjects\Components\FiniteStateMachine.cs" />
+    <Compile Include="GameObjects\Components\GameplayHud.cs" />
     <Compile Include="GameObjects\Components\HealthComponent.cs" />
     <Compile Include="Entities\Player.cs" />
     <Compile Include="GameObjects\Components\IDrawableObjectComponent.cs" />

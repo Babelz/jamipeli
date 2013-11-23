@@ -29,6 +29,11 @@ namespace JamGame.Weapons
 
         protected abstract void OnDrawEffects(SpriteBatch spriteBatch, Vector2 position, Vector2 area, int elapsedDrawTime);
 
+        public override int CalculateDamage()
+        {
+            isInCoolDown = true;
+            return base.CalculateDamage();
+        }
         public override bool CanMakeDamage()
         {
             return elapsed == 0 && !isInCoolDown;

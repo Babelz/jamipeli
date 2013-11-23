@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using JamGame.GameObjects.Monsters;
+using Microsoft.Xna.Framework;
 
 namespace JamGame.Maps
 {
@@ -18,12 +19,19 @@ namespace JamGame.Maps
             get;
             private set;
         }
+        public Vector2 PositionModifier
+        {
+            get;
+            private set;
+        }
         #endregion
 
-        public MonsterWave(List<Monster> monsters, int releaseTime)
+        public MonsterWave(List<Monster> monsters, int releaseTime, Vector2 positionModifier)
         {
             this.monsters = monsters;
+
             ReleaseTime = releaseTime;
+            PositionModifier = positionModifier;
         }
 
         public List<Monster> ReleaseMonsters()

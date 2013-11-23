@@ -73,6 +73,11 @@ namespace JamGame.GameObjects.Components
             }
         }
 
+        public void ClearTarget()
+        {
+            TargetHealthComponent = null;
+            Target = null;
+        }
         public void ChangeTarget(T target)
         {
             LaunchOnTargetChanged(target);
