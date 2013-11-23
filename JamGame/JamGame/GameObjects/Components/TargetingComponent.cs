@@ -53,6 +53,11 @@ namespace JamGame.GameObjects.Components
                 return Vector2.Zero;
             }
         }
+        public HealthComponent TargetHealthComponent
+        {
+            get;
+            private set;
+        }
         #endregion
 
         public TargetingComponent(GameObject owner)
@@ -72,11 +77,12 @@ namespace JamGame.GameObjects.Components
         {
             LaunchOnTargetChanged(target);
 
+            TargetHealthComponent = target.Components
+                .First(c => c is HealthComponent) as HealthComponent;
+
+            // TODO: vois varmaa heittää poikkeuksen jos ei ole hela komponenttia?
+
             this.Target = target;
-        }
-        public void GetNearestTarget()
-        {
-            // TODO: hae lähin target.
         }
     }
 

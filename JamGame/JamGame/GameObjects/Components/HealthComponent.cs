@@ -7,6 +7,10 @@ namespace JamGame.GameObjects.Components
 {
     public class HealthComponent : IObjectComponent
     {
+        #region Vars
+        private int maxHealth;
+        #endregion
+
         #region Properties
         public int Health
         {
@@ -25,8 +29,24 @@ namespace JamGame.GameObjects.Components
         public HealthComponent(int startHealth)
         {
             Health = startHealth;
+
+            this.maxHealth = startHealth;
+        }
+        public HealthComponent(int startHealth, int maxHealth)
+        {
+            Health = startHealth;
+
+            this.maxHealth = maxHealth;
         }
 
+        public void IncreaseMaxHealth(int amount)
+        {
+            maxHealth += amount;
+        }
+        public void ReduceMaxHealth(int amount)
+        {
+            maxHealth -= maxHealth;
+        }
         public void Heal(int amount)
         {
             Health += amount;

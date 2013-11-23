@@ -53,6 +53,7 @@ namespace JamGame.GameObjects.Monsters
             if (fixtureB.Body.UserData as Player != null)
             {
                 brain.PushState(RunAway);
+                brain.PushState(Attack);
                 results = true;
             }
             else
@@ -118,6 +119,10 @@ namespace JamGame.GameObjects.Monsters
         }
         private void Attack()
         {
+            Console.WriteLine("hyökättiin playeriä vastaan");
+
+            targetComponent.TargetHealthComponent.TakeDamage(5);
+            brain.PopState();
         }
         #endregion
 

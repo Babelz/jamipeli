@@ -14,6 +14,7 @@ using Microsoft.Xna.Framework.Media;
 using JamGame.GameObjects;
 using JamGame.Maps;
 using JamGame.Components;
+using JamGame.GameObjects.Components;
 
 namespace JamGame
 {
@@ -122,6 +123,13 @@ namespace JamGame
             get
             {
                 return InputManager.Mapper.GetInputBindProvider<PadInputBindProvider>();
+            }
+        }
+        public List<GameObject> GameObjects
+        {
+            get
+            {
+                return allObjects.AsReadOnly();
             }
         }
         #endregion
@@ -249,6 +257,19 @@ namespace JamGame
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
+            
+            GameplayState gameplayState = GameStateManager.States.FirstOrDefault(
+                s => s is GameplayState) as GameplayState;
+            if (gameplayState != null)
+            {
+                HealthComponent playerHealth = gameplayState.Player.Components
+                    .FirstOrDefault(c => c is HealthComponent) as HealthComponent;
+
+                if (!playerHealth.Alive)
+                {
+                    this.Exit();
+                }
+            }
 
             allObjects.ForEach(
                 o => o.Update(gameTime));

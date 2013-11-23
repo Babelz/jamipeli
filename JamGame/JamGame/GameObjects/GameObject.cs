@@ -49,7 +49,7 @@ namespace JamGame.GameObjects
                     );
             }
         }
-        public virtual Vector2 Velocity
+        public Vector2 Velocity
         {
             get;
             set;
@@ -58,6 +58,13 @@ namespace JamGame.GameObjects
         {
             get;
             protected set;
+        }
+        public List<IObjectComponent> Components
+        {
+            get
+            {
+                return components;
+            }
         }
         #endregion
 

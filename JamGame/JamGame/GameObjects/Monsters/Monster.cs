@@ -14,6 +14,7 @@ namespace JamGame.GameObjects.Monsters
         #region Vars
         protected readonly TimerWrapper timerWrapper;
         protected readonly FiniteStateMachine brain;
+        
         protected CharaterAnimator animation;
         protected TargetingComponent<Player> targetComponent;
         #endregion
