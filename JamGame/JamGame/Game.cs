@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using JamGame.Gamestate;
+using JamGame.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -32,6 +34,8 @@ namespace JamGame
 
         #region Properties
         private static object padLock = new object();
+        private Texture2D tempTexture;
+
         /// <summary>
         /// Palauttaa singleton instanssin pelistä.
         /// </summary>
@@ -69,10 +73,48 @@ namespace JamGame
                                    graphics.GraphicsDevice.Viewport.Y);
             }
         }
-        public Map Current
+        public GameStateManager GameStateManager
         {
             get;
-            set;
+            private set;
+        }
+        public Texture2D Temp
+        {
+            get
+            {
+                return tempTexture;
+            }
+            private set
+            {
+                tempTexture = value;
+            }
+        }
+        public MapManager MapManager
+        {
+            get;
+            private set;
+        }
+        /// <summary>
+        /// InputManager joka tarjoaa bindit.
+        /// </summary>
+        public InputManager InputManager
+        {
+            get;
+            private set;
+        }
+        public KeyInputBindProvider KeyInput
+        {
+            get
+            {
+                return InputManager.Mapper.GetInputBindProvider<KeyInputBindProvider>();
+            }
+        }
+        public PadInputBindProvider PadInput
+        {
+            get
+            {
+                return InputManager.Mapper.GetInputBindProvider<PadInputBindProvider>();
+            }
         }
         #endregion
 
@@ -116,6 +158,10 @@ namespace JamGame
         {
             return allObjects.Where(o => predicate(o));
         }
+        public bool ContainsGameObject(GameObject gameObject)
+        {
+            return allObjects.Contains(gameObject);
+        }
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -126,6 +172,19 @@ namespace JamGame
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            InputManager = new InputManager(this);
+            Components.Add(InputManager);
+            InputManager.AddStateProvider(typeof(KeyboardStateProvider), new KeyboardStateProvider());
+            InputManager.AddStateProvider(typeof(GamepadStateProvider), new GamepadStateProvider());
+            InputManager.Mapper.AddInputBindProvider(typeof(KeyInputBindProvider), new KeyInputBindProvider());
+            InputManager.Mapper.AddInputBindProvider(typeof(PadInputBindProvider), new PadInputBindProvider());
+
+            KeyInput.Map(new KeyTrigger("Exit", Keys.Escape), (triggered, args) => Exit(), InputState.Released);
+            PadInput.Map(new ButtonTrigger("Exit", Buttons.A), (triggered, args) =>
+            {
+                if (args.State == InputState.Released)
+                    Exit();
+            });
 
             base.Initialize();
         }
@@ -139,10 +198,23 @@ namespace JamGame
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            MapManager = new MapManager(this, spriteBatch);
+            Components.Add(MapManager);
 
-            Current = new Map();
-            Current.Load(@"Maps\MapFiles\testmap.xml");
+            GameStateManager = new GameStateManager(this, spriteBatch);
+            GameStateManager.PushState(new GameplayState());
+            Components.Add(GameStateManager);
+
+            #region Temp texture making
+            tempTexture = new Texture2D(GraphicsDevice, 1, 1);
+            Color[] data = new Color[tempTexture.Width * tempTexture.Height];
+            for (int i = 0; i < data.Length; data[i++] = Color.White) ;
+            tempTexture.SetData<Color>(data);
+            #endregion
+
+            MapManager.ChangeMap("testmap");
+
+            // TODO: use this.Content to load your game content here
         }
 
         /// <summary>
@@ -165,10 +237,18 @@ namespace JamGame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            Current.Update(gameTime);
             allObjects.ForEach(
                 o => o.Update(gameTime));
             // TODO: Add your update logic here
+
+            if (gameTime.TotalGameTime.Milliseconds % 1000 == 0)
+            {
+                if (allObjects.Count > 0)
+                {
+                    allObjects.First().Destory();
+                    Console.WriteLine("Poistettiin otus...");
+                }
+            }
 
             base.Update(gameTime);
         }
@@ -181,15 +261,14 @@ namespace JamGame
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            base.Draw(gameTime);
+
             spriteBatch.Begin();
 
-            Current.Draw(spriteBatch);
             drawableObjects.ForEach(
                 o => o.Draw(spriteBatch));
 
             spriteBatch.End();
-
-            base.Draw(gameTime);
         }
     }
 }

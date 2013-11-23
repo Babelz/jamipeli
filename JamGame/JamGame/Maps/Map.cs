@@ -8,27 +8,46 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace JamGame.Maps
 {
-    public class Map : DrawableGameObject
+    public class Map
     {
         #region Vars
         private MapStateManager mapStateManager;
         #endregion
 
-        public void Load(string mapName)
+        #region Properties
+        public string Name
         {
-            MapProcessor mapProcessor = new MapProcessor(mapName);
+            get;
+            private set;
+        }
+        public MapStateManager StateManager
+        {
+            get
+            {
+                return mapStateManager;
+            }
+        }
+        #endregion
+
+        public Map(string name)
+        {
+            Name = name;
+        }
+
+        public void Load()
+        {
+            MapProcessor mapProcessor = new MapProcessor(@"Maps\MapFiles\" + Name + ".xml");
             mapStateManager = new MapStateManager(mapProcessor.LoadMapStates());
 
             mapStateManager.Start();
         }
-        public override void Update(GameTime gameTime)
+
+        public void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
             mapStateManager.Update(gameTime);
         }
-        public override void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch)
         {
-            base.Draw(spriteBatch);
             mapStateManager.Draw(spriteBatch);
         }
     }

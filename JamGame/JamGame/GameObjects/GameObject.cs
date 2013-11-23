@@ -26,6 +26,12 @@ namespace JamGame.GameObjects
             get;
             set;
         }
+
+        public Vector2 Velocity
+        {
+            get;
+            set;
+        }
         public Size Size
         {
             get;

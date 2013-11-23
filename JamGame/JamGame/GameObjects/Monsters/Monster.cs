@@ -20,7 +20,7 @@ namespace JamGame.GameObjects.Monsters
         public HealthComponent Health
         {
             get;
-            private set;
+            protected set;
         }
         #endregion
 

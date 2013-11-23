@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.IO;
 using JamGame.Factories;
 using JamGame.GameObjects.Monsters;
+using Microsoft.Xna.Framework;
 
 namespace JamGame.Maps
 {
@@ -21,15 +22,15 @@ namespace JamGame.Maps
             mapFile = XDocument.Load(mapName);
         }
 
-        private Texture2D LoadForeground()
+        private Texture2D LoadForeground(XElement stateElement)
         {
-            XElement styleElement = mapFile.Descendants("Style").First();
-            return Game.Instance.Content.Load<Texture2D>(styleElement.Attribute("Foreground").Value);
+            string foreground = stateElement.Attribute("Foreground").Value;
+            return Game.Instance.Content.Load<Texture2D>(foreground);
         }
-        private Texture2D LoadBackground()
+        private Texture2D LoadBackground(XElement stateElement)
         {
-            XElement styleElement = mapFile.Descendants("Style").First();
-            return Game.Instance.Content.Load<Texture2D>(styleElement.Attribute("Background").Value);
+            string background = stateElement.Attribute("Background").Value;
+            return Game.Instance.Content.Load<Texture2D>(background);
         }
 
         private IEnumerable<XElement> ReadStates()
@@ -77,14 +78,13 @@ namespace JamGame.Maps
         public List<MapState> LoadMapStates()
         {
             List<MapState> mapStates = new List<MapState>();
-           
-            Texture2D foreground = LoadForeground();
-            Texture2D background = LoadBackground();
-
             IEnumerable<XElement> stateElements = ReadStates();
 
             foreach (XElement stateElement in stateElements)
             {
+                Texture2D foreground = LoadForeground(stateElement);
+                Texture2D background = LoadBackground(stateElement);
+
                 List<MonsterWave> waves = null;
                 IEnumerable<XElement> waveElements = ReadWaveElements(stateElement);
                 
@@ -93,7 +93,13 @@ namespace JamGame.Maps
                     waves = ParseWaves(waveElement);
                 }
 
-                mapStates.Add(new MapState(foreground, background, waves));
+                Rectangle stateArea = new Rectangle(
+                    mapStates.Count * Game.Instance.ScreenWidth, 
+                    mapStates.Count * Game.Instance.ScreenHeight,
+                    Game.Instance.ScreenWidth, 
+                    Game.Instance.ScreenHeight);
+
+                mapStates.Add(new MapState(foreground, background, waves, stateArea));
             }
 
             return mapStates;

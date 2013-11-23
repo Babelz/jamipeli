@@ -1,12 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Map>
-	<Style Background="bg1" Foreground="fg1"/>
 	<States>
-		<State>
+		<State Background="bg1" Foreground="fg1">
 			<Waves>
 				<Wave ReleaseTime="0">
 					<Monsters>
 						<Monster Type="Chutulu" Count="5"/>
+					</Monsters>
+				</Wave>
+			</Waves>
+		</State>
+		<State Background="bg1" Foreground="fg1">
+			<Waves>
+				<Wave ReleaseTime="1000">
+					<Monsters>
+						<Monster Type="Chutulu" Count="1"/>
 					</Monsters>
 				</Wave>
 			</Waves>

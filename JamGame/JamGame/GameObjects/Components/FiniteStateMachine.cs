@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 namespace JamGame.GameObjects.Components
 {
-    public class FiniteStateMachine : IObjectComponent
+    public class FiniteStateMachine : IUpdatableObjectComponent
     {
         #region Vars
         private readonly Stack<Action> states;
@@ -50,6 +51,13 @@ namespace JamGame.GameObjects.Components
         public void PushState(Action action)
         {
             states.Push(action);
+        }
+        public void Update(GameTime gameTime)
+        {
+            if (HasStates)
+            {
+                CurrentState();
+            }
         }
     }
 }

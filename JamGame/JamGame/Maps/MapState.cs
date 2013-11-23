@@ -16,6 +16,7 @@ namespace JamGame.Maps
         private readonly Texture2D background;
 
         private readonly List<MonsterWave> waves;
+        private readonly List<Monster> releasedMonsters;
 
         private int elapsed;
         #endregion
@@ -25,6 +26,16 @@ namespace JamGame.Maps
         #endregion
 
         #region Properties
+        public Rectangle StateArea
+        {
+            get;
+            private set;
+        }
+        public bool Finished
+        {
+            get;
+            private set;
+        }
         public bool HasWaves
         {
             get
@@ -39,14 +50,18 @@ namespace JamGame.Maps
         }
         #endregion
 
-        public MapState(Texture2D foreground, Texture2D background, List<MonsterWave> waves)
+        public MapState(Texture2D foreground, Texture2D background, List<MonsterWave> waves, Rectangle stateArea)
         {
             this.foreground = foreground;
             this.background = background;
             this.waves = waves;
 
-            Started = false;
+            StateArea = stateArea;
 
+            Started = false;
+            Finished = false;
+
+            releasedMonsters = new List<Monster>();
         }
 
         public void Start()
@@ -76,6 +91,20 @@ namespace JamGame.Maps
                     foreach (Monster monster in nextWave.ReleaseMonsters())
                     {
                         Game.Instance.AddGameObject(monster);
+                        releasedMonsters.Add(monster);
+                    }
+                }
+
+                if (!HasWaves)
+                {
+                    Finished = true;
+                    foreach (Monster releasedMonster in releasedMonsters)
+                    {
+                        if (Game.Instance.ContainsGameObject(releasedMonster))
+                        {
+                            Finished = false;
+                            break;
+                        }
                     }
                 }
             }
