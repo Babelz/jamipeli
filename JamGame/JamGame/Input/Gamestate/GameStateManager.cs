@@ -9,9 +9,20 @@ namespace JamGame.Gamestate
 {
     public class GameStateManager : DrawableGameComponent
     {
+        #region Vars
         private readonly SpriteBatch spriteBatch;
+        private readonly List<GameState> gameStates;
+        #endregion
 
-        private List<GameState> gameStates;
+        #region Properties
+        public List<GameState> States
+        {
+            get
+            {
+                return gameStates;
+            }
+        }
+        #endregion
 
         public GameStateManager(Microsoft.Xna.Framework.Game game, SpriteBatch spriteBatch) : base(game)
         {

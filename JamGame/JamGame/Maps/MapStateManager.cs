@@ -11,6 +11,7 @@ namespace JamGame.Maps
     {
         #region Vars
         private readonly List<MapState> states;
+        private StateTransition transition;
         private MapState currentMapState;
         private MapState nextMapState;
         #endregion
@@ -18,6 +19,8 @@ namespace JamGame.Maps
         #region Events
         public event MapStateManagerEventHandle OnMapFinished;
         public event MapStateManagerEventHandle OnStateFinished;
+        public event MapStateManagerEventHandle OnTransitionStart;
+        public event MapStateManagerEventHandle OnTransitionFinished;
         #endregion
 
         #region Propeties
@@ -41,6 +44,19 @@ namespace JamGame.Maps
         {
             this.states = states;
         }
+
+        #region Event handlers
+        private void transition_OnFinished(object sender, StateTransitionEventArgs e)
+        {
+            transition = null;
+            ChangeNextState();
+
+            if (OnTransitionFinished != null)
+            {
+                OnTransitionFinished(this, new MapStateManagerEventArgs(currentMapState, null));
+            }
+        }
+        #endregion
 
         /// <summary>
         /// Palauttaa seuraavan staten ja poistaa sen state listasta.
@@ -99,10 +115,28 @@ namespace JamGame.Maps
         /// </summary>
         public void ChangeNextState()
         {
-            // TODO: playaa tässä transition efekti.
-            
             currentMapState = nextMapState;
             nextMapState = null;
+
+            currentMapState.Start();
+        }
+        /// <summary>
+        /// Aloittaa siirtymän toiston.
+        /// </summary>
+        public void StartTransition()
+        {
+            if (transition == null)
+            {
+                transition = new StateTransition(nextMapState, currentMapState);
+                transition.OnFinished += new StateTransitionEventHandler(transition_OnFinished);
+
+                transition.Start();
+
+                if (OnTransitionStart != null)
+                {
+                    OnTransitionStart(this, new MapStateManagerEventArgs(currentMapState, nextMapState));
+                }
+            }
         }
         public void Update(GameTime gameTime)
         {
@@ -130,12 +164,22 @@ namespace JamGame.Maps
                     }
                 }
             }
+
+            if (transition != null)
+            {
+                transition.Update(gameTime);
+            }
         }
         public void Draw(SpriteBatch spriteBatch)
         {
             if (currentMapState != null)
             {
                 currentMapState.Draw(spriteBatch);
+            }
+
+            if (transition != null)
+            {
+                transition.Draw(spriteBatch);
             }
         }
     }

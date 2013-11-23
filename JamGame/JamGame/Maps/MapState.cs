@@ -26,16 +26,33 @@ namespace JamGame.Maps
         #endregion
 
         #region Properties
+        public Point Position
+        {
+            get
+            {
+                return new Point(StateArea.X, StateArea.Y);
+            }
+            set
+            {
+                StateArea = new Rectangle(value.X, value.Y, StateArea.Width, StateArea.Height);
+            }
+        }
         public Rectangle StateArea
         {
             get;
             private set;
         }
+        /// <summary>
+        /// Onko state toistettu jo loppuun.
+        /// </summary>
         public bool Finished
         {
             get;
             private set;
         }
+        /// <summary>
+        /// Onko statessa vielä waveja jäljellä.
+        /// </summary>
         public bool HasWaves
         {
             get
@@ -43,6 +60,9 @@ namespace JamGame.Maps
                 return waves.Count > 0;
             }
         }
+        /// <summary>
+        /// Ollaanko aloitettu staten toisto.
+        /// </summary>
         public bool Started
         {
             get;
@@ -111,8 +131,17 @@ namespace JamGame.Maps
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(background, new Rectangle(0, 0, Game.Instance.ScreenWidth, Game.Instance.ScreenHeight / 2), Color.White);
-            spriteBatch.Draw(foreground, new Rectangle(0, background.Height / 2, Game.Instance.ScreenWidth, Game.Instance.ScreenHeight), Color.White);
+            spriteBatch.Draw(background, new Rectangle(
+                StateArea.X, 
+                0, 
+                Game.Instance.ScreenWidth, 
+                Game.Instance.ScreenHeight / 2), Color.White);
+            
+            spriteBatch.Draw(foreground, new Rectangle(
+                StateArea.X, 
+                Game.Instance.ScreenHeight / 2, 
+                Game.Instance.ScreenWidth, 
+                Game.Instance.ScreenHeight / 2), Color.White);
         }
     }
 

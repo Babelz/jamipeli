@@ -110,6 +110,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\StateTrigger.cs" />
     <Compile Include="DataTypes\Size.cs" />
     <Compile Include="Entities\Wall.cs" />
     <Compile Include="Factories\IReflectionFactory.cs" />
@@ -132,9 +133,9 @@
     <Compile Include="Maps\MapProcessor.cs" />
     <Compile Include="Maps\MapStateManager.cs" />
     <Compile Include="Maps\MonsterWave.cs" />
-    <Compile Include="Gamestate\GameplayState.cs" />
-    <Compile Include="Gamestate\GameState.cs" />
-    <Compile Include="Gamestate\GameStateManager.cs" />
+    <Compile Include="Input\Gamestate\GameplayState.cs" />
+    <Compile Include="Input\Gamestate\GameState.cs" />
+    <Compile Include="Input\Gamestate\GameStateManager.cs" />
     <Compile Include="Input\Binding.cs" />
     <Compile Include="Input\ButtonTrigger.cs" />
     <Compile Include="Input\GamepadStateProvider.cs" />
@@ -154,6 +155,7 @@
     <Compile Include="Input\KeyTrigger.cs" />
     <Compile Include="Input\PadInputBindProvider.cs" />
     <Compile Include="Components\MotionEngine.cs" />
+    <Compile Include="Maps\StateTransition.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game.cs" />
@@ -175,7 +177,8 @@
       <Name>BrashMonkeySpriter</Name>
     </ProjectReference>
     <ProjectReference Include="..\JamGameContent\JamGameContent.contentproj">
-      <Name>JamGameContent</Name>
+      <Project>{C7210242-2C42-4AB1-84B4-753AAFBB7392}</Project>
+      <Name>JamGameContent %28Content%29</Name>
       <XnaReferenceType>Content</XnaReferenceType>
     </ProjectReference>
   </ItemGroup>

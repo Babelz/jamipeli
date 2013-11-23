@@ -14,6 +14,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using JamGame.Maps;
 using JamGame.GameObjects.Components;
+using JamGame.DataTypes;
 
 namespace JamGame.Entities
 {
@@ -29,40 +30,7 @@ namespace JamGame.Entities
         private Body body;
         #endregion
 
-        public Player(World world)
-        {
-            motionEngine = new MotionEngine(this);
-            defaultSetup = new InputControlSetup();
-            controller = new InputController(Game.Instance.InputManager);
-            controller.ChangeSetup(defaultSetup);
-            body = BodyFactory.CreateRectangle(world, ConvertUnits.ToSimUnits(100), ConvertUnits.ToSimUnits(100), 1.0f);
-            //body.Mass = 0.1f;
-            body.Friction = 0f;
-            body.BodyType = BodyType.Dynamic;
-            body.Restitution = 0f;
-            body.LinearDamping = 5f;
-            Position = Vector2.Zero;
-            
-            
-            
-            Initialize();
-
-            Game.Instance.MapManager.OnMapChanged += new MapManagerEventHandler(MapManager_OnMapChanged);
-        }
-
-        #region Event handlers
-        private void MapManager_OnMapChanged(object sender, MapManagerEventArgs e)
-        {
-            e.Next.StateManager.OnStateFinished += new MapStateManagerEventHandle(StateManager_OnStateFinished);
-            //Console.WriteLine("No ainaki kartta vaihtuu?");
-        }
-        public void StateManager_OnStateFinished(object sender, MapStateManagerEventArgs e)
-        {
-            //Console.WriteLine("HAISTA VITTU HAISTA VITTU");
-            
-        }
-        #endregion
-
+        #region Properties
         public override Vector2 Position
         {
             get
@@ -80,6 +48,37 @@ namespace JamGame.Entities
                     );
             }
         }
+        #endregion
+
+        public Player(World world)
+        {
+            Size = new Size(100, 100);
+            motionEngine = new MotionEngine(this);
+            defaultSetup = new InputControlSetup();
+            controller = new InputController(Game.Instance.InputManager);
+            controller.ChangeSetup(defaultSetup);
+            body = BodyFactory.CreateRectangle(world, ConvertUnits.ToSimUnits(100), ConvertUnits.ToSimUnits(100), 1.0f);
+            //body.Mass = 0.1f;
+            body.Friction = 0f;
+            body.BodyType = BodyType.Dynamic;
+            body.Restitution = 0f;
+            body.LinearDamping = 5f;
+            Position = Vector2.Zero;
+
+            Initialize();
+        }
+
+        #region Event handlers
+        private void MapManager_OnMapChanged(object sender, MapManagerEventArgs e)
+        {
+            e.Next.StateManager.OnStateFinished += new MapStateManagerEventHandle(StateManager_OnStateFinished);
+            //Console.WriteLine("No ainaki kartta vaihtuu?");
+        }
+        public void StateManager_OnStateFinished(object sender, MapStateManagerEventArgs e)
+        {
+            Game.Instance.MapManager.Active.StateManager.StartTransition();
+        }
+        #endregion
 
         public void Initialize()
         {

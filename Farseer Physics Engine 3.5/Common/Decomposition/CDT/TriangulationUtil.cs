@@ -48,7 +48,7 @@ namespace FarseerPhysics.Common.Decomposition.CDT
         ///                +
         ///               / \
         ///              /   \
-        ///            b/     \c
+        ///            b/     \c NEW FAGS CANT TRIFORCE
         ///            +-------+ 
         ///           /    B    \  
         ///          /           \ 
