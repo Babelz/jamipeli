@@ -245,7 +245,7 @@ namespace JamGame
                 o => o.Update(gameTime));
             // TODO: Add your update logic here
 
-            if (gameTime.TotalGameTime.Milliseconds % 1000 == 0)
+            if (gameTime.TotalGameTime.Milliseconds % 10 == 0)
             {
                 if (allObjects.Count > 0)
                 {

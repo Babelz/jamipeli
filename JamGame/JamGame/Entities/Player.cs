@@ -62,6 +62,9 @@ namespace JamGame.Entities
             body.Restitution = 0f;
             body.LinearDamping = 5f;
             Position = Vector2.Zero;
+            components.Add(directionalArrow = new DirectionalArrow());
+
+            Game.Instance.MapManager.OnMapChanged += new MapManagerEventHandler(MapManager_OnMapChanged);
 
             Initialize();
         }
@@ -69,12 +72,16 @@ namespace JamGame.Entities
         #region Event handlers
         private void MapManager_OnMapChanged(object sender, MapManagerEventArgs e)
         {
-            e.Next.StateManager.OnStateFinished += new MapStateManagerEventHandle(StateManager_OnStateFinished);
-            //Console.WriteLine("No ainaki kartta vaihtuu?");
+            Game.Instance.MapManager.Active.StateManager.OnStateFinished += new MapStateManagerEventHandle(StateManager_OnStateFinished);
+            Game.Instance.MapManager.Active.StateManager.OnTransitionStart += new MapStateManagerEventHandle(StateManager_OnTransitionStart);
+        }
+        private void StateManager_OnTransitionStart(object sender, MapStateManagerEventArgs e)
+        {
+            directionalArrow.Enabled = false;
         }
         public void StateManager_OnStateFinished(object sender, MapStateManagerEventArgs e)
         {
-            Game.Instance.MapManager.Active.StateManager.StartTransition();
+            directionalArrow.Enabled = true;
         }
         #endregion
 
@@ -105,6 +112,7 @@ namespace JamGame.Entities
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            base.Draw(spriteBatch);
             spriteBatch.Draw(Game.Instance.Temp, new Rectangle((int) Position.X,
                 (int) Position.Y, 100, 100), null, Color.Black, 0f, new Vector2(0.5f, 0.5f),SpriteEffects.None,0f );
         }
