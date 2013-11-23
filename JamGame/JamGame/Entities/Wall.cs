@@ -20,7 +20,7 @@ namespace JamGame.Entities
         {
             this.width = width;
             this.height = height;
-            body = BodyFactory.CreateRectangle(world, ConvertUnits.ToSimUnits(width)*2, ConvertUnits.ToSimUnits(height),0f);
+            body = BodyFactory.CreateRectangle(world, ConvertUnits.ToSimUnits(width), ConvertUnits.ToSimUnits(height),1f);
             body.Restitution = 0f;
             body.BodyType = BodyType.Static;
             body.Position = new Vector2(ConvertUnits.ToSimUnits(position.X), ConvertUnits.ToSimUnits(position.Y));
@@ -39,7 +39,13 @@ namespace JamGame.Entities
                     (int) ConvertUnits.ToDisplayUnits(body.Position.Y),
                     width,
                     height
-                    ), Color.Brown 
+                    ), 
+                    null,
+                    Color.Brown,
+                    0f,
+                    new Vector2(0.5f, 0.5f),
+                    SpriteEffects.None,
+                    0f
                 );
         }
     }

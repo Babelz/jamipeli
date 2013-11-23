@@ -116,7 +116,7 @@ namespace JamGame.Entities
         {
             base.Draw(spriteBatch);
             spriteBatch.Draw(Game.Instance.Temp, new Rectangle((int) Position.X,
-                (int) Position.Y, Size.Width, Size.Height), Color.Black);
+                (int) Position.Y, 100, 100), null, Color.Black, 0f, new Vector2(0.5f, 0.5f),SpriteEffects.None,0f );
         }
 
         private void InitPadMaps()
