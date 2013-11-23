@@ -22,10 +22,11 @@ namespace JamGame.Gamestate
         {
             world = new World(new Vector2(0f, 0f));
             player = new Player(world);
-            topWall = new Wall(world, new Vector2(0, -100), 1280, 100);
-            bottomWall = new Wall(world, new Vector2(0, 300), 1280, 100);
-            leftWall = new Wall(world, new Vector2(-150, 0), 100, 720);
-            rightWall = new Wall(world, new Vector2(1280, 0), 100, 720);
+            player.Position = new Vector2(500,500);
+            topWall = new Wall(world, new Vector2(Game.Instance.ScreenWidth / 2f, Game.Instance.ScreenHeight / 3f), Game.Instance.ScreenWidth, 100);
+            bottomWall = new Wall(world, new Vector2(Game.Instance.ScreenWidth / 2f, Game.Instance.ScreenHeight + 50), Game.Instance.ScreenWidth, 100);
+            leftWall = new Wall(world, new Vector2(-50, Game.Instance.ScreenHeight / 2f), 100, Game.Instance.ScreenHeight);
+            rightWall = new Wall(world, new Vector2(Game.Instance.ScreenWidth + 50, Game.Instance.ScreenHeight / 2f), 100, Game.Instance.ScreenHeight);
         }
 
         public override void Update(GameTime gameTime)
@@ -40,7 +41,10 @@ namespace JamGame.Gamestate
             spriteBatch.Begin();
 
             player.Draw(spriteBatch);
-            leftWall.Draw(spriteBatch);
+          //  leftWall.Draw(spriteBatch);
+         //   rightWall.Draw(spriteBatch);
+            bottomWall.Draw(spriteBatch);
+            topWall.Draw(spriteBatch);
             spriteBatch.End();
         }
     }
