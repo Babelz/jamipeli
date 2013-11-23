@@ -15,13 +15,18 @@ namespace JamGame.Gamestate
         private Player player;
 
         private World world;
-        private Wall wall;
+        private Wall topWall;
+        private Wall bottomWall;
+        private Wall leftWall;
+        private Wall rightWall;
         public GameplayState()
         {
             world = new World(new Vector2(0f, 0f));
             player = new Player(world);
-            wall = new Wall(world, new Vector2(0, 300), 1000, 100);
-
+            topWall = new Wall(world, new Vector2(0, -100), 1280, 100);
+            bottomWall = new Wall(world, new Vector2(0, 300), 1280, 100);
+            leftWall = new Wall(world, new Vector2(-150, 0), 100, 720);
+            rightWall = new Wall(world, new Vector2(1280, 0), 100, 720);
         }
 
         public override void Update(GameTime gameTime)
@@ -36,7 +41,7 @@ namespace JamGame.Gamestate
             spriteBatch.Begin();
             spriteBatch.GraphicsDevice.Clear(Color.Red);
             player.Draw(spriteBatch);
-            wall.Draw(spriteBatch);
+            leftWall.Draw(spriteBatch);
             spriteBatch.End();
         }
     }

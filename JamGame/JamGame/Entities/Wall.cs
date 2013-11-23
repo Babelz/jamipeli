@@ -20,11 +20,13 @@ namespace JamGame.Entities
         {
             this.width = width;
             this.height = height;
-            body = BodyFactory.CreateRectangle(world, ConvertUnits.ToSimUnits(width)*2, ConvertUnits.ToSimUnits(height),0.5f);
+            body = BodyFactory.CreateRectangle(world, ConvertUnits.ToSimUnits(width)*2, ConvertUnits.ToSimUnits(height),0f);
+            body.Restitution = 0f;
+            body.BodyType = BodyType.Static;
             body.Position = new Vector2(ConvertUnits.ToSimUnits(position.X), ConvertUnits.ToSimUnits(position.Y));
             body.UserData = this;
-       
         }
+
 
        
 

@@ -31,8 +31,8 @@ namespace JamGame.Entities
             controller = new InputController(Game.Instance.InputManager);
             controller.ChangeSetup(defaultSetup);
             body = BodyFactory.CreateRectangle(world, ConvertUnits.ToSimUnits(100), ConvertUnits.ToSimUnits(100), 1.0f);
-            body.Mass = 0.1f;
-            body.Friction = 1f;
+            //body.Mass = 0.1f;
+            body.Friction = 0f;
             body.BodyType = BodyType.Dynamic;
             body.Restitution = 0f;
             body.LinearDamping = 5f;
@@ -85,7 +85,6 @@ namespace JamGame.Entities
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            motionEngine.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
