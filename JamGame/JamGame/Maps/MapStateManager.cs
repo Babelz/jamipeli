@@ -71,7 +71,7 @@ namespace JamGame.Maps
         }
         private void ChangeState()
         {
-            if (!Finished)
+            if (!Finished && nextMapState == null)
             {
                 MapState lastMapState = currentMapState;
 

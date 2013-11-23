@@ -19,13 +19,13 @@ namespace JamGame.GameObjects.Monsters
     {
         public Shoemon()
         {
-            animation = Game.Instance.Content.Load<CharacterModel>("monsters\\shoemon").CreateAnimator("Shoemon");
+            Animation = Game.Instance.Content.Load<CharacterModel>("monsters\\shoemon").CreateAnimator("Shoemon");
 
-            animation.Scale = 0.37f;
+            Animation.Scale = 0.37f;
 
             body = BodyFactory.CreateRectangle(Game.Instance.World, 
-                ConvertUnits.ToSimUnits(256*animation.Scale), 
-                ConvertUnits.ToSimUnits(256*animation.Scale), 1f, this);
+                ConvertUnits.ToSimUnits(256*Animation.Scale), 
+                ConvertUnits.ToSimUnits(256*Animation.Scale), 1f, this);
 
             body.Friction = 0f;
             body.BodyType = BodyType.Dynamic;
@@ -39,8 +39,11 @@ namespace JamGame.GameObjects.Monsters
                 as GameplayState;
 
             body.IgnoreCollisionWith(gameplayState.RightWall.Body);
+            body.IgnoreCollisionWith(gameplayState.LeftWall.Body);
             body.OnCollision += new OnCollisionEventHandler(body_OnCollision);
             body.UserData = this;
+
+            components.Add(Health = new HealthComponent(50));
 
             brain.PushState(MoveToArea);
         }
@@ -53,6 +56,7 @@ namespace JamGame.GameObjects.Monsters
             if (fixtureB.Body.UserData as Player != null)
             {
                 brain.PushState(RunAway);
+                brain.PushState(Attack);
                 results = true;
             }
             else
@@ -72,7 +76,11 @@ namespace JamGame.GameObjects.Monsters
         #region Brain states
         private void MoveToArea()
         {
-            if (Position.X < 1000)
+            if (Position.X < 0)
+            {
+                body.ApplyForce(new Vector2(15f, 0.0f));
+            }
+            else if (Position.X > 1000)
             {
                 body.ApplyForce(new Vector2(-15f, 0.0f));
             }
@@ -108,7 +116,7 @@ namespace JamGame.GameObjects.Monsters
             {
                 Vector2 velocity = -(targetComponent.VelocityToTarget * 5); 
                 body.ApplyForce(velocity);
-                animation.FlipX = velocity.X > 0;
+                Animation.FlipX = velocity.X > 0;
             }
             else
             {
@@ -118,14 +126,30 @@ namespace JamGame.GameObjects.Monsters
         }
         private void Attack()
         {
+            Console.WriteLine("hyökättiin playeriä vastaan");
+
+            brain.PopState();
+            if (targetComponent.HasTarget)
+            {
+                targetComponent.TargetHealthComponent.TakeDamage(5);
+            }
+            else
+            {
+                brain.PushState(GetTarget);
+            }
         }
         #endregion
 
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            animation.Location = new Vector2(Position.X, Position.Y + (256 * animation.Scale / 2));
-            animation.Update(gameTime);
+            Animation.Location = new Vector2(Position.X, Position.Y + (256 * Animation.Scale / 2));
+            Animation.Update(gameTime);
+              
+            if (!Health.Alive)
+            {
+                Destory();
+            }
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -133,10 +157,10 @@ namespace JamGame.GameObjects.Monsters
 
             if (targetComponent.HasTarget)
             {
-                animation.FlipX = targetComponent.VelocityToTarget.X > 0;
+                Animation.FlipX = targetComponent.VelocityToTarget.X > 0;
             }
 
-            animation.Draw(spriteBatch);
+            Animation.Draw(spriteBatch);
         }
     }
 }

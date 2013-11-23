@@ -14,6 +14,8 @@ using Microsoft.Xna.Framework.Media;
 using JamGame.GameObjects;
 using JamGame.Maps;
 using JamGame.Components;
+using JamGame.GameObjects.Components;
+using System.Collections.ObjectModel;
 
 namespace JamGame
 {
@@ -124,6 +126,13 @@ namespace JamGame
                 return InputManager.Mapper.GetInputBindProvider<PadInputBindProvider>();
             }
         }
+        public ReadOnlyCollection<GameObject> GameObjects
+        {
+            get
+            {
+                return allObjects.AsReadOnly();
+            }
+        }
         #endregion
 
         private Game()
@@ -189,7 +198,7 @@ namespace JamGame
             InputManager.Mapper.AddInputBindProvider(typeof(PadInputBindProvider), new PadInputBindProvider());
 
             KeyInput.Map(new KeyTrigger("Exit", Keys.Escape), (triggered, args) => Exit(), InputState.Released);
-            PadInput.Map(new ButtonTrigger("Exit", Buttons.A), (triggered, args) =>
+            PadInput.Map(new ButtonTrigger("Exit", Buttons.Back), (triggered, args) =>
             {
                 if (args.State == InputState.Released)
                     Exit();
@@ -249,6 +258,7 @@ namespace JamGame
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
+           
 
             allObjects.ForEach(
                 o => o.Update(gameTime));

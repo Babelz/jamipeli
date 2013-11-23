@@ -58,10 +58,6 @@ namespace JamGame.GameObjects.Components
             timers = new List<Keypair<string, int>>();
         }
 
-        private bool ContainsTimer(string key)
-        {
-            return timers.FirstOrDefault(k => k.Key == key) != null;
-        }
         private Keypair<string, int> MakeNew(string key, int startvalue = 0)
         {
             if (ContainsTimer(key))
@@ -87,6 +83,10 @@ namespace JamGame.GameObjects.Components
             return keypair;
         }
 
+        public bool ContainsTimer(string key)
+        {
+            return timers.FirstOrDefault(k => k.Key == key) != null;
+        }
         public void AddTimer(string key, int startvalue = 0)
         {
             timers.Add(MakeNew(key, startvalue));

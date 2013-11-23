@@ -41,6 +41,13 @@ namespace JamGame.Entities
                 if (args.PlayerIndex != args.PlayerIndex) return;
                 body.ApplyForce(new Vector2(0, speed));
             });
+            padmapper.Map(new ButtonTrigger("attack", Buttons.A), (triggered, args) =>
+            {
+                if (args.State != InputState.Released)
+                {
+                    weaponComponent.Attack();
+                }
+            } );
 
         }
     }

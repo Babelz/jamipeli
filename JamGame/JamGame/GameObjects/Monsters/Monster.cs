@@ -14,11 +14,16 @@ namespace JamGame.GameObjects.Monsters
         #region Vars
         protected readonly TimerWrapper timerWrapper;
         protected readonly FiniteStateMachine brain;
-        protected CharaterAnimator animation;
+        
         protected TargetingComponent<Player> targetComponent;
         #endregion
 
         #region Properties
+        public CharaterAnimator Animation
+        {
+            get;
+            protected set;
+        }
         public HealthComponent Health
         {
             get;
@@ -33,6 +38,12 @@ namespace JamGame.GameObjects.Monsters
 
             components.Add(brain = new FiniteStateMachine());
             components.Add(targetComponent = new TargetingComponent<Player>(this));
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            Game.Instance.World.RemoveBody(body);
         }
     }
 }
