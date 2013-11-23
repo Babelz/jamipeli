@@ -2,5 +2,14 @@ Content\arrow.xnb
 Content\bg1.xnb
 Content\monsters\Shoemon\Shoemon.xnb
 Content\fg1.xnb
+Content\Walk\Pelaaja_0003s_0000_Layer-0.xnb
+Content\Walk\Pelaaja_0003s_0001_Layer-1.xnb
+Content\Walk\Pelaaja_0003s_0002_Layer-2.xnb
+Content\Walk\Pelaaja_0003s_0003_Layer-3.xnb
+Content\Walk\Pelaaja_0003s_0004_Layer-4.xnb
+Content\Walk\Pelaaja_0003s_0005_Layer-5.xnb
+Content\Walk\Pelaaja_0003s_0006_Layer-6.xnb
+Content\Walk\Pelaaja_0003s_0007_Layer-7.xnb
 Content\monsters\shoemon.xnb
+Content\player.xnb
 Maps\MapFiles\testmap.xml

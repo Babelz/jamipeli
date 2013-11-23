@@ -18,6 +18,8 @@ namespace JamGame.Gamestate
         private Wall bottomWall;
         private Wall leftWall;
         private Wall rightWall;
+
+        private List<Player> players; 
         #endregion
 
         #region Properties
@@ -27,6 +29,18 @@ namespace JamGame.Gamestate
             {
                 return player;
             }
+        }
+
+        public Player PlayerTwo
+        {
+            get;
+            private set;
+        }
+
+        public Player PlayerThree
+        {
+            get;
+            private set;
         }
         public Wall LeftWall
         {
@@ -47,8 +61,17 @@ namespace JamGame.Gamestate
         public GameplayState()
         {
             World world = Game.Instance.World;
-            player = new Player(world);
+
+            player = new KeyboardPlayer(world);
+            PlayerTwo = new GamepadPlayer(world, PlayerIndex.One);
+            PlayerTwo.Position = new Vector2(500, 700);
             player.Position = new Vector2(500,500);
+
+            players = new List<Player>();
+            players.Add(player);
+            players.Add(PlayerTwo);
+
+
             topWall = new Wall(world, new Vector2(Game.Instance.ScreenWidth / 2f, Game.Instance.ScreenHeight / 2f - 50), Game.Instance.ScreenWidth, 100);
             bottomWall = new Wall(world, new Vector2(Game.Instance.ScreenWidth / 2f, Game.Instance.ScreenHeight + 50), Game.Instance.ScreenWidth, 100);
             leftWall = new Wall(world, new Vector2(-50, Game.Instance.ScreenHeight / 2f), 100, Game.Instance.ScreenHeight);
@@ -58,7 +81,7 @@ namespace JamGame.Gamestate
         public override void Update(GameTime gameTime)
         {
             Game.Instance.World.Step((float)(gameTime.ElapsedGameTime.TotalMilliseconds * .001));
-            player.Update(gameTime);   
+            players.ForEach(p => p.Update(gameTime));
         }
 
 
@@ -66,7 +89,7 @@ namespace JamGame.Gamestate
         {
             spriteBatch.Begin();
 
-            player.Draw(spriteBatch);
+            players.ForEach(p => p.Draw(spriteBatch));
           //  leftWall.Draw(spriteBatch);
          //   rightWall.Draw(spriteBatch);
            // bottomWall.Draw(spriteBatch);

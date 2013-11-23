@@ -112,6 +112,8 @@
   <ItemGroup>
     <Compile Include="Components\StateTrigger.cs" />
     <Compile Include="DataTypes\Size.cs" />
+    <Compile Include="Entities\GamepadPlayer.cs" />
+    <Compile Include="Entities\KeyboardPlayer.cs" />
     <Compile Include="Entities\Wall.cs" />
     <Compile Include="Factories\IReflectionFactory.cs" />
     <Compile Include="Factories\MonsterFactory.cs" />
