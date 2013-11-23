@@ -109,6 +109,7 @@
   <ItemGroup>
     <Compile Include="DataTypes\Size.cs" />
     <Compile Include="Entities\Player.cs" />
+    <Compile Include="Entities\Wall.cs" />
     <Compile Include="GameObjects\Components\IDrawableObjectComponent.cs" />
     <Compile Include="GameObjects\Components\IObjectComponent.cs" />
     <Compile Include="GameObjects\Components\IUpdatableObjectComponent.cs" />
@@ -145,6 +146,14 @@
     <Content Include="GameThumbnail.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Farseer Physics Engine 3.5\Farseer Physics XNA.csproj">
+      <Project>{0a850700-1abb-4288-a391-6726b90ebeb9}</Project>
+      <Name>Farseer Physics XNA</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\xnaBrashSpriter\BrashMonkeySpriter\BrashMonkeySpriter.csproj">
+      <Project>{ed000f2e-4cff-432f-9fad-ba08ecb05d7d}</Project>
+      <Name>BrashMonkeySpriter</Name>
+    </ProjectReference>
     <ProjectReference Include="..\JamGameContent\JamGameContent.contentproj">
       <Name>JamGameContent</Name>
       <XnaReferenceType>Content</XnaReferenceType>
