@@ -49,16 +49,42 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="bg1.jpg">
-      <Name>bg1</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="fg1.jpg">
       <Name>fg1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="bg1.png">
+      <Name>bg1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="monsters\Shoemon\Shoemon.png">
+      <Name>Shoemon</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="monsters\shoemon.scml">
+      <Name>shoemon</Name>
+      <Importer>SpriterImporter</Importer>
+      <Processor>SpriterProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\xnaBrashSpriter\BrashMonkeyContentPipelineExtension\BrashMonkeyContentPipelineExtension.csproj">
+      <Project>{bc6a7f30-afd4-48e3-83ce-ab412e33d759}</Project>
+      <Name>BrashMonkeyContentPipelineExtension</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\xnaBrashSpriter\BrashMonkeySpriter\BrashMonkeySpriter.csproj">
+      <Project>{ed000f2e-4cff-432f-9fad-ba08ecb05d7d}</Project>
+      <Name>BrashMonkeySpriter</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -21,7 +21,6 @@ namespace JamGame.Entities
     public class Player : DrawableGameObject
     {
         #region Vars
-        private MotionEngine motionEngine;
         private InputControlSetup defaultSetup;
         private InputController controller;
         private DirectionalArrow directionalArrow;
@@ -53,7 +52,6 @@ namespace JamGame.Entities
         public Player(World world)
         {
             Size = new Size(100, 100);
-            motionEngine = new MotionEngine(this);
             defaultSetup = new InputControlSetup();
             controller = new InputController(Game.Instance.InputManager);
             controller.ChangeSetup(defaultSetup);

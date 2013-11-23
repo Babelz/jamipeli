@@ -6,6 +6,7 @@
 				<Wave ReleaseTime="0">
 					<Monsters>
 						<Monster Type="Chutulu" Count="5"/>
+            <Monster Type="Shoemon" Count="1" />
 					</Monsters>
 				</Wave>
 			</Waves>

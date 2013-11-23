@@ -309,7 +309,7 @@ namespace BrashMonkeySpriter {
         }
 
         public void Draw(SpriteBatch p_spriteBatch) {
-            p_spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.AnisotropicClamp, DepthStencilState.None, RasterizerState.CullNone);
+            //p_spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.AnisotropicClamp, DepthStencilState.None, RasterizerState.CullNone);
             foreach (RenderMatrix l_render in m_renderList) {
                 p_spriteBatch.Draw(
                     m_tx[l_render.Folder],
@@ -323,7 +323,7 @@ namespace BrashMonkeySpriter {
                     /*(float)l_render.ZOrder*/0.0f
                 );
             }
-            p_spriteBatch.End();
+           // p_spriteBatch.End();
         }
     }
 }

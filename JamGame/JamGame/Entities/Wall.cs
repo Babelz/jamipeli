@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace JamGame.Entities
 {
-    class Wall : DrawableGameObject
+    class Wall : GameObject
     {
         private readonly int width;
         private readonly int height;
@@ -29,7 +29,7 @@ namespace JamGame.Entities
 
 
        
-
+        /*
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(
@@ -48,5 +48,6 @@ namespace JamGame.Entities
                     0f
                 );
         }
+         * */
     }
 }

@@ -127,6 +127,7 @@
     <Compile Include="GameObjects\GameObject.cs" />
     <Compile Include="GameObjects\Monsters\Chutulu.cs" />
     <Compile Include="GameObjects\Monsters\Monster.cs" />
+    <Compile Include="GameObjects\Monsters\Shoemon.cs" />
     <Compile Include="Maps\Map.cs" />
     <Compile Include="Maps\MapManager.cs" />
     <Compile Include="Maps\MapState.cs" />
