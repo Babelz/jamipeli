@@ -111,8 +111,8 @@ namespace JamGame.Maps
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(background, new Rectangle(0, 0, Game.Instance.ScreenWidth, Game.Instance.ScreenHeight / 2), Color.White);
-            spriteBatch.Draw(foreground, new Rectangle(0, background.Height / 2, Game.Instance.ScreenWidth, Game.Instance.ScreenHeight), Color.White);
+            spriteBatch.Draw(background, new Rectangle(StateArea.X, 0, Game.Instance.ScreenWidth, Game.Instance.ScreenHeight / 2), Color.White);
+            spriteBatch.Draw(foreground, new Rectangle(StateArea.X, background.Height / 2, Game.Instance.ScreenWidth, Game.Instance.ScreenHeight), Color.White);
         }
     }
 

@@ -154,6 +154,7 @@
     <Compile Include="Input\KeyTrigger.cs" />
     <Compile Include="Input\PadInputBindProvider.cs" />
     <Compile Include="Components\MotionEngine.cs" />
+    <Compile Include="Maps\StateTransition.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game.cs" />
@@ -175,7 +176,8 @@
       <Name>BrashMonkeySpriter</Name>
     </ProjectReference>
     <ProjectReference Include="..\JamGameContent\JamGameContent.contentproj">
-      <Name>JamGameContent</Name>
+      <Project>{C7210242-2C42-4AB1-84B4-753AAFBB7392}</Project>
+      <Name>JamGameContent %28Content%29</Name>
       <XnaReferenceType>Content</XnaReferenceType>
     </ProjectReference>
   </ItemGroup>

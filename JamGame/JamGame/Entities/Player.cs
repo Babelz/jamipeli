@@ -29,6 +29,26 @@ namespace JamGame.Entities
         private Body body;
         #endregion
 
+        #region Properties
+        public override Vector2 Position
+        {
+            get
+            {
+                return new Vector2(
+                    ConvertUnits.ToDisplayUnits(body.Position.X),
+                    ConvertUnits.ToDisplayUnits(body.Position.Y)
+                    );
+            }
+            set
+            {
+                body.Position = new Vector2(
+                    ConvertUnits.ToSimUnits(value.X),
+                    ConvertUnits.ToSimUnits(value.Y)
+                    );
+            }
+        }
+        #endregion
+
         public Player(World world)
         {
             motionEngine = new MotionEngine(this);
@@ -62,24 +82,6 @@ namespace JamGame.Entities
             
         }
         #endregion
-
-        public override Vector2 Position
-        {
-            get
-            {
-                return new Vector2(
-                    ConvertUnits.ToDisplayUnits(body.Position.X),
-                    ConvertUnits.ToDisplayUnits(body.Position.Y)
-                    );
-            }
-            set
-            {
-                body.Position = new Vector2(
-                    ConvertUnits.ToSimUnits(value.X),
-                    ConvertUnits.ToSimUnits(value.Y)
-                    );
-            }
-        }
 
         public void Initialize()
         {

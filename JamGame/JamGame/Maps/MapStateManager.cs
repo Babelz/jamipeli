@@ -11,6 +11,7 @@ namespace JamGame.Maps
     {
         #region Vars
         private readonly List<MapState> states;
+        private StateTransition transition;
         private MapState currentMapState;
         private MapState nextMapState;
         #endregion
