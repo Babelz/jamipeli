@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using FarseerPhysics.Dynamics;
 using JamGame.Gamestate;
 using JamGame.Input;
 using Microsoft.Xna.Framework;
@@ -73,6 +74,12 @@ namespace JamGame
                 return new Vector2(graphics.GraphicsDevice.Viewport.X,
                                    graphics.GraphicsDevice.Viewport.Y);
             }
+        }
+
+        public World World
+        {
+            get;
+            private set;
         }
         public GameStateManager GameStateManager
         {
@@ -172,6 +179,7 @@ namespace JamGame
         /// </summary>
         protected override void Initialize()
         {
+            World = new World(Vector2.Zero);
             // TODO: Add your initialization logic here
             InputManager = new InputManager(this);
             Components.Add(InputManager);
@@ -186,6 +194,7 @@ namespace JamGame
                 if (args.State == InputState.Released)
                     Exit();
             });
+            
 
             base.Initialize();
         }

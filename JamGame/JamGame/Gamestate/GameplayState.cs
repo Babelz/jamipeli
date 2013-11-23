@@ -14,7 +14,6 @@ namespace JamGame.Gamestate
     {
         #region Vars
         private Player player;
-        private World world;
         private Wall topWall;
         private Wall bottomWall;
         private Wall leftWall;
@@ -33,7 +32,7 @@ namespace JamGame.Gamestate
 
         public GameplayState()
         {
-            world = new World(new Vector2(0f, 0f));
+            World world = Game.Instance.World;
             player = new Player(world);
             player.Position = new Vector2(500,500);
             topWall = new Wall(world, new Vector2(Game.Instance.ScreenWidth / 2f, Game.Instance.ScreenHeight / 2f - 50), Game.Instance.ScreenWidth, 100);
@@ -44,7 +43,7 @@ namespace JamGame.Gamestate
 
         public override void Update(GameTime gameTime)
         {
-            world.Step((float) (gameTime.ElapsedGameTime.TotalMilliseconds * .001));
+            Game.Instance.World.Step((float)(gameTime.ElapsedGameTime.TotalMilliseconds * .001));
             player.Update(gameTime);   
         }
 

@@ -74,6 +74,7 @@
       <Name>shoemon</Name>
       <Importer>SpriterImporter</Importer>
       <Processor>SpriterProcessor</Processor>
+      <SubType>Designer</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
