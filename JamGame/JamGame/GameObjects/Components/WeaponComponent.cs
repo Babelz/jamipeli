@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using JamGame.GameObjects.Monsters;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using JamGame.Weapons;
@@ -18,6 +19,7 @@ namespace JamGame.GameObjects.Components
         private readonly SpriteFont spriteFont;
 
         private Weapon currentWeapon;
+        private SoundEffect weaponSound;
         #endregion
 
         #region Properties
@@ -44,6 +46,7 @@ namespace JamGame.GameObjects.Components
             currentWeapon = startWeapon;
             effectDrawers = new List<EffectDrawer>();
             spriteFont = Game.Instance.Content.Load<SpriteFont>("default");
+            weaponSound = Game.Instance.Content.Load<SoundEffect>("music\\baseballbat");
         }
 
         private void AddStringDrawer(Vector2 startPosition, string stringToDraw)
@@ -107,6 +110,7 @@ namespace JamGame.GameObjects.Components
             {
                 if (currentWeapon.CanMakeDamage())
                 {
+                    weaponSound.Play(0.5f, 0.5f, 0.5f);
                     int damage = currentWeapon.CalculateDamage();
                     targetingComponent.TargetHealthComponent.TakeDamage(damage);
                     AddStringDrawer(new Vector2(targetingComponent.Target.Position.X, targetingComponent.Target.Position.Y - targetingComponent.Target.Animation.Scale * 256), damage.ToString());

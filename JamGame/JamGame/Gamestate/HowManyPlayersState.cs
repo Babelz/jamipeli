@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using JamGame.GUI;
+using JamGame.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -19,12 +20,14 @@ namespace JamGame.Gamestate
             one.Position = new Vector2(Game.Instance.ScreenWidth / 2, 300);
             one.Color = Color.Black;
             one.Text = "One player";
+            one.HasFocus = true;
 
             one.OnSelected += one_OnSelected;
 
             LinkLabel two = new LinkLabel();
             two.Position = new Vector2(one.Position.X, one.Position.Y + 100);
             two.Text = "Toni player";
+            two.Color = Color.Black;
             two.OnSelected += two_OnSelected;
 
 
@@ -52,6 +55,11 @@ namespace JamGame.Gamestate
             spriteBatch.Begin();
             gui.Draw(spriteBatch);
             spriteBatch.End();
+        }
+
+        public override void Unload()
+        {
+            gui.Controller.ChangeSetup(new InputControlSetup());
         }
     }
 }

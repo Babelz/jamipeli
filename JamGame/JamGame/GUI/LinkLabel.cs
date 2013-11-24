@@ -48,13 +48,18 @@ namespace JamGame.GUI
         public override void Init()
         {
             var keyinput = Manager.InputSetup.Mapper.GetInputBindProvider<KeyInputBindProvider>();
-            keyinput.Map(new KeyTrigger("enter"+counter++,Keys.Enter), (triggered, args) =>
-            {
-                if (args.State != InputState.Released) return;
-                if (!HasFocus) return;
+            keyinput.Map(new KeyTrigger("enter"+counter++,Keys.Enter), (triggered, args) =>  OnSelectedImpl(args));
 
-                FireSelectedEvent(null);           
-            });
+            var padinput = Manager.InputSetup.Mapper.GetInputBindProvider<PadInputBindProvider>();
+            padinput.Map(new ButtonTrigger("enter"+counter, Buttons.A), (triggered, args) => OnSelectedImpl(args) );
+        }
+
+        private void OnSelectedImpl(InputEventArgs args)
+        {
+            if (args.State != InputState.Released) return;
+            if (!HasFocus) return;
+
+            FireSelectedEvent(null);
         }
     }
 }

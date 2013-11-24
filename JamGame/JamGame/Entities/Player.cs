@@ -11,6 +11,7 @@ using JamGame.Components;
 using JamGame.GameObjects;
 using JamGame.Input;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using JamGame.Maps;
@@ -32,6 +33,8 @@ namespace JamGame.Entities
         private DirectionalArrow directionalArrow;
         private CharaterAnimator animator;
         private TargetingComponent<Monster> targetingComponent;
+
+        //protected SoundEffect weaponSound;
         #endregion
 
         #region Properties
@@ -82,7 +85,7 @@ namespace JamGame.Entities
 
 
             Game.Instance.MapManager.OnMapChanged += new MapManagerEventHandler(MapManager_OnMapChanged);
-
+           // weaponSound = Game.Instance.Content.Load<SoundEffect>("music\\baseballbat");
             Speed = 15f;
 
         }

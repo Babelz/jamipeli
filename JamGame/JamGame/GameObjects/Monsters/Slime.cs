@@ -8,6 +8,7 @@ using FarseerPhysics.Dynamics;
 using JamGame.Gamestate;
 using Microsoft.Xna.Framework;
 using FarseerPhysics;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using JamGame.GameObjects.Components;
 using JamGame.Entities;
@@ -20,6 +21,10 @@ namespace JamGame.GameObjects.Monsters
     {
         #region Vars
         private Spit spit;
+
+        private static SoundEffectInstance soundInstance;
+        private static SoundEffect sound;
+
         #endregion
 
         public Slime()
@@ -27,7 +32,7 @@ namespace JamGame.GameObjects.Monsters
             Animation = Game.Instance.Content.Load<CharacterModel>("monsters\\blob").CreateAnimator("blob");
 
             Animation.Scale = 0.60f;
-
+            Animation.AnimationEnded +=Animation_AnimationEnded;
             body = BodyFactory.CreateRectangle(Game.Instance.World,
                 ConvertUnits.ToSimUnits(256 * Animation.Scale),
                 ConvertUnits.ToSimUnits(256 * Animation.Scale), 1f, this);
@@ -50,6 +55,22 @@ namespace JamGame.GameObjects.Monsters
             components.Add(Health = new HealthComponent(random.Next(250, 500)));
 
             brain.PushState(MoveToArea);
+
+            if (sound == null && soundInstance == null)
+            {
+                sound = Game.Instance.Content.Load<SoundEffect>("music\\slime2");
+                soundInstance = sound.CreateInstance();
+            }
+
+        }
+
+        private void Animation_AnimationEnded()
+        {
+            if (soundInstance.State != SoundState.Playing)
+            {
+                soundInstance.Volume = 0.1f;
+                soundInstance.Play();
+            }
         }
 
         #region Event hanlders

@@ -39,6 +39,7 @@ namespace JamGame.Entities
                     if (args.State == InputState.Down)
                     {
                         weaponComponent.Attack();
+                        
                     }
                 });
         }

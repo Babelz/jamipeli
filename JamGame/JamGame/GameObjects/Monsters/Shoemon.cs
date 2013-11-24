@@ -6,6 +6,7 @@ using BrashMonkeySpriter;
 using FarseerPhysics.Dynamics;
 using FarseerPhysics.Factories;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using FarseerPhysics;
 using JamGame.Gamestate;
@@ -18,11 +19,15 @@ namespace JamGame.GameObjects.Monsters
 {
     public class Shoemon : Monster
     {
+        private static SoundEffect sound;
+        private static SoundEffectInstance soundInstance;
         public Shoemon()
         {
             Animation = Game.Instance.Content.Load<CharacterModel>("monsters\\shoemon").CreateAnimator("Shoemon");
            // Animation.ChangeAnimation("attack");
             Animation.Scale = 0.27f;
+
+            Animation.AnimationEnded += animation_Finished;
 
             body = BodyFactory.CreateRectangle(Game.Instance.World, 
                 ConvertUnits.ToSimUnits(256*Animation.Scale), 
@@ -47,7 +52,15 @@ namespace JamGame.GameObjects.Monsters
             components.Add(Health = new HealthComponent(50, 100));
 
             brain.PushState(MoveToArea);
+
+            if (sound == null && soundInstance == null)
+            {
+                sound = Game.Instance.Content.Load<SoundEffect>("music\\tomps");
+                soundInstance = sound.CreateInstance();
+            }
         }
+
+
 
         #region Event handlers
         private bool body_OnCollision(Fixture fixtureA, Fixture fixtureB, Contact contact)
@@ -76,6 +89,16 @@ namespace JamGame.GameObjects.Monsters
         {
             Animation.AnimationEnded -= Animation_AnimationEnded;
             Animation.ChangeAnimation("Move");
+
+        }
+
+        private void animation_Finished()
+        {
+            if (soundInstance.State != SoundState.Playing)
+            {
+                soundInstance.Volume = 0.5f;
+                soundInstance.Play();
+            }
         }
         #endregion
 
