@@ -42,8 +42,8 @@ namespace JamGame.Entities
             controller.ChangeSetup(defaultSetup);
 
             Game.Instance.MapManager.OnMapChanged += new MapManagerEventHandler(MapManager_OnMapChanged);
-            animator = Game.Instance.Content.Load<CharacterModel>("player").CreateAnimator("player");
-            animator.ChangeAnimation("move");
+            animator = Game.Instance.Content.Load<CharacterModel>("playeri\\plaery").CreateAnimator("player");
+            animator.ChangeAnimation("attack");
             animator.Scale = 0.5f;
 
             body = BodyFactory.CreateRectangle(world, ConvertUnits.ToSimUnits(100), ConvertUnits.ToSimUnits(256 * animator.Scale), 1.0f);

@@ -88,46 +88,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Walk\Pelaaja_0003s_0000_Layer-0.png">
-      <Name>Pelaaja_0003s_0000_Layer-0</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Walk\Pelaaja_0003s_0001_Layer-1.png">
-      <Name>Pelaaja_0003s_0001_Layer-1</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Walk\Pelaaja_0003s_0002_Layer-2.png">
-      <Name>Pelaaja_0003s_0002_Layer-2</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Walk\Pelaaja_0003s_0003_Layer-3.png">
-      <Name>Pelaaja_0003s_0003_Layer-3</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Walk\Pelaaja_0003s_0004_Layer-4.png">
-      <Name>Pelaaja_0003s_0004_Layer-4</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Walk\Pelaaja_0003s_0005_Layer-5.png">
-      <Name>Pelaaja_0003s_0005_Layer-5</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Walk\Pelaaja_0003s_0006_Layer-6.png">
-      <Name>Pelaaja_0003s_0006_Layer-6</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Walk\Pelaaja_0003s_0007_Layer-7.png">
-      <Name>Pelaaja_0003s_0007_Layer-7</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="hudwindow.png">
       <Name>hudwindow</Name>
       <Importer>TextureImporter</Importer>
@@ -135,15 +95,84 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="player.scml">
-      <Name>player</Name>
-      <Importer>SpriterImporter</Importer>
-      <Processor>SpriterProcessor</Processor>
-    </Compile>
     <Compile Include="default.spritefont">
       <Name>default</Name>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="playeri\body.png">
+      <Name>body</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="playeri\hand1.png">
+      <Name>hand1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="playeri\hand2.png">
+      <Name>hand2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="playeri\head.png">
+      <Name>head</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="playeri\legs_0.png">
+      <Name>legs_0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="playeri\legs_1.png">
+      <Name>legs_1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="playeri\legs_2.png">
+      <Name>legs_2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="playeri\legs_3.png">
+      <Name>legs_3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="playeri\legs_4.png">
+      <Name>legs_4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="playeri\legs_5.png">
+      <Name>legs_5</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="playeri\legs_6.png">
+      <Name>legs_6</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="playeri\legs_7.png">
+      <Name>legs_7</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="playeri\weapon.png">
+      <Name>weapon</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="playeri\plaery.scml">
+      <Name>plaery</Name>
+      <Importer>SpriterImporter</Importer>
+      <Processor>SpriterProcessor</Processor>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
