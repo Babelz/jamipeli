@@ -29,7 +29,7 @@ namespace JamGame.Gamestate
             two.Position = new Vector2(one.Position.X, one.Position.Y + 100);
             two.Color = Color.Red;
             two.SelectedColor = Color.White;
-            two.Text = "Toni player";
+            two.Text = "Two players - Gamepad";
             two.OnSelected += two_OnSelected;
 
 
