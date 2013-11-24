@@ -21,4 +21,10 @@ Content\playeri\weapon.xnb
 Content\playeri\plaery.xnb
 Content\heal.xnb
 Content\inchp.xnb
+Content\damageup.xnb
+Content\speedup.xnb
+Content\monsters\Blob_0000_Head.xnb
+Content\monsters\Blob_0001_Body.xnb
+Content\spit.xnb
+Content\monsters\blob.xnb
 Maps\MapFiles\testmap.xml

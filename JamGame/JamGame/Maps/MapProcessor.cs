@@ -70,27 +70,18 @@ namespace JamGame.Maps
                 // Lukee waven releasetimen.
                 int releaseTime = int.Parse(waveElement.Attribute("ReleaseTime").Value);
 
-                // Hakee kaikki monsterit wavesta ja projektaa ne anonyymeiksi olioiksi.
-                var monsterDatasets = from monsterElements in waveElement.Descendants("Monsters")
-                                      from monsterElement in monsterElements.Descendants()
-                                      select new
-                                      {
-                                          Type = monsterElement.Attribute("Type").Value,
-                                          Count = int.Parse(monsterElement.Attribute("Count").Value)
-                                      };
 
-                // Luo projektattujen datojen perusteella monsterit.
-                List<Monster> waveMonsters = new List<Monster>();
-                foreach (var monsterDataset in monsterDatasets)
-                {
-                    waveMonsters.AddRange(factory.MakeNew(monsterDataset.Type, monsterDataset.Count));
-                }
+                // Hakee kaikki monsterit wavesta ja projektaa ne anonyymeiksi olioiksi.
+                Dictionary<string, int> monsterDatasets = (from monsterElements in waveElement.Descendants("Monsters")
+                                                           from monsterElement in monsterElements.Descendants()
+                                                           select new KeyValuePair<string, int>(monsterElement.Attribute("Type").Value, int.Parse(monsterElement.Attribute("Count").Value)))
+                                                           .ToDictionary(v => v.Key, v => v.Value);
+
 
                 // Lukee position modifierin wavesta.
                 Vector2 positionModifier = new Vector2(ReadAttribute(waveElement, "XModifier"), ReadAttribute(waveElement, "YModifier"));
-                
-                
-                waves.Add(new MonsterWave(waveMonsters, releaseTime, positionModifier));
+
+                waves.Add(new MonsterWave(monsterDatasets, releaseTime, positionModifier));
             }
 
             return waves;

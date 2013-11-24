@@ -9,6 +9,7 @@ using JamGame.GameObjects.Monsters;
 using JamGame.Factories;
 using JamGame.GameObjects.PowerUpItems;
 
+// TODO: optimoi wavet
 namespace JamGame.Maps
 {
     public class MapState
@@ -101,9 +102,9 @@ namespace JamGame.Maps
                 Started = true;
 
                 PowerUpFactory powerUpFactory = new PowerUpFactory("JamGame.GameObjects.PowerUpItems");
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < random.Next(3, 3 * 2); i++)
                 {
-                    int value = 15;
+                    int value = random.Next(0, 100);
                     PowerUpItem powerUp = null;
 
                     if (Utils.InRange(0, 25, value))

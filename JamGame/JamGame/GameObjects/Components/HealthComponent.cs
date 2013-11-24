@@ -11,6 +11,12 @@ namespace JamGame.GameObjects.Components
         private int maxHealth;
         #endregion
 
+        #region Events
+        public event HealthComponentEventHandler OnDamaged;
+        public event HealthComponentEventHandler OnHealed;
+        public event HealthComponentEventHandler MaxChanged;
+        #endregion
+
         #region Properties
         public int Health
         {
@@ -39,6 +45,30 @@ namespace JamGame.GameObjects.Components
             this.maxHealth = maxHealth;
         }
 
+        #region Event callers
+        private void LaunchOnHealed(int amount)
+        {
+            if (OnHealed != null)
+            {
+                OnHealed(this, new HealthComponentEventArgs(amount, wasHealed: true));
+            }
+        }
+        private void LaunchOnDamaged(int amount)
+        {
+            if (OnDamaged != null)
+            {
+                OnDamaged(this, new HealthComponentEventArgs(amount, tookDamage: true));
+            }
+        }
+        private void LaunchOnMaxChanged(int amount)
+        {
+            if (MaxChanged != null)
+            {
+                MaxChanged(this, new HealthComponentEventArgs(amount, maxChanged: true));
+            }
+        }
+        #endregion
+
         public void IncreaseMaxHealth(int amount)
         {
             maxHealth += amount;
@@ -54,6 +84,42 @@ namespace JamGame.GameObjects.Components
         public void TakeDamage(int amount)
         {
             Health -= amount;
+        }
+    }
+
+    public delegate void HealthComponentEventHandler(object sender, HealthComponentEventArgs e);
+
+    public class HealthComponentEventArgs : EventArgs
+    {
+        #region Properties
+        public bool WasHealed
+        {
+            get;
+            private set;
+        }
+        public bool MaxChanged
+        {
+            get;
+            private set;
+        }
+        public bool TookDamage
+        {
+            get;
+            private set;
+        }
+        public int Amount
+        {
+            get;
+            private set;
+        }
+        #endregion
+
+        public HealthComponentEventArgs(int amount, bool wasHealed = false, bool maxChanged = false, bool tookDamage = false)
+        {
+            WasHealed = wasHealed;
+            MaxChanged = maxChanged;
+            TookDamage = tookDamage;
+            Amount = amount;
         }
     }
 }

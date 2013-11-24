@@ -10,7 +10,7 @@ namespace JamGame.Weapons
     public class BaseballBat : MeleeWeapon
     {
         public BaseballBat()
-            : base("Baseball Bat", 5, 12, 100, 100, 1000)
+            : base("Baseball Bat", minDamage: 5, maxDamage: 12, critChance: 15, swingTime: 100, drawTime: 1000)
         {
         }
 

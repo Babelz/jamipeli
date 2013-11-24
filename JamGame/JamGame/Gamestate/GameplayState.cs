@@ -9,6 +9,7 @@ using JamGame.Entities;
 using JamGame.Maps;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using JamGame.GameObjects.Components;
 
 namespace JamGame.Gamestate
 {
@@ -99,26 +100,39 @@ namespace JamGame.Gamestate
         public override void Update(GameTime gameTime)
         {
             Game.Instance.World.Step((float)(gameTime.ElapsedGameTime.TotalMilliseconds * .001));
-
-            Array.ForEach(players,
-                p => p.Update(gameTime));
             foreach (var gobject in Game.Instance.GameObjects.ToList())
             {
                 gobject.Update(gameTime);
             }
             
+
+            List<Player> alive = new List<Player>();
+            foreach (Player player in players)
+            {
+                player.Update(gameTime);
+
+                if ((player.Components.FirstOrDefault(c => c is HealthComponent) as HealthComponent).Alive)
+                {
+                    alive.Add(player);
+                }
+            }
+
+            players = alive.ToArray();
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
 
             Array.ForEach(players,
-                p => p.Draw(spriteBatch));
-            foreach (var gobject in Game.Instance.DrawableGameObjects)
+                p => p.Draw(spriteBatch));            
+
+            players.OrderBy(p => p.Position.Y)
+                .ToList()
+                .ForEach(p => p.Draw(spriteBatch));
+            foreach (var gobject in Game.Instance.DrawableGameObjects.OrderBy(g => g.Position.Y).ToList())
             {
                 gobject.Draw(spriteBatch);
             }
-            
 
             spriteBatch.End();
         }

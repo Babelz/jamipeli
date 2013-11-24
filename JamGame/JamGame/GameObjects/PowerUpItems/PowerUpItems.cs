@@ -10,15 +10,88 @@ using FarseerPhysics;
 using FarseerPhysics.Dynamics;
 using JamGame.DataTypes;
 using JamGame.Entities;
+using JamGame.Weapons;
+using FarseerPhysics.Dynamics.Contacts;
 
 // TODO: hovering animation
 namespace JamGame.GameObjects.PowerUpItems
 {
-    public class DoubleDamagePowerUp : PowerUpItem
+    public class DoubleDamagePowerUp : ObjectPowerUp<Player>
     {
+        #region Vars
+        protected readonly Random random;
+        protected Texture2D texture;
+        #endregion
+
+        public DoubleDamagePowerUp()
+            : base()
+        {
+            texture = Game.Instance.Content.Load<Texture2D>("damageup");
+            random = new Random();
+
+            body.OnCollision += new OnCollisionEventHandler(body_OnCollision);
+        }
+
+        #region Event handlers
+        private bool body_OnCollision(Fixture fixtureA, Fixture fixtureB, Contact contact)
+        {
+            Player player = fixtureB.Body.UserData as Player;
+            if (player != null)
+            {
+                this.Apply(player);
+            }
+
+            return false;
+        }
+        #endregion
+
+        public override void Apply(Player target)
+        {
+            if (!Used)
+            {
+                WeaponComponent weaponComponent = target.Components
+                    .FirstOrDefault(c => c is WeaponComponent)
+                    as WeaponComponent;
+
+                weaponComponent.CurrentWeapon.AddPower(random.Next(5, 10));
+
+                target.Animation.Scale += 0.05f;
+                base.Apply(target);
+            }
+        }
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+
+            if (Used)
+            {
+                Destory();
+            }
+        }
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            base.Draw(spriteBatch);
+
+            Rectangle rectangle = new Rectangle((int)Position.X, (int)Position.Y, Size.Width, Size.Height);
+            spriteBatch.Draw(texture, rectangle, Color.White);
+        }
     }
-    public class DoubleSpeedPowerUp : PowerUpItem
+    public class DoubleSpeedPowerUp : DoubleDamagePowerUp
     {
+        public DoubleSpeedPowerUp()
+            : base()
+        {
+            texture = Game.Instance.Content.Load<Texture2D>("speedup");
+        }
+
+        public override void Apply(Player target)
+        {
+            if (!Used)
+            {
+                target.Speed += 4.5f;
+                Used = true;
+            }
+        }
     }
     public class IncreasedHpPowerUp : HealingPowerUp
     {
@@ -56,7 +129,7 @@ namespace JamGame.GameObjects.PowerUpItems
         }
 
         #region Event handlers
-        private bool body_OnCollision(Fixture fixtureA, Fixture fixtureB, FarseerPhysics.Dynamics.Contacts.Contact contact)
+        private bool body_OnCollision(Fixture fixtureA, Fixture fixtureB, Contact contact)
         {
             Player player = fixtureB.Body.UserData as Player; 
             if (player != null)

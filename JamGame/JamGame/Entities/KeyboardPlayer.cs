@@ -22,17 +22,17 @@ namespace JamGame.Entities
             keymapper.Map(new KeyTrigger("move left", Keys.A),
                 (triggered, args) =>
                 {
-                    body.ApplyForce(Velocity = new Vector2(-speed, 0));
+                    body.ApplyForce(Velocity = new Vector2(-Speed, 0));
                 });
             keymapper.Map(new KeyTrigger("move right", Keys.D),
                 (triggered, args) =>
                 {
-                    body.ApplyForce(Velocity = new Vector2(speed, 0));
+                    body.ApplyForce(Velocity = new Vector2(Speed, 0));
                 });
             keymapper.Map(new KeyTrigger("move up", Keys.W),
-                (triggered, args) => body.ApplyForce(new Vector2(0, -speed)));
+                (triggered, args) => body.ApplyForce(new Vector2(0, -Speed)));
             keymapper.Map(new KeyTrigger("move down", Keys.S),
-                (triggered, args) => body.ApplyForce(new Vector2(0, speed)));
+                (triggered, args) => body.ApplyForce(new Vector2(0, Speed)));
             keymapper.Map(new KeyTrigger("attck", Keys.Space),
                 (triggered, args) =>
                 {

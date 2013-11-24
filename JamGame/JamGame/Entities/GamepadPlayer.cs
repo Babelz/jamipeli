@@ -31,22 +31,22 @@ namespace JamGame.Entities
             padmapper.Map(new ButtonTrigger("move left", Buttons.LeftThumbstickLeft), (triggered, args) =>
             {
                 if (args.PlayerIndex != args.PlayerIndex) return;
-                body.ApplyForce(Velocity = new Vector2(-speed, 0));
+                body.ApplyForce(Velocity = new Vector2(-Speed, 0));
             });
             padmapper.Map(new ButtonTrigger("move right", Buttons.LeftThumbstickRight), (triggered, args) =>
             {
                 if (args.PlayerIndex != args.PlayerIndex) return;
-                body.ApplyForce(Velocity = new Vector2(speed, 0));
+                body.ApplyForce(Velocity = new Vector2(Speed, 0));
             });
             padmapper.Map(new ButtonTrigger("move up", Buttons.LeftThumbstickUp), (triggered, args) =>
             {
                 if (args.PlayerIndex != args.PlayerIndex) return;
-                body.ApplyForce(new Vector2(0, -speed));
+                body.ApplyForce(new Vector2(0, -Speed));
             });
             padmapper.Map(new ButtonTrigger("move down", Buttons.LeftThumbstickDown), (triggered, args) =>
             {
                 if (args.PlayerIndex != args.PlayerIndex) return;
-                body.ApplyForce(new Vector2(0, speed));
+                body.ApplyForce(new Vector2(0, Speed));
             });
             padmapper.Map(new ButtonTrigger("attack", Buttons.A), (triggered, args) =>
             {
