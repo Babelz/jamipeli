@@ -11,5 +11,14 @@ namespace JamGame.Gamestate
     {
         public abstract void Update(GameTime gameTime);
         public abstract void Draw(SpriteBatch spriteBatch);
+
+        public virtual void Unload()
+        {
+        }
+
+        public virtual void Init()
+        {
+            
+        }
     }
 }

@@ -137,6 +137,12 @@
     <Compile Include="GameObjects\Monsters\Shoemon.cs" />
     <Compile Include="GameObjects\PowerUpItems\PowerUpItem.cs" />
     <Compile Include="GameObjects\PowerUpItems\PowerUpItems.cs" />
+    <Compile Include="Gamestate\HowManyPlayersState.cs" />
+    <Compile Include="Gamestate\MenuState.cs" />
+    <Compile Include="GUI\Control.cs" />
+    <Compile Include="GUI\ControlEventArgs.cs" />
+    <Compile Include="GUI\GuiManager.cs" />
+    <Compile Include="GUI\LinkLabel.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="Weapons\MeleeWeapons.cs" />
     <Compile Include="Weapons\MeleeWeapon.cs" />

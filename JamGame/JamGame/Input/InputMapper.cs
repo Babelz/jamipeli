@@ -42,7 +42,8 @@ namespace JamGame.Input
                 }
 
             }
-            foreach (var invoke in setups.SelectMany(inputControlSetup => inputControlSetup.Mapper.Update(gameTime)))
+            var setupsClone = setups.ToList();
+            foreach (var invoke in setupsClone.SelectMany(inputControlSetup => inputControlSetup.Mapper.Update(gameTime)))
             {
                 yield return invoke;
             }

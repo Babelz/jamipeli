@@ -67,7 +67,6 @@ namespace JamGame.Entities
             components.Add(weaponComponent = new WeaponComponent(targetingComponent, new BaseballBat()));
             components.Add(new HealthComponent(100));
 
-            Game.Instance.MapManager.OnMapChanged += new MapManagerEventHandler(MapManager_OnMapChanged);
         }
 
         #region Event handlers

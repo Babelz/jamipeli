@@ -5,7 +5,7 @@
 			<Waves>
 				<Wave ReleaseTime="0" XModifier="0" YModifier="1">
 					<Monsters>
-						<Monster Type="Shoemon" Count="1"/>
+						<Monster Type="Shoemon" Count="10"/>
 					</Monsters>
 				</Wave>
 			</Waves>

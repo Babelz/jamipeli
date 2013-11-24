@@ -35,22 +35,31 @@ namespace JamGame.Gamestate
         public void PopState()
         {
             if (gameStates.Count > 0)
-                gameStates.RemoveAt(gameStates.Count - 1);
+            {
+                GameState g = gameStates[gameStates.Count - 1];
+                g.Unload();
+                gameStates.Remove(g);
+            }
 
         }
         public void PushState(GameState gameState)
         {
             gameStates.Add(gameState);
+            gameState.Init();
         }
         public void ChangeState(GameState gameState)
         {
+            
             if (gameStates.Count == 0)
             {
                 gameStates.Add(gameState);
             }
             else
             {
+                gameStates[gameStates.Count - 1].Unload();
+                gameStates[gameStates.Count - 1] = null;
                 gameStates[gameStates.Count - 1] = gameState;
+                gameState.Init();
             }
         }
 

@@ -89,6 +89,7 @@ namespace JamGame.Maps
                 // Lukee position modifierin wavesta.
                 Vector2 positionModifier = new Vector2(ReadAttribute(waveElement, "XModifier"), ReadAttribute(waveElement, "YModifier"));
                 
+                
                 waves.Add(new MonsterWave(waveMonsters, releaseTime, positionModifier));
             }
 

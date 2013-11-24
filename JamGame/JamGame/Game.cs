@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FarseerPhysics.Dynamics;
 using JamGame.Gamestate;
+using JamGame.GUI;
 using JamGame.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
@@ -55,6 +56,14 @@ namespace JamGame
                 return instance;
             }
         }
+
+        public ReadOnlyCollection<DrawableGameObject> DrawableGameObjects
+        {
+            get
+            {
+                return drawableObjects.AsReadOnly();
+            }
+        }
         public int ScreenWidth
         {
             get
@@ -101,8 +110,7 @@ namespace JamGame
         }
         public MapManager MapManager
         {
-            get;
-            private set;
+            get; internal set;
         }
         /// <summary>
         /// InputManager joka tarjoaa bindit.
@@ -133,6 +141,9 @@ namespace JamGame
                 return allObjects.AsReadOnly();
             }
         }
+
+        public SpriteBatch SpriteBatch { get; private set; }
+
         #endregion
 
         private Game()
@@ -216,16 +227,14 @@ namespace JamGame
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            MapManager = new MapManager(this, spriteBatch);
-            Components.Add(MapManager);
+            SpriteBatch = spriteBatch;
+           // MapManager = new MapManager(this, spriteBatch);
+          //  Components.Add(MapManager);
 
             GameStateManager = new GameStateManager(this, spriteBatch);
-            GameStateManager.PushState(new GameplayState());
+            
+            GameStateManager.PushState(new MenuState());
             Components.Add(GameStateManager);
-
-            StateTrigger trigger = new StateTrigger(this);
-            Components.Add(trigger);
 
             #region Temp texture making
             tempTexture = new Texture2D(GraphicsDevice, 1, 1);
@@ -234,7 +243,7 @@ namespace JamGame
             tempTexture.SetData<Color>(data);
             #endregion
 
-            MapManager.ChangeMap("testmap");
+            
 
             // TODO: use this.Content to load your game content here
         }
@@ -247,7 +256,7 @@ namespace JamGame
         {
             // TODO: Unload any non ContentManager content here
         }
-
+/*
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
@@ -266,24 +275,6 @@ namespace JamGame
             // TODO: Add your update logic here
 
             base.Update(gameTime);
-        }
-
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        protected override void Draw(GameTime gameTime)
-        {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            base.Draw(gameTime);
-
-            spriteBatch.Begin();
-
-            drawableObjects.ForEach(
-                o => o.Draw(spriteBatch));
-
-            spriteBatch.End();
-        }
+        }*/
     }
 }
