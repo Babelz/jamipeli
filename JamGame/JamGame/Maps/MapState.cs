@@ -16,7 +16,7 @@ namespace JamGame.Maps
     public class MapState
     {
         #region Vars
-        private readonly Random random;
+        private static Random random;
         private readonly Texture2D foreground;
         private readonly Texture2D background;
         private readonly List<MonsterWave> waves;
@@ -91,8 +91,12 @@ namespace JamGame.Maps
 
             Started = false;
             Finished = false;
-
-            random = new Random();
+            
+            if (random == null)
+            {
+                random = new Random();
+            }
+            
             releasedMonsters = new List<Monster>();
             powerUps = new List<PowerUpItem>();
         }

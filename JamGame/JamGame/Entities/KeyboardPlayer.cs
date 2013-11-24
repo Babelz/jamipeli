@@ -36,7 +36,7 @@ namespace JamGame.Entities
             keymapper.Map(new KeyTrigger("attck", Keys.Space),
                 (triggered, args) =>
                 {
-                    if (args.State == InputState.Down)
+                    if (args.State == InputState.Down && InRange())
                     {
                         weaponComponent.Attack();
                         

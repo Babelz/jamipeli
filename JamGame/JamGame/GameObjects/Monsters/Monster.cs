@@ -46,6 +46,16 @@ namespace JamGame.GameObjects.Monsters
             components.Add(targetComponent = new TargetingComponent<Player>(this));
         }
 
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+
+            while (brain.HasStates)
+            {
+                brain.PopState();
+            }
+        }
+
         #region Brain states
         protected virtual void MoveToArea()
         {

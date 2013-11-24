@@ -51,7 +51,7 @@ namespace JamGame.Entities
             });
             padmapper.Map(new ButtonTrigger("attack", Buttons.A), (triggered, args) =>
             {
-                if (args.State != InputState.Released)
+                if (args.State != InputState.Released && InRange())
                 {
                     weaponComponent.Attack();
                 }

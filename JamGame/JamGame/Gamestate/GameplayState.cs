@@ -86,7 +86,7 @@ namespace JamGame.Gamestate
                     .FirstOrDefault(c => c is WeaponComponent)
                     as WeaponComponent;
 
-                weaponComponent.CurrentWeapon.AddPower(30);
+                weaponComponent.CurrentWeapon.AddPower(15);
             }
 
             topWall = new Wall(world, new Vector2(Game.Instance.ScreenWidth / 2f, Game.Instance.ScreenHeight / 2f - 50), Game.Instance.ScreenWidth * 2, 100);

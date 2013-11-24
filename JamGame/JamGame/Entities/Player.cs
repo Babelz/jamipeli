@@ -30,9 +30,9 @@ namespace JamGame.Entities
         protected InputController controller;
         protected WeaponComponent weaponComponent;
 
+        private TargetingComponent<Monster> targetingComponent;
         private DirectionalArrow directionalArrow;
         private CharaterAnimator animator;
-        private TargetingComponent<Monster> targetingComponent;
 
         //protected SoundEffect weaponSound;
         #endregion
@@ -87,9 +87,18 @@ namespace JamGame.Entities
             Game.Instance.MapManager.OnMapChanged += new MapManagerEventHandler(MapManager_OnMapChanged);
            // weaponSound = Game.Instance.Content.Load<SoundEffect>("music\\baseballbat");
             Speed = 15f;
+        }
 
-
-            
+        protected bool InRange()
+        {
+            if (targetingComponent.HasTarget)
+            {
+                return Utils.InRange(100, 200 + (int)(targetingComponent.Target.Animation.Scale * 256), (int)Vector2.Distance(Position, targetingComponent.Target.Position));
+            }
+            else
+            {
+                return false;
+            }
         }
 
         #region Event handlers

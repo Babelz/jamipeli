@@ -72,11 +72,6 @@ namespace JamGame.GameObjects.Monsters
             if (spit != null)
             {
                 spit.Destory();
-
-                while (brain.HasStates)
-                {
-                    brain.PopState();
-                }
             }
         }
 
