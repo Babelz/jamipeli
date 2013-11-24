@@ -116,8 +116,10 @@
     <Compile Include="Entities\GamepadPlayer.cs" />
     <Compile Include="Entities\KeyboardPlayer.cs" />
     <Compile Include="Entities\Wall.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Factories\IReflectionFactory.cs" />
     <Compile Include="Factories\MonsterFactory.cs" />
+    <Compile Include="Factories\PowerUpFactory.cs" />
     <Compile Include="GameObjects\Components\DirectionalArrow.cs" />
     <Compile Include="GameObjects\Components\FiniteStateMachine.cs" />
     <Compile Include="GameObjects\Components\GameplayHud.cs" />
@@ -131,9 +133,11 @@
     <Compile Include="GameObjects\Components\WeaponComponent.cs" />
     <Compile Include="GameObjects\DrawableGameObject.cs" />
     <Compile Include="GameObjects\GameObject.cs" />
-    <Compile Include="GameObjects\Monsters\Chutulu.cs" />
     <Compile Include="GameObjects\Monsters\Monster.cs" />
     <Compile Include="GameObjects\Monsters\Shoemon.cs" />
+    <Compile Include="GameObjects\PowerUpItems\PowerUpItem.cs" />
+    <Compile Include="GameObjects\PowerUpItems\PowerUpItems.cs" />
+    <Compile Include="Utils.cs" />
     <Compile Include="Weapons\MeleeWeapons.cs" />
     <Compile Include="Weapons\MeleeWeapon.cs" />
     <Compile Include="Weapons\Weapon.cs" />

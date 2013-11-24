@@ -13,31 +13,28 @@ namespace JamGame.Gamestate
     class GameplayState : GameState
     {
         #region Vars
-        private Player player;
-        private Wall topWall;
-        private Wall bottomWall;
-        private Wall leftWall;
-        private Wall rightWall;
+        private readonly Wall topWall;
+        private readonly Wall bottomWall;
+        private readonly Wall leftWall;
+        private readonly Wall rightWall;
 
-        private List<Player> players; 
+        private readonly Player[] players;
         #endregion
 
         #region Properties
-        public Player Player
+        public Player[] Players
         {
             get
             {
-                return player;
+                return players;
             }
         }
-
-        public Player PlayerTwo
+        public Player PlayerOne
         {
             get;
             private set;
         }
-
-        public Player PlayerThree
+        public Player PlayerTwo
         {
             get;
             private set;
@@ -62,14 +59,16 @@ namespace JamGame.Gamestate
         {
             World world = Game.Instance.World;
 
-            player = new KeyboardPlayer(world);
+            PlayerOne = new KeyboardPlayer(world);
             PlayerTwo = new GamepadPlayer(world, PlayerIndex.One);
-            PlayerTwo.Position = new Vector2(500, 700);
-            player.Position = new Vector2(500,500);
 
-            players = new List<Player>();
-            players.Add(player);
-            players.Add(PlayerTwo);
+            PlayerTwo.Position = new Vector2(500, 700);
+            PlayerOne.Position = new Vector2(500, 500);
+
+            players = new Player[] 
+            {
+                PlayerOne, PlayerTwo
+            };
 
             topWall = new Wall(world, new Vector2(Game.Instance.ScreenWidth / 2f, Game.Instance.ScreenHeight / 2f - 50), Game.Instance.ScreenWidth * 2, 100);
             bottomWall = new Wall(world, new Vector2(Game.Instance.ScreenWidth / 2f, Game.Instance.ScreenHeight + 50), Game.Instance.ScreenWidth * 2, 100);
@@ -80,19 +79,17 @@ namespace JamGame.Gamestate
         public override void Update(GameTime gameTime)
         {
             Game.Instance.World.Step((float)(gameTime.ElapsedGameTime.TotalMilliseconds * .001));
-            players.ForEach(p => p.Update(gameTime));
+
+            Array.ForEach(players,
+                p => p.Update(gameTime));
         }
-
-
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
 
-            players.ForEach(p => p.Draw(spriteBatch));
-          //  leftWall.Draw(spriteBatch);
-         //   rightWall.Draw(spriteBatch);
-           // bottomWall.Draw(spriteBatch);
-          //  topWall.Draw(spriteBatch);
+            Array.ForEach(players,
+                p => p.Draw(spriteBatch));
+
             spriteBatch.End();
         }
     }

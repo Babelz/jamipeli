@@ -46,18 +46,20 @@ namespace JamGame.Weapons
 
         public abstract bool CanMakeDamage();
 
+        public bool IsCrit(int damage)
+        {
+            return damage > maxDamage;
+        }
         public virtual int CalculateDamage()
         {
             int result = 0;
-
             int damageModifier = (random.Next(0, 100) <= critChance ? CritModifier : 1);
-
             result = random.Next(minDamage, maxDamage) * damageModifier;
 
             return result;
         }
 
         public abstract void Update(GameTime gameTime);
-        public abstract void DrawEffects(SpriteBatch spriteBatch, Vector2 position, Vector2 area, int elapsedDrawTime);
+        public abstract void DrawEffects(SpriteBatch spriteBatch, Vector2 position, Vector2 area);
     }
 }

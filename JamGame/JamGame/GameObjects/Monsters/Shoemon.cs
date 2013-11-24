@@ -12,6 +12,7 @@ using JamGame.Gamestate;
 using JamGame.GameObjects.Components;
 using JamGame.Entities;
 using FarseerPhysics.Dynamics.Contacts;
+using JamGame.Extensions;
 
 namespace JamGame.GameObjects.Monsters
 {
@@ -97,7 +98,12 @@ namespace JamGame.GameObjects.Monsters
                 .FirstOrDefault(s => s is GameplayState)
                 as GameplayState;
 
-            targetComponent.ChangeTarget(gameplayState.Player);
+            Player nearest = gameplayState.Players.FindNearest<Player>(Position) as Player;
+
+            if (nearest != null)
+            {
+                targetComponent.ChangeTarget(nearest);
+            }
 
             brain.PopState();
 
@@ -109,10 +115,15 @@ namespace JamGame.GameObjects.Monsters
             {
                 body.ApplyForce(targetComponent.VelocityToTarget * 5);
             }
+            else
+            {
+                brain.PopState();
+                brain.PushState(GetTarget);
+            }
         }
         private void RunAway()
         {
-            if (timerWrapper["runawaytimer"] < 2500)
+            if (timerWrapper["runawaytimer"] < 1500)
             {
                 Vector2 velocity = -(targetComponent.VelocityToTarget * 5); 
                 body.ApplyForce(velocity);
@@ -126,8 +137,6 @@ namespace JamGame.GameObjects.Monsters
         }
         private void Attack()
         {
-            Console.WriteLine("hyökättiin playeriä vastaan");
-
             brain.PopState();
             if (targetComponent.HasTarget)
             {
@@ -143,6 +152,7 @@ namespace JamGame.GameObjects.Monsters
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+
             Animation.Location = new Vector2(Position.X, Position.Y + (256 * Animation.Scale / 2));
             Animation.Update(gameTime);
               

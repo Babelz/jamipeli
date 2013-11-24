@@ -13,10 +13,11 @@ namespace JamGame.GameObjects.Components
     public class WeaponComponent : IDrawableObjectComponent
     {
         #region Vars
-        private Weapon currentWeapon;
         private readonly TargetingComponent<Monster> targetingComponent;
         private readonly List<EffectDrawer> effectDrawers;
-        private readonly SpriteFont font;
+        private readonly SpriteFont spriteFont;
+
+        private Weapon currentWeapon;
         #endregion
 
         #region Properties
@@ -41,34 +42,56 @@ namespace JamGame.GameObjects.Components
             this.targetingComponent = targetingComponent;
  
             currentWeapon = startWeapon;
-
             effectDrawers = new List<EffectDrawer>();
-
-            font = Game.Instance.Content.Load<SpriteFont>("default");
+            spriteFont = Game.Instance.Content.Load<SpriteFont>("default");
         }
 
         private void AddStringDrawer(Vector2 startPosition, string stringToDraw)
         {
             int elapsed = 0;
+            bool isScrit = false;
+            
+            Random random = null;
             Vector2 position = startPosition;
-
             EffectDrawer effectDrawer = new EffectDrawer();
+
+            if (currentWeapon.IsCrit(int.Parse(stringToDraw)))
+            {
+                random = new Random();
+                isScrit = true;
+            }
 
             effectDrawer.Update = (gameTime) =>
                 {
-                    if (elapsed > 500)
+                    if (elapsed > 850)
                     {
                         effectDrawer.Dispose();
-                    } 
-                    else 
+                    }
+                    else
                     {
                         elapsed += gameTime.ElapsedGameTime.Milliseconds;
                         position = new Vector2(position.X, position.Y - 1.25f);
+
+                        if (isScrit)
+                        {
+                            position = new Vector2(Math.Abs(position.X + (float)random.NextDouble() * 5), position.Y - Math.Abs((float)random.NextDouble() * 5));
+                        }
                     }
                 };
             effectDrawer.Draw = (spriteBatch) =>
                 {
-                    spriteBatch.DrawString(font, stringToDraw, position, Color.Red);
+                    if (isScrit)
+                    {
+                        bool negate = random.NextDouble() >= 0.5;
+                        float value = MathHelper.Clamp((float)random.NextDouble(), 0.0f, 0.15f);
+                        float rotation = (negate ? -value : value);
+
+                        spriteBatch.DrawString(spriteFont, stringToDraw, position, Color.Red, rotation, spriteFont.MeasureString(stringToDraw) / 2, 2.0f, SpriteEffects.None, 0.0f);
+                    }
+                    else
+                    {
+                        spriteBatch.DrawString(spriteFont, stringToDraw, position, Color.Red);
+                    }
                 };
             effectDrawer.Dispose = () =>
                 {
@@ -86,7 +109,7 @@ namespace JamGame.GameObjects.Components
                 {
                     int damage = currentWeapon.CalculateDamage();
                     targetingComponent.TargetHealthComponent.TakeDamage(damage);
-                    AddStringDrawer(new Vector2(targetingComponent.Target.Position.X, targetingComponent.Target.Position.Y), damage.ToString());
+                    AddStringDrawer(new Vector2(targetingComponent.Target.Position.X, targetingComponent.Target.Position.Y - targetingComponent.Target.Animation.Scale * 256), damage.ToString());
                 }
             }
         }
@@ -103,7 +126,7 @@ namespace JamGame.GameObjects.Components
         {
             if (HasWeapon && currentWeapon.IsDrawing)
             {
-                //currentWeapon.DrawEffects(SpriteBatch spriteBatch, Vector2 position, Vector2 area, int elapsedDrawTime);
+                // TODO: pitäs piirtää weapon effectit.
             }
 
             effectDrawers.ForEach(e => e.Draw(spriteBatch));

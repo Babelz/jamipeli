@@ -11,7 +11,14 @@ namespace JamGame.Entities
 {
     class GamepadPlayer : Player
     {
-        public PlayerIndex PlayerIndex { get; private set; }
+        #region Properties
+        public PlayerIndex PlayerIndex
+        {
+            get;
+            private set;
+        }
+        #endregion
+
         public GamepadPlayer(World world, PlayerIndex playerIndex) : base(world)
         {
             PlayerIndex = playerIndex;
@@ -20,7 +27,7 @@ namespace JamGame.Entities
 
         private void InitPadMaps()
         {
-            var padmapper = defaultSetup.Mapper.GetInputBindProvider<PadInputBindProvider>();
+            PadInputBindProvider padmapper = defaultSetup.Mapper.GetInputBindProvider<PadInputBindProvider>();
             padmapper.Map(new ButtonTrigger("move left", Buttons.LeftThumbstickLeft), (triggered, args) =>
             {
                 if (args.PlayerIndex != args.PlayerIndex) return;
@@ -47,8 +54,7 @@ namespace JamGame.Entities
                 {
                     weaponComponent.Attack();
                 }
-            } );
-
+            });
         }
     }
 }

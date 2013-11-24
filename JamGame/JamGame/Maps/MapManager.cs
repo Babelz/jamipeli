@@ -39,7 +39,6 @@ namespace JamGame.Maps
         public void ChangeMap(string name)
         {
             Map last = Active;
-
             Map map = maps.FirstOrDefault(
                 m => m.Name == name);
 

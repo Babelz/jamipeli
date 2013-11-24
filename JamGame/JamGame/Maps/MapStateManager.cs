@@ -43,6 +43,8 @@ namespace JamGame.Maps
         public MapStateManager(List<MapState> states)
         {
             this.states = states;
+
+            Start();
         }
 
         #region Event handlers
@@ -59,6 +61,17 @@ namespace JamGame.Maps
         #endregion
 
         /// <summary>
+        /// Aloittaa statejen toiston.
+        /// </summary>
+        private void Start()
+        {
+            // Jos current on null, ei olla aloitettu statejen toistamista.
+            if (currentMapState == null)
+            {
+                ChangeState();
+            }
+        }
+        /// <summary>
         /// Palauttaa seuraavan staten ja poistaa sen state listasta.
         /// </summary>
         /// <returns></returns>
@@ -69,6 +82,9 @@ namespace JamGame.Maps
 
             return nextMapState;
         }
+        /// <summary>
+        /// Vaihtaa seuraavan staten.
+        /// </summary>
         private void ChangeState()
         {
             if (!Finished && nextMapState == null)
@@ -87,8 +103,6 @@ namespace JamGame.Maps
                     currentMapState.Start();
                 }
 
-                // Jos edellinen state ei ole null ja se on jo toistettu loppuun,
-                // laukaistaan eventti.
                 if (lastMapState != null && lastMapState.Finished)
                 {
                     if (OnStateFinished != null)
@@ -99,17 +113,6 @@ namespace JamGame.Maps
             }
         }
 
-        /// <summary>
-        /// Aloittaa statejen toiston.
-        /// </summary>
-        public void Start()
-        {
-            // Jos current on null, ei olla aloitettu statejen toistamista.
-            if (currentMapState == null)
-            {
-                ChangeState();
-            }
-        }
         /// <summary>
         /// Jos quessa on seuraava state, asettaa sen aktiiviseksi.
         /// </summary>
@@ -138,6 +141,7 @@ namespace JamGame.Maps
                 }
             }
         }
+
         public void Update(GameTime gameTime)
         {
             // Jos omataan map state, sallitaan päivitykset.

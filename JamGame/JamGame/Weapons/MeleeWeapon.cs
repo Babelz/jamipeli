@@ -13,7 +13,8 @@ namespace JamGame.Weapons
         protected readonly Random random;
         protected readonly int swingTime;
         protected readonly int drawTime;
-        private bool isInCoolDown;
+
+        private bool inCoolDown;
         private int elapsed;
         private int elapsedDrawTime;
         #endregion
@@ -31,21 +32,22 @@ namespace JamGame.Weapons
 
         public override int CalculateDamage()
         {
-            isInCoolDown = true;
+            inCoolDown = true;
             return base.CalculateDamage();
         }
         public override bool CanMakeDamage()
         {
-            return elapsed == 0 && !isInCoolDown;
+            return elapsed == 0 && !inCoolDown;
         }
+
         public override void Update(GameTime gameTime)
         {
-            if (isInCoolDown)
+            if (inCoolDown)
             {
                 elapsed += gameTime.ElapsedGameTime.Milliseconds;
                 if (elapsed > swingTime)
                 {
-                    isInCoolDown = false;
+                    inCoolDown = false;
                     elapsed = 0;
                 }
             }
@@ -60,7 +62,7 @@ namespace JamGame.Weapons
                 }
             }
         }
-        public override void DrawEffects(SpriteBatch spriteBatch, Vector2 position, Vector2 area, int elapsedDrawTime)
+        public override void DrawEffects(SpriteBatch spriteBatch, Vector2 position, Vector2 area)
         {
             if (IsDrawing)
             {
