@@ -73,19 +73,22 @@ namespace JamGame.Gamestate
             PlayerOne = new KeyboardPlayer(world);
             PlayerOne.Position = new Vector2(500, 500);
             players[0] = PlayerOne;
+
             if (players.Length == 2)
             {
                 PlayerTwo = new GamepadPlayer(world, PlayerIndex.One);
                 PlayerTwo.Position = new Vector2(500, 700);
                 Players[1] = PlayerTwo;
             }
+            else
+            {
+                WeaponComponent weaponComponent = PlayerOne.Components
+                    .FirstOrDefault(c => c is WeaponComponent)
+                    as WeaponComponent;
 
-            
-            
+                weaponComponent.CurrentWeapon.AddPower(30);
+            }
 
-            
-
-            
             topWall = new Wall(world, new Vector2(Game.Instance.ScreenWidth / 2f, Game.Instance.ScreenHeight / 2f - 50), Game.Instance.ScreenWidth * 2, 100);
             bottomWall = new Wall(world, new Vector2(Game.Instance.ScreenWidth / 2f, Game.Instance.ScreenHeight + 50), Game.Instance.ScreenWidth * 2, 100);
             leftWall = new Wall(world, new Vector2(-50, Game.Instance.ScreenHeight / 2f), 100, Game.Instance.ScreenHeight);

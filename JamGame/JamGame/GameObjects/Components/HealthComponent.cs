@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 namespace JamGame.GameObjects.Components
 {
@@ -72,18 +73,26 @@ namespace JamGame.GameObjects.Components
         public void IncreaseMaxHealth(int amount)
         {
             maxHealth += amount;
+
+            LaunchOnMaxChanged(amount);
         }
         public void ReduceMaxHealth(int amount)
         {
             maxHealth -= maxHealth;
+
+            LaunchOnMaxChanged(amount);
         }
         public void Heal(int amount)
         {
-            Health += amount;
+            Health = (int)MathHelper.Clamp(Health + amount, 0, maxHealth);
+
+            LaunchOnHealed(amount);
         }
         public void TakeDamage(int amount)
         {
             Health -= amount;
+
+            LaunchOnDamaged(amount);
         }
     }
 

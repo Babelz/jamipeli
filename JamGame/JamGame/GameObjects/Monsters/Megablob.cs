@@ -83,6 +83,13 @@ namespace JamGame.GameObjects.Monsters
             }
         }
 
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+
+            spits.ForEach(p => p.Destory());
+        }
+
         #region Event handlers
         private bool body_OnCollision(Fixture fixtureA, Fixture fixtureB, FarseerPhysics.Dynamics.Contacts.Contact contact)
         {
@@ -243,6 +250,11 @@ namespace JamGame.GameObjects.Monsters
                 }
 
                 brain.PushState(GoHome);
+            }
+
+            if (!Health.Alive)
+            {
+                Destory();
             }
         }
         public override void Draw(SpriteBatch spriteBatch)

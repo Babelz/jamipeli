@@ -65,6 +65,21 @@ namespace JamGame.GameObjects.Monsters
 
         }
 
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+
+            if (spit != null)
+            {
+                spit.Destory();
+
+                while (brain.HasStates)
+                {
+                    brain.PopState();
+                }
+            }
+        }
+
         private void Animation_AnimationEnded()
         {
             if (soundInstance.State != SoundState.Playing)
@@ -77,6 +92,7 @@ namespace JamGame.GameObjects.Monsters
         #region Event hanlders
         private void spit_OnDestroyed(object sender, GameObjectEventArgs e)
         {
+            spit.OnDestroyed -= spit_OnDestroyed;
             spit = null;
         }
         private void Animation_Bite_AnimationEnded()
@@ -129,6 +145,7 @@ namespace JamGame.GameObjects.Monsters
 
                 Console.WriteLine(dist);
                 brain.PushState(Charge);
+
                 if (dist > 150)
                 {
                     brain.PushState(SpitAttack);
@@ -141,8 +158,6 @@ namespace JamGame.GameObjects.Monsters
         }
         private void BiteAttack()
         {
-            Console.WriteLine("Bite paska");
-            Animation.ChangeAnimation("attack");
             Animation.AnimationEnded += new CharaterAnimator.AnimationEndedHandler(Animation_Bite_AnimationEnded);
 
             // TODO: hajoaa tässä käsiin koska aika loppuu.
@@ -155,11 +170,11 @@ namespace JamGame.GameObjects.Monsters
         }
         private void SpitAttack()
         {
-            Console.WriteLine("Spit paska");
-            Animation.ChangeAnimation("attack");
-            Animation.AnimationEnded += new CharaterAnimator.AnimationEndedHandler(Animation_Spit_AnimationEnded);
+            if (spit == null)
+            {
+                Animation.AnimationEnded += new CharaterAnimator.AnimationEndedHandler(Animation_Spit_AnimationEnded);
+            }
 
-            // TODO: hajoaa tässä käsiin koska aika loppuu.
             while (brain.HasStates)
             {
                 brain.PopState();
@@ -222,6 +237,7 @@ namespace JamGame.GameObjects.Monsters
                 Size = new Size(64, 32);
                 random = new Random();
                 texture = Game.Instance.Content.Load<Texture2D>("spit");
+
                 body = BodyFactory.CreateRectangle(Game.Instance.World,
                      ConvertUnits.ToSimUnits(texture.Height),
                      ConvertUnits.ToSimUnits(texture.Width), 1f, this);

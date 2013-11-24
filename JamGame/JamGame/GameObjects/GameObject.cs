@@ -20,7 +20,6 @@ namespace JamGame.GameObjects
         #endregion
 
         #region Events
-        public event GameObjectEventHandler OnDestroying;
         public event GameObjectEventHandler OnDestroyed;
         #endregion
 
@@ -81,9 +80,18 @@ namespace JamGame.GameObjects
             {
                 destroying = true;
 
-                if (OnDestroying != null)
+                if (OnDestroyed != null)
                 {
-                    OnDestroying(this, new GameObjectEventArgs(false, true));
+                    OnDestroyed(this, new GameObjectEventArgs(true, false));
+                }
+
+                // Hoidetaan olion poisto pelistä.
+                Game.Instance.RemoveGameObject(this);
+
+                // Hoidetaan bodyn poisto worldista.
+                if (body != null)
+                {
+                    Game.Instance.World.RemoveBody(body);
                 }
             }
         }
@@ -91,15 +99,6 @@ namespace JamGame.GameObjects
         {
             if (destroying)
             {
-                OnDestroy();
-
-                if (OnDestroyed != null)
-                {
-                    OnDestroyed(this, new GameObjectEventArgs(true, false));
-                }
-
-                Game.Instance.RemoveGameObject(this);
-
                 return;
             }
 

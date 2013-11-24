@@ -46,13 +46,6 @@ namespace JamGame.GameObjects.Monsters
             components.Add(targetComponent = new TargetingComponent<Player>(this));
         }
 
-        protected override void OnDestroy()
-        {
-            base.OnDestroy();
-
-            Game.Instance.World.RemoveBody(body);
-        }
-
         #region Brain states
         protected virtual void MoveToArea()
         {

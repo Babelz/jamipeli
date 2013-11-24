@@ -111,12 +111,6 @@ namespace JamGame.Entities
         }
         #endregion
 
-        protected override void OnDestroy()
-        {
-            base.OnDestroy();
-            Game.Instance.World.RemoveBody(body);
-        } 
-
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
