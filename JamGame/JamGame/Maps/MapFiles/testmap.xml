@@ -3,12 +3,112 @@
 <!-- Monsters = Shoemon, Slime, Megablob -->
 <Map>
 	<States>
+		<!-- Eka -->
 		<State Background="bg1" Foreground="fg1">
 			<Waves>
 				<Wave ReleaseTime="0" XModifier="1" YModifier="1">
 					<Monsters>
+						<Monster Type="Shoemon" Count="3"/>
+					</Monsters>
+				</Wave>
+				<Wave ReleaseTime="0" XModifier="0" YModifier="1">
+					<Monsters>
+						<Monster Type="Shoemon" Count="3"/>
+					</Monsters>
+				</Wave>
+				<Wave ReleaseTime="3500" XModifier="1" YModifier="1">
+					<Monsters>
+						<Monster Type="Shoemon" Count="5"/>
+					</Monsters>
+				</Wave>
+			</Waves>
+		</State>
+
+		<!-- Toka -->
+		<State Background="bg1" Foreground="fg1">
+			<Waves>
+				<Wave ReleaseTime="3500" XModifier="1" YModifier="1">
+					<Monsters>
+						<Monster Type="Shoemon" Count="5"/>
+					</Monsters>
+				</Wave>
+				<Wave ReleaseTime="3500" XModifier="0" YModifier="1">
+					<Monsters>
+						<Monster Type="Shoemon" Count="5"/>
+					</Monsters>
+				</Wave>
+				<Wave ReleaseTime="13500" XModifier="1" YModifier="1">
+					<Monsters>
+						<Monster Type="Slime" Count="1"/>
+					</Monsters>
+				</Wave>
+				<Wave ReleaseTime="13500" XModifier="0" YModifier="1">
+					<Monsters>
+						<Monster Type="Slime" Count="1"/>
+					</Monsters>
+				</Wave>
+			</Waves>
+		</State>
+
+		<!-- Kolmas -->
+		<State Background="bg1" Foreground="fg1">
+			<Waves>
+				<Wave ReleaseTime="0" XModifier="1" YModifier="1">
+					<Monsters>
+						<Monster Type="Slime" Count="3"/>
+					</Monsters>
+				</Wave>
+				<Wave ReleaseTime="0" XModifier="0" YModifier="1">
+					<Monsters>
+						<Monster Type="Shoemon" Count="3"/>
+					</Monsters>
+				</Wave>
+			</Waves>
+		</State>
+
+		<!-- Neljäs -->
+		<State Background="bg1" Foreground="fg1">
+			<Waves>
+				<Wave ReleaseTime="0" XModifier="1" YModifier="1">
+					<Monsters>
+						<Monster Type="Slime" Count="1"/>
+					</Monsters>
+				</Wave>
+			</Waves>
+		</State>
+
+		<!-- Viides -->
+		<State Background="bg1" Foreground="fg1">
+			<Waves>
+				<Wave ReleaseTime="0" XModifier="1" YModifier="1">
+					<Monsters>
+						<Monster Type="Shoemon" Count="15"/>
+					</Monsters>
+				</Wave>
+			</Waves>
+		</State>
+
+		<State Background="bg1" Foreground="fg1">
+			<Waves>
+				<Wave ReleaseTime="0" XModifier="1" YModifier="1">
+					<Monsters>
+						<Monster Type="Shoemon" Count="20"/>
+					</Monsters>
+				</Wave>
+				<Wave ReleaseTime="0" XModifier="0" YModifier="1">
+					<Monsters>
+						<Monster Type="Shoemon" Count="20"/>
+					</Monsters>
+				</Wave>
+			</Waves>
+		</State>
+
+		<!-- Kuudes (final) -->
+		<State Background="bg1" Foreground="fg1">
+			<Waves>
+				<Wave ReleaseTime="500" XModifier="1" YModifier="1">
+					<Monsters>
 						<Monster Type="Megablob" Count="1"/>
-						<!-- <Monster Type="Shoemon" Count="5"/> -->
 					</Monsters>
 				</Wave>
 			</Waves>

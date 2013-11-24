@@ -53,7 +53,7 @@ namespace JamGame.GameObjects.Monsters
             body.IgnoreCollisionWith(gameplayState.LeftWall.Body);
             body.UserData = this;
 
-            components.Add(Health = new HealthComponent(random.Next(250, 500)));
+            components.Add(Health = new HealthComponent(random.Next(250, 300)));
 
             brain.PushState(MoveToArea);
 
