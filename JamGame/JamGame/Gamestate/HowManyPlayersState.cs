@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using JamGame.GUI;
+using JamGame.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -20,6 +21,7 @@ namespace JamGame.Gamestate
             one.Color = Color.Red;
             one.SelectedColor = Color.White;
             one.Text = "One player";
+            one.HasFocus = true;
 
             one.OnSelected += one_OnSelected;
 
@@ -56,6 +58,11 @@ namespace JamGame.Gamestate
             spriteBatch.GraphicsDevice.Clear(Color.Black);
             gui.Draw(spriteBatch);
             spriteBatch.End();
+        }
+
+        public override void Unload()
+        {
+            gui.Controller.ChangeSetup(new InputControlSetup());
         }
     }
 }

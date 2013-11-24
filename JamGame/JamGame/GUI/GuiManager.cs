@@ -13,7 +13,12 @@ namespace JamGame.GUI
     {
         private int selected = 0;
         private List<Control> controls;
-        private InputController controller;
+
+        public InputController Controller
+        {
+            get;
+            private set;
+        }
 
         public InputControlSetup InputSetup
         {
@@ -31,9 +36,9 @@ namespace JamGame.GUI
         {
             controls = new List<Control>();
             Font = font;
-            controller = new InputController(Game.Instance.InputManager);
+            Controller = new InputController(Game.Instance.InputManager);
             InputSetup = new InputControlSetup();
-            controller.ChangeSetup(InputSetup);
+            Controller.ChangeSetup(InputSetup);
             BindKeys();
         }
 
@@ -42,7 +47,18 @@ namespace JamGame.GUI
             var keyinput = InputSetup.Mapper.GetInputBindProvider<KeyInputBindProvider>();
             keyinput.Map(new KeyTrigger("alas", Keys.Down), (triggered, args) => NextControl(), InputState.Released);
             keyinput.Map(new KeyTrigger("ylos", Keys.Up), (triggered, args) => PreviousControl(), InputState.Released);
-            
+
+            var padinput = InputSetup.Mapper.GetInputBindProvider<PadInputBindProvider>();
+            padinput.Map(new ButtonTrigger("alas", Buttons.DPadUp, Buttons.LeftThumbstickUp), (triggered, args) =>
+            {
+                if (args.State != InputState.Released) return;
+                NextControl();
+            });
+            padinput.Map(new ButtonTrigger("ylos", Buttons.DPadDown, Buttons.LeftThumbstickDown), (triggered, args) =>
+            {
+                if (args.State != InputState.Released) return;
+                PreviousControl();
+            });
         }
 
         public void AddControl(Control control)

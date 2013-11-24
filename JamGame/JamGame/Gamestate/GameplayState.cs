@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using FarseerPhysics.Collision.Shapes;
 using FarseerPhysics.Dynamics;
@@ -10,6 +11,7 @@ using JamGame.Maps;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using JamGame.GameObjects.Components;
+using Microsoft.Xna.Framework.Media;
 
 namespace JamGame.Gamestate
 {
@@ -60,7 +62,7 @@ namespace JamGame.Gamestate
 
         public GameplayState(int playerCount)
         {
-
+            players = new Player[playerCount];
         }
 
         public override void Init()
@@ -69,15 +71,19 @@ namespace JamGame.Gamestate
 
             World world = Game.Instance.World;
             PlayerOne = new KeyboardPlayer(world);
-            PlayerTwo = new GamepadPlayer(world, PlayerIndex.One);
-
-            PlayerTwo.Position = new Vector2(500, 700);
             PlayerOne.Position = new Vector2(500, 500);
-
-            players = new Player[] 
+            players[0] = PlayerOne;
+            if (players.Length == 2)
             {
-                PlayerOne, PlayerTwo
-            };
+                PlayerTwo = new GamepadPlayer(world, PlayerIndex.One);
+                PlayerTwo.Position = new Vector2(500, 700);
+                Players[1] = PlayerTwo;
+            }
+
+            
+            
+
+            
 
             
             topWall = new Wall(world, new Vector2(Game.Instance.ScreenWidth / 2f, Game.Instance.ScreenHeight / 2f - 50), Game.Instance.ScreenWidth * 2, 100);
@@ -91,8 +97,13 @@ namespace JamGame.Gamestate
             Game.Instance.Components.Add(trigger);
 
             Game.Instance.MapManager.ChangeMap("testmap");
-            
 
+
+            Song bgmusic = Game.Instance.Content.Load<Song>("music\\bgmusic");
+            MediaPlayer.Play(bgmusic);
+            MediaPlayer.Volume = 0.15f;
+            
+            MediaPlayer.IsRepeating = true;
 
 
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using JamGame.GUI;
+using JamGame.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -17,7 +18,9 @@ namespace JamGame.Gamestate
             LinkLabel start = new LinkLabel();
             start.Text = "Start game";
             start.Position = new Vector2(Game.Instance.ScreenWidth / 2, 300);
+            start.HasFocus = true;
             start.Color = Color.Red;
+            start.SelectedColor = Color.White;
             start.OnSelected += start_OnSelected;
             gui.AddControl(start);
         }
@@ -38,6 +41,12 @@ namespace JamGame.Gamestate
             spriteBatch.GraphicsDevice.Clear(Color.Black);
             gui.Draw(spriteBatch);
             spriteBatch.End();
+        }
+
+        public override void Unload()
+        {
+            // heitetään bindit kotia
+            gui.Controller.ChangeSetup(new InputControlSetup());
         }
     }
 }

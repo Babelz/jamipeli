@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using JamGame.Entities;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using FarseerPhysics;
 using FarseerPhysics.Factories;
@@ -21,6 +22,12 @@ namespace JamGame.GameObjects.Monsters
         private Vector2 oldPositon;
         private Vector2 idlePosition;
         private List<BossSpit> spits;
+
+        private static SoundEffect idleSound;
+        private static SoundEffectInstance idleSoundInstance;
+
+        private static SoundEffect randomHampaat;
+        private static SoundEffectInstance randomHampaatInstance;
         #endregion
 
         #region Properties
@@ -62,6 +69,18 @@ namespace JamGame.GameObjects.Monsters
             timerWrapper.AddTimer("player", 0);
 
             spits = new List<BossSpit>();
+
+            if (idleSound == null && idleSoundInstance == null)
+            {
+                idleSound = Game.Instance.Content.Load<SoundEffect>("music\\weird_monster");
+                idleSoundInstance = idleSound.CreateInstance();
+            }
+
+            if (randomHampaat == null && randomHampaatInstance == null)
+            {
+                randomHampaat = Game.Instance.Content.Load<SoundEffect>("music\\randomhampaat");
+                randomHampaatInstance = randomHampaat.CreateInstance();
+            }
         }
 
         #region Event handlers
@@ -149,6 +168,9 @@ namespace JamGame.GameObjects.Monsters
             {
                 if (timerWrapper["spitspawn"] > 500)
                 {
+                    body.ApplyForce(new Vector2(0, targetComponent.VelocityToTarget.Y * 20));
+
+
                     BossSpit spit = new BossSpit(targetComponent.Target, Position);
                     spit.OnDestroyed += new GameObjectEventHandler(spit_OnDestroyed);
                     spits.Add(spit);
@@ -163,7 +185,9 @@ namespace JamGame.GameObjects.Monsters
                 timerWrapper.ResetTimer("moveandshoot");
 
                 brain.PopState();
+                idleSoundInstance.Play();
                 brain.PushState(Idle);
+                
             }
             // TODO: liiku ja ammu
             Console.WriteLine("liiku ja ammu");

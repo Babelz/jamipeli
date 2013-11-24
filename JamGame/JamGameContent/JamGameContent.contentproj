@@ -229,6 +229,53 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="music\bgmusic.mp3">
+      <Name>bgmusic</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="music\baseballbat.wav">
+      <Name>baseballbat</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="music\greatmonster.wav">
+      <Name>greatmonster</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="music\randomhampaat.wav">
+      <Name>randomhampaat</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="music\slime1.wav">
+      <Name>slime1</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="music\slime2.wav">
+      <Name>slime2</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="music\slime3.wav">
+      <Name>slime3</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="music\tomps.wav">
+      <Name>tomps</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="music\weird_monster.wav">
+      <Name>weird_monster</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
     <Compile Include="monsters\bossi.scml">
       <Name>bossi</Name>
       <Importer>SpriterImporter</Importer>
