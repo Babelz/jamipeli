@@ -38,15 +38,13 @@ namespace JamGame.GameObjects
             {
                 return new Vector2(
                     ConvertUnits.ToDisplayUnits(body.Position.X),
-                    ConvertUnits.ToDisplayUnits(body.Position.Y)
-                    );
+                    ConvertUnits.ToDisplayUnits(body.Position.Y));
             }
             set
             {
                 body.Position = new Vector2(
                     ConvertUnits.ToSimUnits(value.X),
-                    ConvertUnits.ToSimUnits(value.Y)
-                    );
+                    ConvertUnits.ToSimUnits(value.Y));
             }
         }
         public Vector2 Velocity

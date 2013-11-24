@@ -5,22 +5,8 @@
 			<Waves>
 				<Wave ReleaseTime="0" XModifier="0" YModifier="1">
 					<Monsters>
-						<Monster Type="Shoemon" Count="3"/>
+						<Monster Type="Shoemon" Count="1"/>
 					</Monsters>
-				</Wave>
-			</Waves>
-		</State>
-		<State Background="bg1" Foreground="fg1">
-			<Waves>
-				<Wave ReleaseTime="0" XModifier="1" YModifier="1">
-					<Monsters>
-						<Monster Type="Shoemon" Count="3"/>
-					</Monsters>
-					<Wave ReleaseTime="0" XModifier="0" YModifier="1">
-						<Monsters>
-							<Monster Type="Shoemon" Count="3"/>
-						</Monsters>
-					</Wave>
 				</Wave>
 			</Waves>
 		</State>

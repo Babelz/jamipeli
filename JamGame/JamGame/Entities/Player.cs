@@ -27,13 +27,13 @@ namespace JamGame.Entities
         #region Vars
         protected InputControlSetup defaultSetup;
         protected InputController controller;
+        protected WeaponComponent weaponComponent;
 
         private DirectionalArrow directionalArrow;
         private CharaterAnimator animator;
         private TargetingComponent<Monster> targetingComponent;
 
-        protected  const float speed = 15f;
-        protected WeaponComponent weaponComponent;
+        protected const float speed = 15f;
         #endregion
 
         public Player(World world)
@@ -91,9 +91,10 @@ namespace JamGame.Entities
 
         public override void Update(GameTime gameTime)
         {
+            base.Update(gameTime);
+
             animator.Location = Position + new Vector2(0, 256 * animator.Scale / 2);
             animator.Update(gameTime);
-            base.Update(gameTime);
 
             // Haetaan lähin monsteri.
             Monster nearest = Game.Instance.GameObjects.FindNearest<Monster>(Position) as Monster;
@@ -109,14 +110,14 @@ namespace JamGame.Entities
                 nearest = null;
                 targetingComponent.ClearTarget();
             }
+
+            animator.FlipX = Velocity.X < 0;
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            base.Draw(spriteBatch);
-
-            spriteBatch.Draw(Game.Instance.Temp, new Rectangle((int)Position.X, (int)Position.Y, 100, 100), null, Color.Black, 0f, new Vector2(0.5f, 0.5f),SpriteEffects.None,0f );
-
             animator.Draw(spriteBatch);
+
+            base.Draw(spriteBatch);
         }
     }
 }

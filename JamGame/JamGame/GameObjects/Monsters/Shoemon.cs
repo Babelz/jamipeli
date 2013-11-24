@@ -123,7 +123,7 @@ namespace JamGame.GameObjects.Monsters
         }
         private void RunAway()
         {
-            if (timerWrapper["runawaytimer"] < 2500)
+            if (timerWrapper["runawaytimer"] < 1500)
             {
                 Vector2 velocity = -(targetComponent.VelocityToTarget * 5); 
                 body.ApplyForce(velocity);
@@ -137,8 +137,6 @@ namespace JamGame.GameObjects.Monsters
         }
         private void Attack()
         {
-            Console.WriteLine("hyökättiin playeriä vastaan");
-
             brain.PopState();
             if (targetComponent.HasTarget)
             {

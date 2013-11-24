@@ -46,6 +46,10 @@ namespace JamGame.Weapons
 
         public abstract bool CanMakeDamage();
 
+        public bool IsCrit(int damage)
+        {
+            return damage > maxDamage;
+        }
         public virtual int CalculateDamage()
         {
             int result = 0;
