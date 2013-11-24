@@ -124,20 +124,34 @@ namespace JamGame.Gamestate
 
             players = alive.ToArray();
         }
+        
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
 
             Array.ForEach(players,
-                p => p.Draw(spriteBatch));            
+                p => p.Draw(spriteBatch));
 
             players.OrderBy(p => p.Position.Y)
                 .ToList()
-                .ForEach(p => p.Draw(spriteBatch));
+                .ForEach(p =>
+                {
+                    p.Draw(spriteBatch);
+
+                    HealthComponent hp = p.Components
+                        .FirstOrDefault(c => c is HealthComponent)
+                        as HealthComponent;
+
+                    Vector2 pos = (p is GamepadPlayer ? new Vector2(0, 100) : new Vector2(0, 0));
+
+                    spriteBatch.DrawString(Game.Instance.Content.Load<SpriteFont>("default"), "Player" + (pos == Vector2.Zero ? "1: " : "2: ") + hp.Health, pos, Color.Red);
+                });
             foreach (var gobject in Game.Instance.DrawableGameObjects.OrderBy(g => g.Position.Y).ToList())
             {
                 gobject.Draw(spriteBatch);
             }
+            
+
 
             spriteBatch.End();
         }

@@ -45,7 +45,7 @@ namespace JamGame.GameObjects.Monsters
             body.OnCollision += new OnCollisionEventHandler(body_OnCollision);
             body.UserData = this;
 
-            components.Add(Health = new HealthComponent(50, 100));
+            components.Add(Health = new HealthComponent(50, 75));
 
             brain.PushState(MoveToArea);
         }
