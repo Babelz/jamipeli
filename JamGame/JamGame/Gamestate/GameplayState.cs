@@ -115,6 +115,11 @@ namespace JamGame.Gamestate
                 {
                     alive.Add(player);
                 }
+                else
+                {
+                    player.Destory();
+                    player.Update(gameTime);
+                }
             }
 
             players = alive.ToArray();

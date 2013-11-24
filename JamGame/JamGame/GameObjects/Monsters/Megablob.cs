@@ -149,8 +149,6 @@ namespace JamGame.GameObjects.Monsters
             {
                 if (timerWrapper["spitspawn"] > 500)
                 {
-                    body.ApplyForce(new Vector2(0, targetComponent.VelocityToTarget.Y * 12));
-
                     BossSpit spit = new BossSpit(targetComponent.Target, Position);
                     spit.OnDestroyed += new GameObjectEventHandler(spit_OnDestroyed);
                     spits.Add(spit);
@@ -169,6 +167,8 @@ namespace JamGame.GameObjects.Monsters
             }
             // TODO: liiku ja ammu
             Console.WriteLine("liiku ja ammu");
+
+            body.ApplyForce(new Vector2(0, targetComponent.VelocityToTarget.Y * 12));
         }
 
         protected override void MoveToArea()
@@ -186,6 +186,11 @@ namespace JamGame.GameObjects.Monsters
                 brain.PushState(GetTarget);
             }
         }
+        private void GoHome()
+        {
+            body.ApplyForce(new Vector2(12, -12));
+            Animation.FlipX = true;
+        }
         #endregion
 
         public override void Update(GameTime gameTime)
@@ -201,6 +206,20 @@ namespace JamGame.GameObjects.Monsters
             Animation.Update(gameTime);
 
             spits.ForEach(p => p.Update(gameTime));
+
+            GameplayState gameplay = Game.Instance.GameStateManager.States
+                .FirstOrDefault(s => s is GameplayState)
+                as GameplayState;
+
+            if (gameplay.Players.Length == 0 && brain.CurrentState != GoHome)
+            {
+                while (brain.HasStates)
+                {
+                    brain.PopState();
+                }
+
+                brain.PushState(GoHome);
+            }
         }
         public override void Draw(SpriteBatch spriteBatch)
         {

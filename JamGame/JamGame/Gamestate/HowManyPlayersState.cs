@@ -17,13 +17,16 @@ namespace JamGame.Gamestate
             gui  = new GuiManager(Game.Instance.Content.Load<SpriteFont>("default"));
             LinkLabel one = new LinkLabel();
             one.Position = new Vector2(Game.Instance.ScreenWidth / 2, 300);
-            one.Color = Color.Black;
+            one.Color = Color.Red;
+            one.SelectedColor = Color.White;
             one.Text = "One player";
 
             one.OnSelected += one_OnSelected;
 
             LinkLabel two = new LinkLabel();
             two.Position = new Vector2(one.Position.X, one.Position.Y + 100);
+            two.Color = Color.Red;
+            two.SelectedColor = Color.White;
             two.Text = "Toni player";
             two.OnSelected += two_OnSelected;
 
@@ -50,6 +53,7 @@ namespace JamGame.Gamestate
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
+            spriteBatch.GraphicsDevice.Clear(Color.Black);
             gui.Draw(spriteBatch);
             spriteBatch.End();
         }
