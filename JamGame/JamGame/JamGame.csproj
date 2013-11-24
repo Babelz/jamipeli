@@ -135,6 +135,7 @@
     <Compile Include="GameObjects\GameObject.cs" />
     <Compile Include="GameObjects\Monsters\Monster.cs" />
     <Compile Include="GameObjects\Monsters\Shoemon.cs" />
+    <Compile Include="GameObjects\Monsters\Slime.cs" />
     <Compile Include="GameObjects\PowerUpItems\PowerUpItem.cs" />
     <Compile Include="GameObjects\PowerUpItems\PowerUpItems.cs" />
     <Compile Include="Utils.cs" />

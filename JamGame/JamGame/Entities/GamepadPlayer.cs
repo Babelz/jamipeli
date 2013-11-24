@@ -31,14 +31,12 @@ namespace JamGame.Entities
             padmapper.Map(new ButtonTrigger("move left", Buttons.LeftThumbstickLeft), (triggered, args) =>
             {
                 if (args.PlayerIndex != args.PlayerIndex) return;
-                body.ApplyForce(new Vector2(-Speed, 0));
-                Velocity = new Vector2(-Speed, 0);
+                body.ApplyForce(Velocity = new Vector2(-Speed, 0));
             });
             padmapper.Map(new ButtonTrigger("move right", Buttons.LeftThumbstickRight), (triggered, args) =>
             {
                 if (args.PlayerIndex != args.PlayerIndex) return;
-                body.ApplyForce(new Vector2(Speed, 0));
-                Velocity = new Vector2(Speed, 0);
+                body.ApplyForce(Velocity = new Vector2(Speed, 0));
             });
             padmapper.Map(new ButtonTrigger("move up", Buttons.LeftThumbstickUp), (triggered, args) =>
             {

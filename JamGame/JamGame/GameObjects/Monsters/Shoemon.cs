@@ -21,8 +21,8 @@ namespace JamGame.GameObjects.Monsters
         public Shoemon()
         {
             Animation = Game.Instance.Content.Load<CharacterModel>("monsters\\shoemon").CreateAnimator("Shoemon");
-
-            Animation.Scale = 0.37f;
+           // Animation.ChangeAnimation("attack");
+            Animation.Scale = 0.27f;
 
             body = BodyFactory.CreateRectangle(Game.Instance.World, 
                 ConvertUnits.ToSimUnits(256*Animation.Scale), 
@@ -44,7 +44,7 @@ namespace JamGame.GameObjects.Monsters
             body.OnCollision += new OnCollisionEventHandler(body_OnCollision);
             body.UserData = this;
 
-            components.Add(Health = new HealthComponent(50));
+            components.Add(Health = new HealthComponent(50, 100));
 
             brain.PushState(MoveToArea);
         }
@@ -72,54 +72,19 @@ namespace JamGame.GameObjects.Monsters
 
             return results;
         }
+        private void Animation_AnimationEnded()
+        {
+            Animation.AnimationEnded -= Animation_AnimationEnded;
+            Animation.ChangeAnimation("Move");
+        }
         #endregion
 
         #region Brain states
-        private void MoveToArea()
+        protected override void GetTarget()
         {
-            if (Position.X < 0)
-            {
-                body.ApplyForce(new Vector2(15f, 0.0f));
-            }
-            else if (Position.X > 1000)
-            {
-                body.ApplyForce(new Vector2(-15f, 0.0f));
-            }
-            else
-            {
-                brain.PopState();
-                brain.PushState(MoveToTarget);
-                brain.PushState(GetTarget);
-            }
-        }
-        private void GetTarget()
-        {
-            GameplayState gameplayState = Game.Instance.GameStateManager.States
-                .FirstOrDefault(s => s is GameplayState)
-                as GameplayState;
-
-            Player nearest = gameplayState.Players.FindNearest<Player>(Position) as Player;
-
-            if (nearest != null)
-            {
-                targetComponent.ChangeTarget(nearest);
-            }
-
-            brain.PopState();
+            base.GetTarget();
 
             brain.PushState(MoveToTarget);
-        }
-        private void MoveToTarget()
-        {
-            if (targetComponent.HasTarget)
-            {
-                body.ApplyForce(targetComponent.VelocityToTarget * 5);
-            }
-            else
-            {
-                brain.PopState();
-                brain.PushState(GetTarget);
-            }
         }
         private void RunAway()
         {
@@ -138,9 +103,13 @@ namespace JamGame.GameObjects.Monsters
         private void Attack()
         {
             brain.PopState();
+
+            Animation.ChangeAnimation("attack");
+            Animation.AnimationEnded += new CharaterAnimator.AnimationEndedHandler(Animation_AnimationEnded);
+            
             if (targetComponent.HasTarget)
             {
-                targetComponent.TargetHealthComponent.TakeDamage(5);
+                targetComponent.TargetHealthComponent.TakeDamage(random.Next(5, 10));
             }
             else
             {

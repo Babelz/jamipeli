@@ -7,7 +7,7 @@
         <animation id="0" name="Move" length="1000">
             <mainline>
                 <key id="0">
-                    <object_ref id="0" name="Shoemon" folder="0" file="0" abs_x="-120" abs_y="240" abs_pivot_x="0" abs_pivot_y="1" abs_angle="360" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="0" z_index="0"/>
+                    <object_ref id="0" name="Shoemon" folder="0" file="0" abs_x="-120" abs_y="240" abs_pivot_x="0" abs_pivot_y="1" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="0" z_index="0"/>
                 </key>
                 <key id="1" time="245">
                     <object_ref id="0" timeline="0" key="1" z_index="0"/>
@@ -21,16 +21,46 @@
             </mainline>
             <timeline id="0" name="Shoemon">
                 <key id="0">
-                    <object folder="0" file="0" x="-120" y="240"/>
+                    <object folder="0" file="0" x="-120" y="240" angle="0"/>
                 </key>
                 <key id="1" time="245" spin="-1">
                     <object folder="0" file="0" x="-120" y="172.631323" angle="1.965476" scale_y="0.737354"/>
                 </key>
                 <key id="2" time="489" spin="-1">
-                    <object folder="0" file="0" x="-122.884096" y="284.475144" angle="1.330276" scale_x="1" scale_y="0.970703"/>
+                    <object folder="0" file="0" x="-122.884096" y="284.475144" angle="1.330276" scale_y="0.970703"/>
                 </key>
                 <key id="3" time="735" spin="-1">
-                    <object folder="0" file="0" x="-121.495666" y="235.471454" angle="0.689869" scale_x="1" scale_y="0.984807"/>
+                    <object folder="0" file="0" x="-121.495666" y="235.471454" angle="0.689869" scale_y="0.984807"/>
+                </key>
+            </timeline>
+        </animation>
+        <animation id="1" name="attack" length="1000">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" name="Shoemon_000" folder="0" file="0" abs_x="34.879377" abs_y="87.105058" abs_pivot_x="0.620623" abs_pivot_y="0.394942" abs_angle="360" abs_scale_x="1" abs_scale_y="1.009653" abs_a="1" timeline="0" key="0" z_index="0"/>
+                </key>
+                <key id="1" time="244">
+                    <object_ref id="0" timeline="0" key="1" z_index="0"/>
+                </key>
+                <key id="2" time="440">
+                    <object_ref id="0" timeline="0" key="2" z_index="0"/>
+                </key>
+                <key id="3" time="643">
+                    <object_ref id="0" timeline="0" key="3" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="Shoemon_000">
+                <key id="0" spin="0">
+                    <object folder="0" file="0" x="34.879377" y="87.105058" pivot_x="0.620623" pivot_y="0.394942" scale_y="1.009653"/>
+                </key>
+                <key id="1" time="244" spin="-1">
+                    <object folder="0" file="0" x="34.879377" y="77.105058" pivot_x="0.620623" pivot_y="0.394942" scale_y="0.855208"/>
+                </key>
+                <key id="2" time="440" spin="-1">
+                    <object folder="0" file="0" x="22.879377" y="102.697651" pivot_x="0.620623" pivot_y="0.394942" angle="354.528464" scale_y="0.895249"/>
+                </key>
+                <key id="3" time="643">
+                    <object folder="0" file="0" x="6.229377" y="127.045336" pivot_x="0.620623" pivot_y="0.394942" angle="319.414995" scale_y="0.93672"/>
                 </key>
             </timeline>
         </animation>
