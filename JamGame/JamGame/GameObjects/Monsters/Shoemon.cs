@@ -19,6 +19,7 @@ namespace JamGame.GameObjects.Monsters
     public class Shoemon : Monster
     {
         public Shoemon()
+            : base()
         {
             Animation = Game.Instance.Content.Load<CharacterModel>("monsters\\shoemon").CreateAnimator("Shoemon");
            // Animation.ChangeAnimation("attack");
@@ -109,7 +110,7 @@ namespace JamGame.GameObjects.Monsters
             
             if (targetComponent.HasTarget)
             {
-                targetComponent.TargetHealthComponent.TakeDamage(random.Next(5, 10));
+                targetComponent.TargetHealthComponent.TakeDamage(random.Next(2, 4));
             }
             else
             {

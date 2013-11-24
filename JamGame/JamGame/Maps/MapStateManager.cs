@@ -139,6 +139,8 @@ namespace JamGame.Maps
                 {
                     OnTransitionStart(this, new MapStateManagerEventArgs(currentMapState, nextMapState));
                 }
+
+                currentMapState.ClearPowerUps();
             }
         }
 

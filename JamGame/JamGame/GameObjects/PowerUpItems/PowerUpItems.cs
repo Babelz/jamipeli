@@ -55,7 +55,7 @@ namespace JamGame.GameObjects.PowerUpItems
 
                 weaponComponent.CurrentWeapon.AddPower(random.Next(5, 10));
 
-                target.Animation.Scale += 0.05f;
+                target.Animation.Scale += 0.03f;
                 base.Apply(target);
             }
         }
@@ -88,7 +88,7 @@ namespace JamGame.GameObjects.PowerUpItems
         {
             if (!Used)
             {
-                target.Speed += 4.5f;
+                target.Speed += 2.5f;
                 Used = true;
             }
         }

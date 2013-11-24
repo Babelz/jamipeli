@@ -19,7 +19,8 @@ namespace JamGame.Entities
         }
         #endregion
 
-        public GamepadPlayer(World world, PlayerIndex playerIndex) : base(world)
+        public GamepadPlayer(World world, PlayerIndex playerIndex) : 
+            base(world)
         {
             PlayerIndex = playerIndex;
             InitPadMaps();

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="b5">
+    <folder id="0">
+        <file id="0" name="bossi_0001s_0000_Layer-0.png" width="455" height="256" pivot_x="0" pivot_y="1"/>
+        <file id="1" name="bossi_0001s_0001_Layer-1.png" width="455" height="256" pivot_x="0" pivot_y="1"/>
+    </folder>
+    <entity id="0" name="boss">
+        <animation id="0" name="move" length="1000">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" name="bossi_0001s_0000_Layer-0" folder="0" file="1" abs_x="-246" abs_y="249" abs_pivot_x="0" abs_pivot_y="1" abs_angle="360" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="0" z_index="0"/>
+                </key>
+                <key id="1" time="245">
+                    <object_ref id="0" timeline="0" key="1" z_index="0"/>
+                </key>0
+                <key id="2" time="490">
+                    <object_ref id="0" timeline="0" key="2" z_index="0"/>
+                </key>
+                <key id="3" time="735">
+                    <object_ref id="0" timeline="0" key="3" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="bossi_0001s_0000_Layer-0">
+                <key id="0" spin="0">
+                    <object folder="0" file="1" x="-246" y="249"/>
+                </key>
+                <key id="1" time="245" spin="0">
+                    <object folder="0" file="0" x="-246" y="249"/>
+                </key>
+                <key id="2" time="490" spin="0">
+                    <object folder="0" file="1" x="-246" y="249"/>
+                </key>
+                <key id="3" time="735" spin="0">
+                    <object folder="0" file="0" x="-246" y="249"/>
+                </key>
+            </timeline>
+        </animation>
+    </entity>
+</spriter_data>

@@ -62,7 +62,7 @@ namespace JamGame.Entities
             Game.Instance.MapManager.OnMapChanged += new MapManagerEventHandler(MapManager_OnMapChanged);
             animator = Game.Instance.Content.Load<CharacterModel>("playeri\\plaery").CreateAnimator("player");
             animator.ChangeAnimation("attack");
-            animator.Scale = 0.5f;
+            animator.Scale = 0.35f;
 
             // Colliderin alustus.
             body = BodyFactory.CreateRectangle(world, ConvertUnits.ToSimUnits(100), ConvertUnits.ToSimUnits(100), 1.0f);
@@ -105,6 +105,12 @@ namespace JamGame.Entities
             directionalArrow.Enabled = true;
         }
         #endregion
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            Game.Instance.World.RemoveBody(body);
+        } 
 
         public override void Update(GameTime gameTime)
         {
