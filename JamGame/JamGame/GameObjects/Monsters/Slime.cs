@@ -230,7 +230,7 @@ namespace JamGame.GameObjects.Monsters
 
                 if (player != null)
                 {
-                    targetinComponent.TargetHealthComponent.TakeDamage(random.Next(10, 20));
+                    targetinComponent.TargetHealthComponent.TakeDamage(random.Next(15, 25));
                     hitted = true;
                 }
 

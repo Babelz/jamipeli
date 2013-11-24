@@ -7,27 +7,23 @@
 			<Waves>
 				<Wave ReleaseTime="0" XModifier="0" YModifier="1">
 					<Monsters>
-
-						<Monster Type="Shoemon" Count="10"/>
 						<Monster Type="Slime" Count="1"/>
 						<!-- <Monster Type="Shoemon" Count="5"/> -->
-
+					</Monsters>
+				</Wave>
+				<Wave ReleaseTime="3500" XModifier="0" YModifier="1">
+					<Monsters>
+						<Monster Type="Slime" Count="1"/>
+						<!-- <Monster Type="Shoemon" Count="5"/> -->
+					</Monsters>
+				</Wave>
+				<Wave ReleaseTime="4500" XModifier="0" YModifier="1">
+					<Monsters>
+						<Monster Type="Slime" Count="1"/>
+						<!-- <Monster Type="Shoemon" Count="5"/> -->
 					</Monsters>
 				</Wave>
 			</Waves>
 		</State>
-    <State Background="bg1" Foreground="fg1">
-      <Waves>
-        <Wave ReleaseTime="0" XModifier="0" YModifier="1">
-          <Monsters>
-
-            <Monster Type="Shoemon" Count="10"/>
-            <Monster Type="Slime" Count="1"/>
-            <!-- <Monster Type="Shoemon" Count="5"/> -->
-
-          </Monsters>
-        </Wave>
-      </Waves>
-    </State>
 	</States>
 </Map>
