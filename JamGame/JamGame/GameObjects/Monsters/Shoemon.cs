@@ -21,7 +21,7 @@ namespace JamGame.GameObjects.Monsters
         public Shoemon()
         {
             Animation = Game.Instance.Content.Load<CharacterModel>("monsters\\shoemon").CreateAnimator("Shoemon");
-
+           // Animation.ChangeAnimation("attack");
             Animation.Scale = 0.37f;
 
             body = BodyFactory.CreateRectangle(Game.Instance.World, 
