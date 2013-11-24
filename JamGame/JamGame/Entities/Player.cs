@@ -77,17 +77,19 @@ namespace JamGame.Entities
             Position = Vector2.Zero;
             Size = new Size(100, 100);
 
+            HealthComponent health = new HealthComponent(100);
             // Komponentti alustus.
             components.Add(targetingComponent = new TargetingComponent<Monster>(this));
             components.Add(directionalArrow = new DirectionalArrow());
             components.Add(weaponComponent = new WeaponComponent(targetingComponent, new BaseballBat()));
-            components.Add(new HealthComponent(100));
-
+            components.Add(health);
 
             Game.Instance.MapManager.OnMapChanged += new MapManagerEventHandler(MapManager_OnMapChanged);
            // weaponSound = Game.Instance.Content.Load<SoundEffect>("music\\baseballbat");
             Speed = 15f;
 
+
+            
         }
 
         #region Event handlers

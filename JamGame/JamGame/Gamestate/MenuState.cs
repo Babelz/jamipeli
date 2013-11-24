@@ -18,8 +18,9 @@ namespace JamGame.Gamestate
             LinkLabel start = new LinkLabel();
             start.Text = "Start game";
             start.Position = new Vector2(Game.Instance.ScreenWidth / 2, 300);
-            start.Color = Color.Black;
             start.HasFocus = true;
+            start.Color = Color.Red;
+            start.SelectedColor = Color.White;
             start.OnSelected += start_OnSelected;
             gui.AddControl(start);
         }
@@ -37,7 +38,7 @@ namespace JamGame.Gamestate
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            spriteBatch.GraphicsDevice.Clear(Color.RosyBrown);
+            spriteBatch.GraphicsDevice.Clear(Color.Black);
             gui.Draw(spriteBatch);
             spriteBatch.End();
         }

@@ -11,7 +11,6 @@ namespace JamGame.GUI
 {
     public class LinkLabel : Control
     {
-
         public Color SelectedColor
         {
             get;
