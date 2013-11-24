@@ -7,6 +7,7 @@ using FarseerPhysics.Dynamics;
 using JamGame.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using JamGame.GameObjects.Components;
 
 namespace JamGame.Gamestate
 {
@@ -18,7 +19,7 @@ namespace JamGame.Gamestate
         private readonly Wall leftWall;
         private readonly Wall rightWall;
 
-        private readonly Player[] players;
+        private Player[] players;
         #endregion
 
         #region Properties
@@ -80,15 +81,27 @@ namespace JamGame.Gamestate
         {
             Game.Instance.World.Step((float)(gameTime.ElapsedGameTime.TotalMilliseconds * .001));
 
-            Array.ForEach(players,
-                p => p.Update(gameTime));
+
+            List<Player> alive = new List<Player>();
+            foreach (Player player in players)
+            {
+                player.Update(gameTime);
+
+                if ((player.Components.FirstOrDefault(c => c is HealthComponent) as HealthComponent).Alive)
+                {
+                    alive.Add(player);
+                }
+            }
+
+            players = alive.ToArray();
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
 
-            Array.ForEach(players,
-                p => p.Draw(spriteBatch));
+            players.OrderBy(p => p.Position.Y)
+                .ToList()
+                .ForEach(p => p.Draw(spriteBatch));
 
             spriteBatch.End();
         }

@@ -280,8 +280,9 @@ namespace JamGame
 
             spriteBatch.Begin();
 
-            drawableObjects.ForEach(
-                o => o.Draw(spriteBatch));
+            drawableObjects.OrderBy(o => o.Position.Y)
+                .ToList()
+                .ForEach(o => o.Draw(spriteBatch));
 
             spriteBatch.End();
         }

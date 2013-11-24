@@ -9,7 +9,7 @@ namespace JamGame
     {
         public static bool InRange(int min, int max, int value)
         {
-            return value > min && value < max;
+            return value >= min && value <= max;
         }
     }
 }

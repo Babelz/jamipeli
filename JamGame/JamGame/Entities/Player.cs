@@ -32,14 +32,27 @@ namespace JamGame.Entities
         private DirectionalArrow directionalArrow;
         private CharaterAnimator animator;
         private TargetingComponent<Monster> targetingComponent;
+        #endregion
 
-        protected const float speed = 15f;
+        #region Properties
+        public CharaterAnimator Animation
+        {
+            get
+            {
+                return animator;
+            }
+        }
+        public float Speed
+        {
+            get;
+            set;
+        }
         #endregion
 
         public Player(World world)
         {
             Size = new Size(100, 100);
-            Velocity = new Vector2(speed, 0);
+            Velocity = new Vector2(Speed, 0);
 
             // Inputin alustus.
             defaultSetup = new InputControlSetup();
@@ -68,6 +81,8 @@ namespace JamGame.Entities
             components.Add(new HealthComponent(100));
 
             Game.Instance.MapManager.OnMapChanged += new MapManagerEventHandler(MapManager_OnMapChanged);
+
+            Speed = 15f;
         }
 
         #region Event handlers

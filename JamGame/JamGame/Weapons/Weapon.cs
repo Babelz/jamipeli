@@ -12,11 +12,12 @@ namespace JamGame.Weapons
     {
         #region Vars
         private readonly Random random;
-
         private readonly string name;
         private readonly int minDamage;
         private readonly int maxDamage;
         private readonly int critChance;
+
+        private int addedPower;
         #endregion
 
         #region Properties
@@ -46,15 +47,24 @@ namespace JamGame.Weapons
 
         public abstract bool CanMakeDamage();
 
+        public void AddPower(int amount)
+        {
+            addedPower += amount;
+        }
+        public void NormalizePower()
+        {
+            addedPower = 0;
+        }
         public bool IsCrit(int damage)
         {
-            return damage > maxDamage;
+            return damage > maxDamage + addedPower;
         }
         public virtual int CalculateDamage()
         {
             int result = 0;
+
             int damageModifier = (random.Next(0, 100) <= critChance ? CritModifier : 1);
-            result = random.Next(minDamage, maxDamage) * damageModifier;
+            result = random.Next(minDamage + addedPower, maxDamage + addedPower) * damageModifier;
 
             return result;
         }

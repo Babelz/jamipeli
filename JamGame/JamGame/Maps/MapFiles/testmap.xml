@@ -5,7 +5,93 @@
 			<Waves>
 				<Wave ReleaseTime="0" XModifier="0" YModifier="1">
 					<Monsters>
+						<Monster Type="Shoemon" Count="3"/>
+					</Monsters>
+				</Wave>
+			</Waves>
+		</State>
+		<State Background="bg1" Foreground="fg1">
+			<Waves>
+				<Wave ReleaseTime="0" XModifier="0" YModifier="1">
+					<Monsters>
+						<Monster Type="Shoemon" Count="5"/>
+					</Monsters>
+				</Wave>
+			</Waves>
+		</State>
+		<State Background="bg1" Foreground="fg1">
+			<Waves>
+				<Wave ReleaseTime="0" XModifier="0" YModifier="1">
+					<Monsters>
+						<Monster Type="Shoemon" Count="10"/>
+					</Monsters>
+				</Wave>
+			</Waves>
+		</State>
+		<State Background="bg1" Foreground="fg1">
+			<Waves>
+				<Wave ReleaseTime="0" XModifier="0" YModifier="1">
+					<Monsters>
+						<Monster Type="Shoemon" Count="5"/>
+					</Monsters>
+				</Wave>
+				<Wave ReleaseTime="0" XModifier="0" YModifier="1">
+					<Monsters>
+						<Monster Type="Shoemon" Count="5"/>
+					</Monsters>
+				</Wave>
+				<Wave ReleaseTime="7500" XModifier="1" YModifier="1">
+					<Monsters>
+						<Monster Type="Shoemon" Count="10"/>
+					</Monsters>
+				</Wave>
+				<Wave ReleaseTime="7500" XModifier="0" YModifier="1">
+					<Monsters>
+						<Monster Type="Shoemon" Count="10"/>
+					</Monsters>
+				</Wave>
+			</Waves>
+		</State>
+		<State Background="bg1" Foreground="fg1">
+			<Waves>
+				<Wave ReleaseTime="0" XModifier="0" YModifier="1">
+					<Monsters>
+						<Monster Type="Shoemon" Count="10"/>
+					</Monsters>
+				</Wave>
+				<Wave ReleaseTime="0" XModifier="0" YModifier="1">
+					<Monsters>
+						<Monster Type="Shoemon" Count="10"/>
+					</Monsters>
+				</Wave>
+				<Wave ReleaseTime="5000" XModifier="0" YModifier="1">
+					<Monsters>
 						<Monster Type="Shoemon" Count="1"/>
+					</Monsters>
+				</Wave>
+				<Wave ReleaseTime="15500" XModifier="1" YModifier="1">
+					<Monsters>
+						<Monster Type="Shoemon" Count="15"/>
+					</Monsters>
+				</Wave>
+				<Wave ReleaseTime="15500" XModifier="0" YModifier="1">
+					<Monsters>
+						<Monster Type="Shoemon" Count="15"/>
+					</Monsters>
+				</Wave>
+				<Wave ReleaseTime="30000" XModifier="0" YModifier="1">
+					<Monsters>
+						<Monster Type="Shoemon" Count="15"/>
+					</Monsters>
+				</Wave>
+				<Wave ReleaseTime="35500" XModifier="0" YModifier="1">
+					<Monsters>
+						<Monster Type="Shoemon" Count="35"/>
+					</Monsters>
+				</Wave>
+				<Wave ReleaseTime="41550" XModifier="0" YModifier="1">
+					<Monsters>
+						<Monster Type="Shoemon" Count="35"/>
 					</Monsters>
 				</Wave>
 			</Waves>
