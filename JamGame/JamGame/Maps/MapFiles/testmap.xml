@@ -1,33 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<!-- Monsters = Shoemon, Slime -->
+<!-- Monsters = Shoemon, Slime, Megablob -->
 <Map>
 	<States>
 		<State Background="bg1" Foreground="fg1">
 			<Waves>
-				<Wave ReleaseTime="0" XModifier="0" YModifier="1">
+				<Wave ReleaseTime="0" XModifier="1" YModifier="1">
 					<Monsters>
-
-						<Monster Type="Shoemon" Count="10"/>
-						<Monster Type="Slime" Count="1"/>
+						<Monster Type="Megablob" Count="1"/>
 						<!-- <Monster Type="Shoemon" Count="5"/> -->
-
 					</Monsters>
 				</Wave>
 			</Waves>
 		</State>
-    <State Background="bg1" Foreground="fg1">
-      <Waves>
-        <Wave ReleaseTime="0" XModifier="0" YModifier="1">
-          <Monsters>
-
-            <Monster Type="Shoemon" Count="10"/>
-            <Monster Type="Slime" Count="1"/>
-            <!-- <Monster Type="Shoemon" Count="5"/> -->
-
-          </Monsters>
-        </Wave>
-      </Waves>
-    </State>
 	</States>
 </Map>

@@ -28,6 +28,7 @@ namespace JamGame.GameObjects.Monsters
         #endregion
 
         public Slime()
+            : base()
         {
             Animation = Game.Instance.Content.Load<CharacterModel>("monsters\\blob").CreateAnimator("blob");
 
@@ -80,7 +81,7 @@ namespace JamGame.GameObjects.Monsters
         }
         private void Animation_Bite_AnimationEnded()
         {
-            targetComponent.TargetHealthComponent.TakeDamage(random.Next(5, 8));
+            targetComponent.TargetHealthComponent.TakeDamage(random.Next(3, 6));
 
             Animation.ChangeAnimation("move");
 
@@ -126,8 +127,9 @@ namespace JamGame.GameObjects.Monsters
 
                 float dist = Vector2.Distance(Position, targetComponent.Target.Position);
 
+                Console.WriteLine(dist);
                 brain.PushState(Charge);
-                if (dist > 120)
+                if (dist > 150)
                 {
                     brain.PushState(SpitAttack);
                 }
@@ -202,16 +204,17 @@ namespace JamGame.GameObjects.Monsters
         }
 
         #region Spit private class
-        private class Spit : DrawableGameObject
+        public class Spit : DrawableGameObject
         {
             #region Vars
-            private bool hitted;
-            private readonly Random random;
-            private readonly Texture2D texture;
-            private Vector2 direction;
+            protected bool hitted;
+            protected Random random;
+            protected Texture2D texture;
+            protected Vector2 direction;
 
-            private int elapsed;
-            private TargetingComponent<Player> targetinComponent;
+            protected int aliveTime;
+            protected int elapsed;
+            protected TargetingComponent<Player> targetinComponent;
             #endregion
 
             public Spit(Player target, Vector2 position)
@@ -230,6 +233,7 @@ namespace JamGame.GameObjects.Monsters
                 body.Mass = 1f;
                 Position = new Vector2(position.X, position.Y + Size.Height);
 
+                aliveTime = 1250;
 
                 body.OnCollision += new OnCollisionEventHandler(body_OnCollision);
 
@@ -240,7 +244,7 @@ namespace JamGame.GameObjects.Monsters
             }
 
             #region Event handlers
-            private bool body_OnCollision(Fixture fixtureA, Fixture fixtureB, Contact contact)
+            protected virtual bool body_OnCollision(Fixture fixtureA, Fixture fixtureB, Contact contact)
             {
                 if (hitted)
                 {
@@ -251,7 +255,7 @@ namespace JamGame.GameObjects.Monsters
 
                 if (player != null)
                 {
-                    targetinComponent.TargetHealthComponent.TakeDamage(random.Next(10, 20));
+                    targetinComponent.TargetHealthComponent.TakeDamage(random.Next(6, 12));
                     hitted = true;
                 }
 
@@ -265,7 +269,7 @@ namespace JamGame.GameObjects.Monsters
 
                 elapsed += gameTime.ElapsedGameTime.Milliseconds;
 
-                if (elapsed > 1250 || hitted)
+                if (elapsed > aliveTime || hitted)
                 {
                     Destory();
                 }

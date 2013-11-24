@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using JamGame.GameObjects.Monsters;
 using JamGame.Factories;
 using JamGame.GameObjects.PowerUpItems;
+using JamGame.Gamestate;
 
 // TODO: optimoi wavet
 namespace JamGame.Maps
@@ -20,6 +21,7 @@ namespace JamGame.Maps
         private readonly Texture2D background;
         private readonly List<MonsterWave> waves;
         private readonly List<Monster> releasedMonsters;
+        private readonly List<PowerUpItem> powerUps;
 
         private int elapsed;
         #endregion
@@ -92,8 +94,17 @@ namespace JamGame.Maps
 
             random = new Random();
             releasedMonsters = new List<Monster>();
+            powerUps = new List<PowerUpItem>();
         }
 
+        public void ClearPowerUps()
+        {
+            powerUps.Where(p => Game.Instance.ContainsGameObject(p))
+                .ToList()
+                .ForEach(p => Game.Instance.RemoveGameObject(p));
+
+            powerUps.Clear();
+        }
         public void Start()
         {
             if (!Started)
@@ -101,8 +112,12 @@ namespace JamGame.Maps
                 elapsed = 0;
                 Started = true;
 
+                GameplayState gameplayState = Game.Instance.GameStateManager.States
+                    .FirstOrDefault(s => s is GameplayState)
+                    as GameplayState;
+
                 PowerUpFactory powerUpFactory = new PowerUpFactory("JamGame.GameObjects.PowerUpItems");
-                for (int i = 0; i < random.Next(3, 3 * 2); i++)
+                for (int i = 0; i < random.Next(3, 3 * gameplayState.Players.Length); i++)
                 {
                     int value = random.Next(0, 100);
                     PowerUpItem powerUp = null;
@@ -123,6 +138,8 @@ namespace JamGame.Maps
                     {
                         Game.Instance.AddGameObject(powerUp = powerUpFactory.MakeNew("DoubleDamagePowerUp"));
                     }
+
+                    powerUps.Add(powerUp);
 
                     powerUp.Position = new Vector2(
                         random.Next(0, Game.Instance.ScreenWidth - powerUp.Size.Width), 
@@ -162,7 +179,7 @@ namespace JamGame.Maps
                         // jotta se saadaan tulemaan oikeasta paikasta (vasen, oikea, ylä ja ala)
                         monster.Position = new Vector2(
                             random.Next(Game.Instance.ScreenWidth, max_X) * nextWave.PositionModifier.X,
-                            random.Next(Game.Instance.ScreenHeight / 2 + height, max_Y) * nextWave.PositionModifier.Y);
+                            random.Next(Game.Instance.ScreenHeight / 2, max_Y) * nextWave.PositionModifier.Y);
 
                     }
                 }

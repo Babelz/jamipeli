@@ -49,11 +49,12 @@ namespace JamGame.GameObjects.Monsters
         protected override void OnDestroy()
         {
             base.OnDestroy();
+
             Game.Instance.World.RemoveBody(body);
         }
 
         #region Brain states
-        protected void MoveToArea()
+        protected virtual void MoveToArea()
         {
             if (Position.X < 0)
             {

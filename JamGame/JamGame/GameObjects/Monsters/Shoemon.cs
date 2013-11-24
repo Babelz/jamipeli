@@ -22,6 +22,7 @@ namespace JamGame.GameObjects.Monsters
         private static SoundEffect sound;
         private static SoundEffectInstance soundInstance;
         public Shoemon()
+            : base()
         {
             Animation = Game.Instance.Content.Load<CharacterModel>("monsters\\shoemon").CreateAnimator("Shoemon");
            // Animation.ChangeAnimation("attack");
@@ -132,7 +133,7 @@ namespace JamGame.GameObjects.Monsters
             
             if (targetComponent.HasTarget)
             {
-                targetComponent.TargetHealthComponent.TakeDamage(random.Next(5, 10));
+                targetComponent.TargetHealthComponent.TakeDamage(random.Next(2, 4));
             }
             else
             {
