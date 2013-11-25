@@ -6,4 +6,4 @@ Jamipeli - 2D mätkintäpeli rakennettu 48 tunnissa
 
 ![Perusnäkymä](https://dl.dropboxusercontent.com/u/22171160/screenshots/kuva1.png "Perusnäkymä")
 ![Boss fight](https://dl.dropboxusercontent.com/u/22171160/screenshots/kuva2.png "Boss fight")
-![Coop](https://dl.dropboxusercontent.com/u/22171160/screenshots/kuva2.png "Coop")
+![Coop](https://dl.dropboxusercontent.com/u/22171160/screenshots/kuva3.png "Coop")
