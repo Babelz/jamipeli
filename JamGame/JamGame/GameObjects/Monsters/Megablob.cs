@@ -182,14 +182,14 @@ namespace JamGame.GameObjects.Monsters
                     spit.OnDestroyed += new GameObjectEventHandler(spit_OnDestroyed);
                     spits.Add(spit);
 
-                    timerWrapper.ResetTimer("spitspawn");
+                    timerWrapper.RemoveTimer("spitspawn");
 
                     brain.PushState(GetTarget);
                 } 
             }
             else
             {
-                timerWrapper.ResetTimer("moveandshoot");
+                timerWrapper.RemoveTimer("moveandshoot");
 
                 brain.PopState();
                 idleSoundInstance.Play();

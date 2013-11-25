@@ -93,7 +93,10 @@ namespace JamGame.Entities
         {
             if (targetingComponent.HasTarget)
             {
-                return Utils.InRange(100, 200 + (int)(targetingComponent.Target.Animation.Scale * 256), (int)Vector2.Distance(Position, targetingComponent.Target.Position));
+                return Utils.InRange(
+                    100 - (int)(targetingComponent.Target.Animation.Scale * 256),
+                    200 + (int)(targetingComponent.Target.Animation.Scale * 256), 
+                    (int)Vector2.Distance(Position, targetingComponent.Target.Position));
             }
             else
             {

@@ -93,6 +93,8 @@ namespace JamGame.GameObjects
                 {
                     Game.Instance.World.RemoveBody(body);
                 }
+
+                OnDestroy();
             }
         }
         public virtual void Update(GameTime gameTime)
