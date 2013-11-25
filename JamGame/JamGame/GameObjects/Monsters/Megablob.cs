@@ -99,7 +99,7 @@ namespace JamGame.GameObjects.Monsters
             {
                 if (timerWrapper["player"] > 500)
                 {
-                    Console.WriteLine("Collisionista damaa...");
+                    //Console.WriteLine("Collisionista damaa...");
                     HealthComponent healthComponent = player.Components
                         .FirstOrDefault(c => c is HealthComponent)
                         as HealthComponent;
@@ -197,7 +197,7 @@ namespace JamGame.GameObjects.Monsters
                 
             }
             // TODO: liiku ja ammu
-            Console.WriteLine("liiku ja ammu");
+            //Console.WriteLine("liiku ja ammu");
 
             body.ApplyForce(new Vector2(0, targetComponent.VelocityToTarget.Y * 12));
         }

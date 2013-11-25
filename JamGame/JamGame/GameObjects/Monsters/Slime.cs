@@ -134,11 +134,11 @@ namespace JamGame.GameObjects.Monsters
 
             if (targetComponent.HasTarget)
             {
-                Console.WriteLine(Vector2.Distance(Position, targetComponent.Target.Position));
+                //Console.WriteLine(Vector2.Distance(Position, targetComponent.Target.Position));
 
                 float dist = Vector2.Distance(Position, targetComponent.Target.Position);
 
-                Console.WriteLine(dist);
+                //Console.WriteLine(dist);
                 brain.PushState(Charge);
 
                 if (dist > 150)
