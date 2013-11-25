@@ -6,7 +6,7 @@ Jamipeli - 2D beat em up game, made in 48 hours
 * Jani Niemelä - Programming, animations
 * Toni Mänty - Graphics, monsters, levels
 * Panu Akrenius - Audio
-* Jarkko - Graphics, player, boss
+* Jarkko Piippo - Graphics, player, boss
 
 
 [Download the game!](https://dl.dropboxusercontent.com/u/22171160/PelilabraJamGame.zip "Download the game!")
